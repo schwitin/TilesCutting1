@@ -1,0 +1,414 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://Resources/theme.tres" type="Theme" id=1]
+[ext_resource path="res://Einstellungen/SchnittlinieInput.gd" type="Script" id=2]
+[ext_resource path="res://Einstellungen/Zeichenflaeche.gd" type="Script" id=3]
+
+[node name="SchnittlinieInput" type="Container"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+theme/theme = ExtResource( 1 )
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+script/script = ExtResource( 2 )
+
+[node name="Zeichenflaeche" type="Node2D" parent="."]
+
+transform/pos = Vector2( 554.741, 40.0844 )
+script/script = ExtResource( 3 )
+
+[node name="UserInput" type="PanelContainer" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 454.0
+margin/bottom = 1078.0
+
+[node name="Container" type="Container" parent="UserInput"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 7.0
+margin/top = 7.0
+margin/right = 447.0
+margin/bottom = 1071.0
+
+[node name="SchnittpunktContainer" type="PanelContainer" parent="UserInput/Container"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInput/Container/SchnittpunktContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 7.0
+margin/top = 7.0
+margin/right = 437.0
+margin/bottom = 621.0
+alignment = 0
+
+[node name="ObenUntenButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 430.0
+margin/bottom = 100.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Unten"
+flat = false
+
+[node name="NavigationContainer" type="GridContainer" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 104.0
+margin/right = 430.0
+margin/bottom = 614.0
+columns = 2
+
+[node name="VersatzLinksLabel" type="Label" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 194.0
+margin/bottom = 94.0
+text = "150"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="VersatzRechtsLabel" type="Label" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 198.0
+margin/top = 0.0
+margin/right = 430.0
+margin/bottom = 94.0
+text = "150"
+align = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="NachLinksButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 98.0
+margin/right = 194.0
+margin/bottom = 198.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "|<--"
+flat = false
+align = 0
+
+[node name="NachRechtsButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 198.0
+margin/top = 98.0
+margin/right = 430.0
+margin/bottom = 198.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "-->|"
+flat = false
+align = 2
+
+[node name="MinusHundertButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 202.0
+margin/right = 194.0
+margin/bottom = 302.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "-100"
+flat = false
+align = 0
+
+[node name="PlusHundertButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 198.0
+margin/top = 202.0
+margin/right = 430.0
+margin/bottom = 302.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "+100"
+flat = false
+align = 2
+
+[node name="MinusZehnButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 306.0
+margin/right = 194.0
+margin/bottom = 406.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "-10"
+flat = false
+align = 0
+
+[node name="PlusZehnButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 198.0
+margin/top = 306.0
+margin/right = 430.0
+margin/bottom = 406.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "+10"
+flat = false
+align = 2
+
+[node name="MinusEinsButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 410.0
+margin/right = 194.0
+margin/bottom = 510.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "-1"
+flat = false
+align = 0
+
+[node name="PlusEinsButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 198.0
+margin/top = 410.0
+margin/right = 430.0
+margin/bottom = 510.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "+1"
+flat = false
+align = 2
+
+[node name="WinkelContainer" type="VBoxContainer" parent="UserInput/Container"]
+
+anchor/left = 3
+anchor/top = 1
+anchor/right = 3
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 216.0
+margin/top = 293.0
+margin/right = -215.0
+margin/bottom = 101.0
+alignment = 0
+
+[node name="HWinkel" type="HBoxContainer" parent="UserInput/Container/WinkelContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 431.0
+margin/bottom = 94.0
+alignment = 1
+
+[node name="WinkelPraefix" type="Label" parent="UserInput/Container/WinkelContainer/HWinkel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 12.0
+margin/top = 0.0
+margin/right = 192.0
+margin/bottom = 94.0
+text = "––    "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="WinkelValue" type="Label" parent="UserInput/Container/WinkelContainer/HWinkel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 196.0
+margin/top = 0.0
+margin/right = 374.0
+margin/bottom = 94.0
+text = "30.5"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="WinkelEinheit" type="Label" parent="UserInput/Container/WinkelContainer/HWinkel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 378.0
+margin/top = 0.0
+margin/right = 418.0
+margin/bottom = 94.0
+text = "°"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="VWinkel" type="HBoxContainer" parent="UserInput/Container/WinkelContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 98.0
+margin/right = 431.0
+margin/bottom = 192.0
+alignment = 1
+
+[node name="WinkelPraefix" type="Label" parent="UserInput/Container/WinkelContainer/VWinkel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 14.0
+margin/top = 0.0
+margin/right = 191.0
+margin/bottom = 94.0
+text = "|      "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="WinkelValue" type="Label" parent="UserInput/Container/WinkelContainer/VWinkel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 195.0
+margin/top = 0.0
+margin/right = 373.0
+margin/bottom = 94.0
+text = "30.5"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="WinkelEinheit" type="Label" parent="UserInput/Container/WinkelContainer/VWinkel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 377.0
+margin/top = 0.0
+margin/right = 417.0
+margin/bottom = 94.0
+text = "°"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[connection signal="pressed" from="UserInput/Container/SchnittpunktContainer/VBoxContainer/ObenUntenButton" to="." method="_on_ObenUntenButton_pressed"]
+
+[connection signal="pressed" from="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/NachLinksButton" to="." method="_on_NachLinksButton_pressed"]
+
+[connection signal="pressed" from="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/NachRechtsButton" to="." method="_on_NachRechtsButton_pressed"]
+
+[connection signal="pressed" from="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/MinusHundertButton" to="." method="_on_MinusHundertButton_pressed"]
+
+[connection signal="pressed" from="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/PlusHundertButton" to="." method="_on_PlusHundertButton_pressed"]
+
+[connection signal="pressed" from="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/MinusZehnButton" to="." method="_on_MinusZehnButton_pressed"]
+
+[connection signal="pressed" from="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/PlusZehnButton" to="." method="_on_PlusZehnButton_pressed"]
+
+[connection signal="pressed" from="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/MinusEinsButton" to="." method="_on_MinusEinsButton_pressed"]
+
+[connection signal="pressed" from="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/PlusEinsButton" to="." method="_on_PlusEinsButton_pressed"]
+
+

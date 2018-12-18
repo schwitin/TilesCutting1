@@ -1,0 +1,26 @@
+{
+	"Metaden":{},
+	"ZiegelTypList":[
+		{
+			"Name": "Rubin 9V",
+			"Hersteller": "BRAAS",
+			"Laenge" : "472",
+			"Breite" : "313",
+			"VersatzY": "35",
+			"DecklaengeMin" : "370",
+			"DecklaengeMax" : "400",
+			"Deckbreite" : "267"
+		},
+		{
+			"Name": "Rubin 11V",
+			"Hersteller": "BRAAS",
+			"Laenge" : "435",
+			"Breite" : "284",
+			"VersatzY": "39",
+			"DecklaengeMin" : "338",
+			"DecklaengeMax" : "370",
+			"Deckbreite" : "234"
+		}
+		
+	]
+}
