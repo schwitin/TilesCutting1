@@ -46,7 +46,6 @@ margin/bottom = 1071.0
 
 [node name="SchnittpunktContainer" type="PanelContainer" parent="UserInput/Container"]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -65,10 +64,10 @@ size_flags/vertical = 2
 margin/left = 7.0
 margin/top = 7.0
 margin/right = 437.0
-margin/bottom = 621.0
+margin/bottom = 725.0
 alignment = 0
 
-[node name="ObenUntenButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer"]
+[node name="GratKehleButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -84,6 +83,22 @@ shortcut = null
 text = "Unten"
 flat = false
 
+[node name="ObenUntenButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 104.0
+margin/right = 430.0
+margin/bottom = 204.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Unten"
+flat = false
+
 [node name="NavigationContainer" type="GridContainer" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer"]
 
 focus/ignore_mouse = false
@@ -91,41 +106,10 @@ focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 104.0
+margin/top = 208.0
 margin/right = 430.0
-margin/bottom = 614.0
+margin/bottom = 718.0
 columns = 2
-
-[node name="VersatzLinksLabel" type="Label" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 194.0
-margin/bottom = 94.0
-text = "150"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="VersatzRechtsLabel" type="Label" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 198.0
-margin/top = 0.0
-margin/right = 430.0
-margin/bottom = 94.0
-text = "150"
-align = 2
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 [node name="NachLinksButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
 
@@ -134,9 +118,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 98.0
+margin/top = 0.0
 margin/right = 194.0
-margin/bottom = 198.0
+margin/bottom = 100.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -151,9 +135,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 198.0
-margin/top = 98.0
+margin/top = 0.0
 margin/right = 430.0
-margin/bottom = 198.0
+margin/bottom = 100.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -168,9 +152,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 202.0
+margin/top = 104.0
 margin/right = 194.0
-margin/bottom = 302.0
+margin/bottom = 204.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -185,9 +169,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 198.0
-margin/top = 202.0
+margin/top = 104.0
 margin/right = 430.0
-margin/bottom = 302.0
+margin/bottom = 204.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -202,9 +186,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 306.0
+margin/top = 208.0
 margin/right = 194.0
-margin/bottom = 406.0
+margin/bottom = 308.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -219,9 +203,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 198.0
-margin/top = 306.0
+margin/top = 208.0
 margin/right = 430.0
-margin/bottom = 406.0
+margin/bottom = 308.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -236,9 +220,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 410.0
+margin/top = 312.0
 margin/right = 194.0
-margin/bottom = 510.0
+margin/bottom = 412.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -253,9 +237,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 198.0
-margin/top = 410.0
+margin/top = 312.0
 margin/right = 430.0
-margin/bottom = 510.0
+margin/bottom = 412.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -279,7 +263,7 @@ margin/right = -215.0
 margin/bottom = 101.0
 alignment = 0
 
-[node name="HWinkel" type="HBoxContainer" parent="UserInput/Container/WinkelContainer"]
+[node name="Versatz" type="HBoxContainer" parent="UserInput/Container/WinkelContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = false
@@ -287,8 +271,36 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 431.0
+margin/right = 393.0
 margin/bottom = 94.0
+alignment = 2
+
+[node name="VersatzValue" type="Label" parent="UserInput/Container/WinkelContainer/Versatz"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 240.0
+margin/top = 0.0
+margin/right = 393.0
+margin/bottom = 94.0
+text = "150"
+align = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="HWinkel" type="HBoxContainer" parent="UserInput/Container/WinkelContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 98.0
+margin/right = 458.0
+margin/bottom = 192.0
 alignment = 1
 
 [node name="WinkelPraefix" type="Label" parent="UserInput/Container/WinkelContainer/HWinkel"]
@@ -297,9 +309,9 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 12.0
+margin/left = 26.0
 margin/top = 0.0
-margin/right = 192.0
+margin/right = 206.0
 margin/bottom = 94.0
 text = "––    "
 percent_visible = 1.0
@@ -312,9 +324,9 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 196.0
+margin/left = 210.0
 margin/top = 0.0
-margin/right = 374.0
+margin/right = 388.0
 margin/bottom = 94.0
 text = "30.5"
 percent_visible = 1.0
@@ -327,9 +339,9 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 378.0
+margin/left = 392.0
 margin/top = 0.0
-margin/right = 418.0
+margin/right = 432.0
 margin/bottom = 94.0
 text = "°"
 percent_visible = 1.0
@@ -338,14 +350,15 @@ max_lines_visible = -1
 
 [node name="VWinkel" type="HBoxContainer" parent="UserInput/Container/WinkelContainer"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 98.0
-margin/right = 431.0
-margin/bottom = 192.0
+margin/top = 196.0
+margin/right = 458.0
+margin/bottom = 290.0
 alignment = 1
 
 [node name="WinkelPraefix" type="Label" parent="UserInput/Container/WinkelContainer/VWinkel"]
@@ -354,9 +367,9 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 14.0
+margin/left = 27.0
 margin/top = 0.0
-margin/right = 191.0
+margin/right = 204.0
 margin/bottom = 94.0
 text = "|      "
 percent_visible = 1.0
@@ -369,9 +382,9 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 195.0
+margin/left = 208.0
 margin/top = 0.0
-margin/right = 373.0
+margin/right = 386.0
 margin/bottom = 94.0
 text = "30.5"
 percent_visible = 1.0
@@ -384,14 +397,16 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 377.0
+margin/left = 390.0
 margin/top = 0.0
-margin/right = 417.0
+margin/right = 430.0
 margin/bottom = 94.0
 text = "°"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[connection signal="pressed" from="UserInput/Container/SchnittpunktContainer/VBoxContainer/GratKehleButton" to="." method="_on_GratKehleButton_pressed"]
 
 [connection signal="pressed" from="UserInput/Container/SchnittpunktContainer/VBoxContainer/ObenUntenButton" to="." method="_on_ObenUntenButton_pressed"]
 

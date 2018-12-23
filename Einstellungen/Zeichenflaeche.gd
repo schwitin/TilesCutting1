@@ -31,13 +31,23 @@ func draw_schnittlinie():
 	zeichne_linie(schnittline)
 	
 func draw_schnuere() :
-	var linien = dach.get_schnuere_grat()
+	var linien
+	if dach.is_grat:
+		linien = dach.get_schnuere_grat()
+	else:
+		linien = dach.get_schnuere_kehle()
+	
 	#var linien = dach.get_schnuere()
 	for linie in linien:
 		zeichne_linie(linie)
 
 func draw_latten() :
-	var linien = dach.get_latten_grat()
+	
+	var linien
+	if dach.is_grat:
+		linien = dach.get_latten_grat()
+	else:
+		linien = dach.get_latten_kehle()
 	#var linien = dach.get_latten()
 	for linie in linien:
 		zeichne_linie(linie)
@@ -50,8 +60,8 @@ func scale_node() :
 		var viewport_size = self.get_viewport_rect().size
 		# var viewport_size = get_viewport().get_visible_rect().size
 		var bounding_box = dach.get_bounding_box()
-		var x = viewport_size.x / bounding_box.x  * 0.9
-		var y = viewport_size.y / bounding_box.y  * 0.9
+		var x = viewport_size.x / bounding_box.x  * 0.99
+		var y = viewport_size.y / bounding_box.y  * 0.94
 		var k = min(x, y)
 		var pos = self.get_pos()
 		self.set_pos(Vector2(0,0))

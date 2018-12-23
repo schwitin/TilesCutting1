@@ -21,6 +21,7 @@ func _ready():
 	
 	if self.text == "?":
 		_on_Items_index_pressed(0)
+		
 
 
 func _on_Items_index_pressed(index):
@@ -39,11 +40,11 @@ func get_ziegel_typen():
 	var ziegelTypClass = load("res://Model/ZiegelTyp1.gd")
 	var file = File.new()
 	file.open("res://Resources/ZiegelTyp.json", file.READ)
-	var parsed = JSON.parse(file.get_as_text())
+	var dict = {}
+	var parse_result = dict.parse_json(file.get_as_text())
 	file.close()
 	
-	if typeof(parsed.result) == TYPE_DICTIONARY:
-		var dict = parsed.result
+	if parse_result == OK:
 		for typ in dict.ZiegelTypList :
 			zeigelTypen.append(ziegelTypClass.new(typ))
 	
@@ -53,5 +54,5 @@ func get_text(ziegelTyp) :
 	return ziegelTyp.name + " (" + ziegelTyp.hersteller + ")"
 	
 func _notification(what):        
-    if what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST : 
+    if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST : 
         items.hide()

@@ -6,25 +6,25 @@ var dach
 var classEinstellungen = preload("res://Model/Einstellungen1.gd")
 var classDach = preload("res://Model/Dach1.gd")
 
-var versatzLinksLabel = null
-var versatzRechtsLabel = null
+var versatzLabel = null
 var winkelHLabel = null
 var winkelVLabel = null
 var obenUntenButton = null
+var gratKehleButton = null
 
 var isOben = false
 
 func _ready():
-	versatzLinksLabel = get_node("UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/VersatzLinksLabel")
-	versatzRechtsLabel = get_node("UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/VersatzRechtsLabel")
+	versatzLabel = get_node("UserInput/Container/WinkelContainer/Versatz/VersatzValue")
 	winkelHLabel = get_node("UserInput/Container/WinkelContainer/HWinkel/WinkelValue")
 	winkelVLabel = get_node("UserInput/Container/WinkelContainer/VWinkel/WinkelValue")
 	obenUntenButton = get_node("UserInput/Container/SchnittpunktContainer/VBoxContainer/ObenUntenButton")
+	gratKehleButton = get_node("UserInput/Container/SchnittpunktContainer/VBoxContainer/GratKehleButton")
 	
 	dach = classDach.new(classEinstellungen.new()) 
 	zeichenflaeche = get_node("Zeichenflaeche")
 	zeichenflaeche.dach = dach
-	update_labels()
+	_on_GratKehleButton_pressed()
 
 
 func _on_ObenUntenButton_pressed():
@@ -33,6 +33,8 @@ func _on_ObenUntenButton_pressed():
 		obenUntenButton.text = "Oben"
 	else :
 		obenUntenButton.text = "Unten"
+	
+	update_labels()
 
 
 func _on_NachLinksButton_pressed():
@@ -101,28 +103,36 @@ func _on_PlusEinsButton_pressed():
 	update_labels()
 
 
-
 func update_labels():
-	update_versatz_zum_linken_sprungpunkt(dach.get_versatz_zum_linken_sprungpunkt_oben())
-	update_versatz_zum_rechten_sprungpunkt(dach.get_versatz_zum_rechten_sprungpunkt_oben())
-	update_versatz_zum_linken_sprungpunkt(dach.get_versatz_zum_linken_sprungpunkt_unten())
-	update_versatz_zum_rechten_sprungpunkt(dach.get_versatz_zum_rechten_sprungpunkt_unten())
+	var versatz
+	if isOben:
+		versatz = dach.get_versatz_zum_naechsten_schnur_oben()
+	else:
+		versatz = dach.get_versatz_zum_naechsten_schnur_unten()
+	
+	versatzLabel.text = String(round(versatz))
 	update_winkel()
-
-
-func update_versatz_zum_linken_sprungpunkt(versatz):
-	versatzLinksLabel.text = String(round(versatz))
-
-
-func update_versatz_zum_rechten_sprungpunkt(versatz):
-	versatzRechtsLabel.text = String(round(versatz))
 
 
 func update_winkel():
 	var winkel = dach.einstellungen.schnittlinie.get_winkel_zu_vertikale()
-	var winkelH = abs(min(180 - abs(winkel), abs(winkel)))
-	var winkelV = 90.0 - winkelH
+	var winkelV = abs(min(180 - abs(winkel), abs(winkel)))
+	var winkelH = 90.0 - winkelV
 	var winkelHStr = "%0.1f" % winkelH
 	var winkelVStr = "%0.1f" % winkelV
 	winkelHLabel.text = String(winkelHStr)
 	winkelVLabel.text = String(winkelVStr)
+
+
+func _on_GratKehleButton_pressed():
+	self.dach.set_grat(!self.dach.is_grat())
+	
+	if self.dach.is_grat:
+		self.gratKehleButton.text = "Grat"
+	else: 
+		self.gratKehleButton.text = "Kehle"
+	
+	update_labels()
+	
+	
+	

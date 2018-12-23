@@ -48,8 +48,9 @@ func _on_RemoveButton_pressed():
 
 
 func update_button_visibility():
-	addButton.visible = abstaende.keys().size() < 6
-	removeButton.visible = abstaende.keys().size() > 1
+	addButton.set_hidden(false)
+	# addButton.set_hidden(abstaende.keys().size() < 10)
+	removeButton.set_hidden(abstaende.keys().size() > 1)
 
 
 func add_abstand(abstand):
