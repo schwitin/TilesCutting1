@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=1]
 
 [ext_resource path="res://Resources/theme.tres" type="Theme" id=1]
-[ext_resource path="res://Einstellungen/DachdimensionInput.gd" type="Script" id=2]
+[ext_resource path="res://Einstellungen/SchnuereBereicheInput.gd" type="Script" id=2]
 
 [node name="DachdimensionInput" type="Button"]
 
@@ -28,14 +28,15 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 99.0
+margin/left = 33.0
 margin/top = 22.0
-margin/right = 911.0
+margin/right = 1674.0
 margin/bottom = 849.0
 popup/exclusive = false
 
 [node name="Container" type="VBoxContainer" parent="PopupPanel"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -48,17 +49,18 @@ alignment = 0
 
 [node name="UeberschriftContainer" type="HBoxContainer" parent="PopupPanel/Container"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 815.0
+margin/right = 1071.0
 margin/bottom = 94.0
 alignment = 0
 
-[node name="AbstandLabel" type="Label" parent="PopupPanel/Container/UeberschriftContainer"]
+[node name="DeckbreiteLabel" type="Label" parent="PopupPanel/Container/UeberschriftContainer"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -66,29 +68,44 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 430.0
+margin/right = 310.0
 margin/bottom = 94.0
-text = "Abstand    "
+text = "Deckbr."
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="AnzahlLabel" type="Label" parent="PopupPanel/Container/UeberschriftContainer"]
+[node name="ZiegelLabel" type="Label" parent="PopupPanel/Container/UeberschriftContainer"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 434.0
+margin/left = 314.0
 margin/top = 0.0
-margin/right = 704.0
+margin/right = 612.0
 margin/bottom = 94.0
-text = "Anzahl"
+text = "  Ziegel"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="AbstandInputContainer" type="VBoxContainer" parent="PopupPanel/Container"]
+[node name="SchnuereLabel" type="Label" parent="PopupPanel/Container/UeberschriftContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 616.0
+margin/top = 0.0
+margin/right = 1071.0
+margin/bottom = 94.0
+text = "     Schnüre"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="BereicheContainer" type="VBoxContainer" parent="PopupPanel/Container"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = false
@@ -96,7 +113,7 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 98.0
-margin/right = 815.0
+margin/right = 1071.0
 margin/bottom = 98.0
 alignment = 0
 
@@ -109,7 +126,7 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 102.0
-margin/right = 815.0
+margin/right = 1071.0
 margin/bottom = 202.0
 alignment = 0
 
@@ -147,10 +164,34 @@ text = " - "
 flat = false
 align = 2
 
+[node name="VSlider" type="VSlider" parent="PopupPanel"]
+
+rect/scale = Vector2( 2, 2 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 0
+size_flags/vertical = 2
+margin/left = 1538.0
+margin/top = 70.0
+margin/right = 1554.0
+margin/bottom = 408.0
+range/min = 0.0
+range/max = 100.0
+range/step = 1.0
+range/page = 0.0
+range/value = 0.0
+range/exp_edit = false
+range/rounded = false
+tick_count = 0
+ticks_on_borders = true
+focus_mode = 2
+
 [connection signal="pressed" from="." to="." method="_on_DachdimensionInput_pressed"]
 
 [connection signal="pressed" from="PopupPanel/Container/AddRemoveContainer/AddButton" to="." method="_on_AddButton_pressed"]
 
 [connection signal="pressed" from="PopupPanel/Container/AddRemoveContainer/RemoveButton" to="." method="_on_RemoveButton_pressed"]
+
+[connection signal="value_changed" from="PopupPanel/VSlider" to="." method="_on_slider_value_changed"]
 
 
