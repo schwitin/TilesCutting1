@@ -17,9 +17,21 @@ margin/right = 0.0
 margin/bottom = 0.0
 script/script = ExtResource( 2 )
 
+[node name="ColorFrame" type="ColorFrame" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -481.0
+margin/top = -177.0
+margin/right = 2307.0
+margin/bottom = 1350.0
+color = Color( 0, 0, 0, 1 )
+
 [node name="Zeichenflaeche" type="Node2D" parent="."]
 
-transform/pos = Vector2( 554.741, 40.0844 )
+transform/pos = Vector2( 26.0203, 27.5387 )
 script/script = ExtResource( 3 )
 
 [node name="UserInput" type="PanelContainer" parent="."]
@@ -28,10 +40,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 454.0
-margin/bottom = 1078.0
+margin/left = 1228.0
+margin/top = 9.0
+margin/right = 1682.0
+margin/bottom = 995.0
 
 [node name="Container" type="Container" parent="UserInput"]
 
@@ -42,7 +54,89 @@ size_flags/vertical = 2
 margin/left = 7.0
 margin/top = 7.0
 margin/right = 447.0
-margin/bottom = 1071.0
+margin/bottom = 979.0
+
+[node name="WinkelContainer" type="VBoxContainer" parent="UserInput/Container"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 1.0
+margin/top = 5.0
+margin/right = 432.0
+margin/bottom = 197.0
+alignment = 0
+
+[node name="Versatz" type="HBoxContainer" parent="UserInput/Container/WinkelContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 431.0
+margin/bottom = 94.0
+alignment = 1
+
+[node name="VersatzValue" type="Label" parent="UserInput/Container/WinkelContainer/Versatz"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 139.0
+margin/top = 0.0
+margin/right = 292.0
+margin/bottom = 94.0
+text = "150"
+align = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="VWinkel" type="HBoxContainer" parent="UserInput/Container/WinkelContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 98.0
+margin/right = 431.0
+margin/bottom = 192.0
+alignment = 1
+
+[node name="WinkelValue" type="Label" parent="UserInput/Container/WinkelContainer/VWinkel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 104.0
+margin/top = 0.0
+margin/right = 282.0
+margin/bottom = 94.0
+text = "30.5"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="WinkelEinheit" type="Label" parent="UserInput/Container/WinkelContainer/VWinkel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 286.0
+margin/top = 0.0
+margin/right = 326.0
+margin/bottom = 94.0
+text = "°"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 [node name="SchnittpunktContainer" type="PanelContainer" parent="UserInput/Container"]
 
@@ -50,10 +144,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 0.0
-margin/bottom = 0.0
+margin/left = 6.0
+margin/top = 232.0
+margin/right = 450.0
+margin/bottom = 866.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UserInput/Container/SchnittpunktContainer"]
 
@@ -64,7 +158,7 @@ size_flags/vertical = 2
 margin/left = 7.0
 margin/top = 7.0
 margin/right = 437.0
-margin/bottom = 725.0
+margin/bottom = 627.0
 alignment = 0
 
 [node name="GratKehleButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer"]
@@ -108,7 +202,7 @@ size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 208.0
 margin/right = 430.0
-margin/bottom = 718.0
+margin/bottom = 620.0
 columns = 2
 
 [node name="NachLinksButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
@@ -247,164 +341,7 @@ text = "+1"
 flat = false
 align = 2
 
-[node name="WinkelContainer" type="VBoxContainer" parent="UserInput/Container"]
-
-anchor/left = 3
-anchor/top = 1
-anchor/right = 3
-anchor/bottom = 1
-focus/ignore_mouse = false
-focus/stop_mouse = false
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 216.0
-margin/top = 293.0
-margin/right = -215.0
-margin/bottom = 101.0
-alignment = 0
-
-[node name="Versatz" type="HBoxContainer" parent="UserInput/Container/WinkelContainer"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = false
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 393.0
-margin/bottom = 94.0
-alignment = 2
-
-[node name="VersatzValue" type="Label" parent="UserInput/Container/WinkelContainer/Versatz"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 240.0
-margin/top = 0.0
-margin/right = 393.0
-margin/bottom = 94.0
-text = "150"
-align = 2
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="HWinkel" type="HBoxContainer" parent="UserInput/Container/WinkelContainer"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = false
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 98.0
-margin/right = 458.0
-margin/bottom = 192.0
-alignment = 1
-
-[node name="WinkelPraefix" type="Label" parent="UserInput/Container/WinkelContainer/HWinkel"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 26.0
-margin/top = 0.0
-margin/right = 206.0
-margin/bottom = 94.0
-text = "––    "
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="WinkelValue" type="Label" parent="UserInput/Container/WinkelContainer/HWinkel"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 210.0
-margin/top = 0.0
-margin/right = 388.0
-margin/bottom = 94.0
-text = "30.5"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="WinkelEinheit" type="Label" parent="UserInput/Container/WinkelContainer/HWinkel"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 392.0
-margin/top = 0.0
-margin/right = 432.0
-margin/bottom = 94.0
-text = "°"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="VWinkel" type="HBoxContainer" parent="UserInput/Container/WinkelContainer"]
-
-editor/display_folded = true
-focus/ignore_mouse = false
-focus/stop_mouse = false
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 196.0
-margin/right = 458.0
-margin/bottom = 290.0
-alignment = 1
-
-[node name="WinkelPraefix" type="Label" parent="UserInput/Container/WinkelContainer/VWinkel"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 27.0
-margin/top = 0.0
-margin/right = 204.0
-margin/bottom = 94.0
-text = "|      "
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="WinkelValue" type="Label" parent="UserInput/Container/WinkelContainer/VWinkel"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 208.0
-margin/top = 0.0
-margin/right = 386.0
-margin/bottom = 94.0
-text = "30.5"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="WinkelEinheit" type="Label" parent="UserInput/Container/WinkelContainer/VWinkel"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 390.0
-margin/top = 0.0
-margin/right = 430.0
-margin/bottom = 94.0
-text = "°"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
+[connection signal="oben_unten_changed" from="." to="Zeichenflaeche" method="_on_SchnittlinieInput_oben_unten_changed"]
 
 [connection signal="pressed" from="UserInput/Container/SchnittpunktContainer/VBoxContainer/GratKehleButton" to="." method="_on_GratKehleButton_pressed"]
 

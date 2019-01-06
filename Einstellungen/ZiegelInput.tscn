@@ -37,4 +37,6 @@ items = [  ]
 
 [connection signal="pressed" from="." to="." method="_on_Button_pressed"]
 
+[connection signal="item_pressed" from="Items" to="." method="_on_Items_item_pressed"]
+
 

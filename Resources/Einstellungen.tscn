@@ -1,0 +1,171 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://Resources/theme.tres" type="Theme" id=1]
+[ext_resource path="res://Einstellungen/ZiegelInput.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Einstellungen/DachdimensionInput.tscn" type="PackedScene" id=3]
+
+[node name="Einstellungen" type="PanelContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+theme/theme = ExtResource( 1 )
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 1675.0
+margin/bottom = 876.0
+
+[node name="GridContainer" type="GridContainer" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 7.0
+margin/top = 7.0
+margin/right = 1668.0
+margin/bottom = 869.0
+columns = 3
+
+[node name="ZiegelTypLabel" type="Label" parent="GridContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 3.0
+margin/right = 832.0
+margin/bottom = 97.0
+text = "Ziegel Typ"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="AbstandLabel1" type="Label" parent="GridContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 836.0
+margin/top = 3.0
+margin/right = 911.0
+margin/bottom = 97.0
+text = "   "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="ZiegelInput" parent="GridContainer" instance=ExtResource( 2 )]
+
+margin/left = 915.0
+margin/right = 969.0
+margin/bottom = 100.0
+
+[node name="SchnuereLabel" type="Label" parent="GridContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 107.0
+margin/right = 832.0
+margin/bottom = 201.0
+text = "Schnuere Abstaende"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="AbstandLabel2" type="Label" parent="GridContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 836.0
+margin/top = 107.0
+margin/right = 911.0
+margin/bottom = 201.0
+text = "   "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="SchnuereInput" parent="GridContainer" instance=ExtResource( 3 )]
+
+margin/left = 915.0
+margin/top = 104.0
+margin/right = 969.0
+margin/bottom = 204.0
+
+[node name="LattenLabel" type="Label" parent="GridContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 211.0
+margin/right = 832.0
+margin/bottom = 305.0
+text = "Latten Abstaende"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="AbstandLabel3" type="Label" parent="GridContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 836.0
+margin/top = 211.0
+margin/right = 911.0
+margin/bottom = 305.0
+text = "   "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="LattenInput" parent="GridContainer" instance=ExtResource( 3 )]
+
+margin/left = 915.0
+margin/top = 208.0
+margin/right = 969.0
+margin/bottom = 308.0
+
+[node name="LattenLabel1" type="Label" parent="GridContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 312.0
+margin/right = 832.0
+margin/bottom = 406.0
+text = "Schnittlinie"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="AbstandLabel4" type="Label" parent="GridContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 836.0
+margin/top = 312.0
+margin/right = 911.0
+margin/bottom = 406.0
+text = "   "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+

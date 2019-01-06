@@ -3,12 +3,13 @@ extends Node2D
 var classEinstellungen = preload("res://Model/Einstellungen1.gd")
 var classDach = preload("res://Model/Dach1.gd")
 var dach = null setget dach_set
+var isOben = false
 
 func _init():
 	self.dach = classDach.new(classEinstellungen.new()) 
 
 func _ready():
-	scale_node()
+	#scale_node()
 	pass
 	
 
@@ -23,10 +24,23 @@ func _draw():
 	draw_schnuere()
 	draw_latten()
 	draw_schnittlinie()
+	draw_abstand()
+	
+	
+
+func draw_abstand():
+	var abstand
+	if self.isOben:
+		abstand = dach.get_linie_von_schnittlinie_zum_naechsten_schnur_oben()
+	else:
+		abstand = dach.get_linie_von_schnittlinie_zum_naechsten_schnur_unten()
+	
+	zeichne_linie(abstand, Color("#FFFFFF"), 5.0)
+	
 	
 
 func draw_schnittlinie():
-	var schnittline = dach.get_schnittlinie_bis_bounding_box()
+	var schnittline = dach.get_schnittlinie()
 	# print (schnittline.get_steigung())
 	zeichne_linie(schnittline)
 	
@@ -67,3 +81,7 @@ func scale_node() :
 		self.set_pos(Vector2(0,0))
 		set_scale(Vector2(k,k))
 		self.set_pos(pos)
+
+func _on_SchnittlinieInput_oben_unten_changed( isOben ):
+	self.isOben = isOben
+	update()

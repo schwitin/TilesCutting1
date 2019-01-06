@@ -7,16 +7,17 @@ var classEinstellungen = preload("res://Model/Einstellungen1.gd")
 var classDach = preload("res://Model/Dach1.gd")
 
 var versatzLabel = null
-var winkelHLabel = null
 var winkelVLabel = null
 var obenUntenButton = null
 var gratKehleButton = null
 
 var isOben = false
 
+signal oben_unten_changed(isOben)
+
 func _ready():
+	
 	versatzLabel = get_node("UserInput/Container/WinkelContainer/Versatz/VersatzValue")
-	winkelHLabel = get_node("UserInput/Container/WinkelContainer/HWinkel/WinkelValue")
 	winkelVLabel = get_node("UserInput/Container/WinkelContainer/VWinkel/WinkelValue")
 	obenUntenButton = get_node("UserInput/Container/SchnittpunktContainer/VBoxContainer/ObenUntenButton")
 	gratKehleButton = get_node("UserInput/Container/SchnittpunktContainer/VBoxContainer/GratKehleButton")
@@ -25,6 +26,8 @@ func _ready():
 	zeichenflaeche = get_node("Zeichenflaeche")
 	zeichenflaeche.dach = dach
 	_on_GratKehleButton_pressed()
+	set_user_input_position()
+	emit_signal("oben_unten_changed", isOben)
 
 
 func _on_ObenUntenButton_pressed():
@@ -35,6 +38,7 @@ func _on_ObenUntenButton_pressed():
 		obenUntenButton.text = "Unten"
 	
 	update_labels()
+	emit_signal("oben_unten_changed", isOben)
 
 
 func _on_NachLinksButton_pressed():
@@ -106,9 +110,9 @@ func _on_PlusEinsButton_pressed():
 func update_labels():
 	var versatz
 	if isOben:
-		versatz = dach.get_versatz_zum_naechsten_schnur_oben()
+		versatz = dach.get_abstand_von_schnittlinie_zum_naechsten_schnur_oben()
 	else:
-		versatz = dach.get_versatz_zum_naechsten_schnur_unten()
+		versatz = dach.get_abstand_von_schnittlinie_zum_naechsten_schnur_unten()
 	
 	versatzLabel.text = String(round(versatz))
 	update_winkel()
@@ -117,10 +121,7 @@ func update_labels():
 func update_winkel():
 	var winkel = dach.einstellungen.schnittlinie.get_winkel_zu_vertikale()
 	var winkelV = abs(min(180 - abs(winkel), abs(winkel)))
-	var winkelH = 90.0 - winkelV
-	var winkelHStr = "%0.1f" % winkelH
 	var winkelVStr = "%0.1f" % winkelV
-	winkelHLabel.text = String(winkelHStr)
 	winkelVLabel.text = String(winkelVStr)
 
 
@@ -134,5 +135,21 @@ func _on_GratKehleButton_pressed():
 	
 	update_labels()
 	
+func set_user_input_position() :
+	var userInput = get_node("UserInput")
+	var userInputBreite = userInput.get_size().width
+	var viewportSize = self.get_viewport_rect().size
+	var viewPortBreite = viewportSize.width
+	userInput.set_pos(Vector2(viewPortBreite - userInputBreite, 0))
 	
-	
+	var zeichenfaeche = get_node("Zeichenflaeche")
+
+	if dach != null :
+		var bounding_box = dach.get_bounding_box()
+		var x = (viewportSize.x - userInputBreite) / bounding_box.x  * 0.99
+		var y = viewportSize.y / bounding_box.y  * 0.95
+		var k = min(x, y)
+		var pos = zeichenfaeche.get_pos()
+		zeichenfaeche.set_pos(Vector2(0,0))
+		zeichenfaeche.set_scale(Vector2(k,k))
+		zeichenfaeche.set_pos(pos)

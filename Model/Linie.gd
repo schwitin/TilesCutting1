@@ -42,10 +42,14 @@ func get_steigung():
 	var steigung = dx / dy
 	return steigung
 
-func get_laengere_linie(koeffizient) : 
+func get_laengere_linie(koeffizient=null) : 
+	if koeffizient == null:
+		# koeffizient entspricht der verlaengerung um 2mm
+		var distance = p1.distance_to(p2)
+		koeffizient = 1 + 1 / distance
 	
 	# erstes Ende 
-	var null_vector_p1 = p1 * -1	
+	var null_vector_p1 = p1 * -1
 	var p2_null = p2 + null_vector_p1
 	var p2_lang = p2_null * koeffizient
 	var p2_neu = p2_lang + p1
@@ -58,7 +62,7 @@ func get_laengere_linie(koeffizient) :
 	
 	var linieClass = load("res://Model/Linie.gd")
 	return linieClass.new(p1_neu, p2_neu)
-	
+
 
 # векторное произведение
 func vector_mult(ax, ay, bx, by) : 

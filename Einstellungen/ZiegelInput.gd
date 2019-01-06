@@ -24,13 +24,6 @@ func _ready():
 		
 
 
-func _on_Items_index_pressed(index):
-	var ziegelTyp = ziegelTypen[index]
-	self.text = get_text(ziegelTyp)
-	emit_signal("changed", ziegelTyp)
-	
-
-
 func _on_Button_pressed():
 	items.popup_centered()
 	
@@ -56,3 +49,9 @@ func get_text(ziegelTyp) :
 func _notification(what):        
     if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST : 
         items.hide()
+
+
+func _on_Items_item_pressed( ID ):
+	var ziegelTyp = ziegelTypen[ID]
+	self.text = get_text(ziegelTyp)
+	emit_signal("changed", ziegelTyp)

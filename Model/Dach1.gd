@@ -33,7 +33,7 @@ func is_grat():
 
 func get_sprungpunkte_oben():
 	var latten = get_latten()
-	var sprung_latte = latten[latten.size()-2]
+	var sprung_latte = latten[latten.size()-1]
 	return get_sprungpunkte(sprung_latte)
 
 
@@ -55,33 +55,45 @@ func get_sprungpunkte(sprung_latte):
 	return sprungpunkte
 
 
-func get_versatz_zum_naechsten_schnur_oben():
-	var distance = 0
+func get_linie_von_schnittlinie_zum_naechsten_schnur_oben():
 	var schnittlinie = get_schnittlinie()
 	var schnittlinie_ende = schnittlinie.p1
 	var sprungpunkte = get_sprungpunkte_oben()
-	var sprungpunkt = get_naechsten_sichtbaren_sprungpunkt(sprungpunkte, schnittlinie_ende)
-		
-		
-	# print (self.is_grat(), " ", " ", sprungpunkt)
-	if sprungpunkt != null:
-		distance = sprungpunkt.distance_to(schnittlinie_ende)
-	return distance
-	
-func get_versatz_zum_naechsten_schnur_unten():
-	var distance = 0
+	var linie = get_linie_von_schnittlinie_zum_naechsten_schnur(schnittlinie_ende, sprungpunkte)
+	return linie
+
+
+func get_linie_von_schnittlinie_zum_naechsten_schnur_unten():
 	var schnittlinie = get_schnittlinie()
 	var schnittlinie_ende = schnittlinie.p2
 	var sprungpunkte = get_sprungpunkte_unten()
-	var sprungpunkt = get_naechsten_sichtbaren_sprungpunkt(sprungpunkte, schnittlinie_ende)
-		
-		
-	# print (self.is_grat(), " ", " ", sprungpunkt)
-	if sprungpunkt != null:
-		distance = sprungpunkt.distance_to(schnittlinie_ende)
+	var linie = get_linie_von_schnittlinie_zum_naechsten_schnur(schnittlinie_ende, sprungpunkte)
+	return linie
+
+
+func get_abstand_von_schnittlinie_zum_naechsten_schnur_oben():
+	var linie = get_linie_von_schnittlinie_zum_naechsten_schnur_oben()
+	var distance = linie.p1.distance_to(linie.p2)
 	return distance
-	
-	
+
+func get_abstand_von_schnittlinie_zum_naechsten_schnur_unten():
+	var linie = get_linie_von_schnittlinie_zum_naechsten_schnur_unten()
+	var distance = linie.p1.distance_to(linie.p2)
+	return distance
+
+
+func get_linie_von_schnittlinie_zum_naechsten_schnur(schnittlinie_ende, sprungpunkte):
+	var schnittlinie = get_schnittlinie()
+	var sprungpunkt = get_naechsten_sichtbaren_sprungpunkt(sprungpunkte, schnittlinie_ende)
+	var linie = null
+	if sprungpunkt != null:
+		linie = classLinie.new(schnittlinie_ende, sprungpunkt)
+	else :
+		linie =  classLinie.new(Vector2(0,0), Vector2(0,0))
+		
+	return linie
+
+
 func get_naechsten_sichtbaren_sprungpunkt(sprungpunkte, schnittlinie_ende):
 	var schnittlinie = get_schnittlinie()
 	var steigung = schnittlinie.get_steigung()
@@ -90,15 +102,15 @@ func get_naechsten_sichtbaren_sprungpunkt(sprungpunkte, schnittlinie_ende):
 	if self.is_grat() :
 		if steigung > 0:
 			sprungpunkt = get_sprungpunkt_links(sprungpunkte, schnittlinie_ende.x)
-		else:
+		elif steigung < 0:
 			sprungpunkt = get_sprungpunkt_rechts(sprungpunkte, schnittlinie_ende.x)
 		
 	else:
 		if steigung < 0:
 			sprungpunkt = get_sprungpunkt_links(sprungpunkte, schnittlinie_ende.x)
-		else:
+		elif steigung > 0:
 			sprungpunkt = get_sprungpunkt_rechts(sprungpunkte, schnittlinie_ende.x)
-	
+		
 	return sprungpunkt
 
 
@@ -182,30 +194,6 @@ func get_sprungpunkt_rechts(sprungpunkte, x):
 
 func get_schnittlinie():
 	return einstellungen.schnittlinie
-	
-func get_schnittlinie_bis_bounding_box():
-	var verlaengerung = 1.0001
-	var schnittline = get_schnittlinie().get_laengere_linie(2)
-	var schnuere = get_schnuere()
-	var latten = get_latten()
-	
-	var erste_latte = latten[0].get_laengere_linie(verlaengerung)
-	var letzte_latte = latten[latten.size() - 1].get_laengere_linie(verlaengerung)
-	var erster_schnur = schnuere[0].get_laengere_linie(verlaengerung)
-	var letzter_schnur = schnuere[schnuere.size() - 1].get_laengere_linie(verlaengerung)
-	var bounding_box = [erster_schnur, letzte_latte, letzter_schnur, erste_latte ]
-	
-	var schnittpunkte = []
-	for linie in bounding_box:
-		var p = schnittline.get_schnittpunkt(linie)
-		if p != null:
-			schnittpunkte.append(p)
-	
-	if schnittpunkte.size() >= 2:
-		return classLinie.new(schnittpunkte[0], schnittpunkte[1]).get_laengere_linie(verlaengerung)
-	else: # sollte nie der fall sein
-		return schnittline
-
 
 
 func get_bounding_box() :
@@ -245,43 +233,49 @@ func get_schnuere_kehle():
 	var linien = []
 	var schnuere = get_schnuere()
 	var p_max = get_bounding_box()
-	var bounding_box = Rect2(Vector2(-1,-1), Vector2(p_max.x+10, p_max.y+10))
-	var schnittline = get_schnittlinie_bis_bounding_box()
+	var bounding_box = Rect2(Vector2(-2,-2), Vector2(p_max.x+4, p_max.y+4))
+	var schnittline = get_schnittlinie().get_laengere_linie()
 	var steigung = schnittline.get_steigung()
 	
 	for schnur in schnuere:
-		var schnittpunkt = schnittline.get_schnittpunkt(schnur.get_laengere_linie(1.2))		
+		var schnittpunkt = schnittline.get_schnittpunkt(schnur.get_laengere_linie())
 		# print(schnittpunkt)
 		if schnittpunkt != null && bounding_box.has_point(schnittpunkt):
 			var p1 = schnur.p1
 			var p2 = schnittpunkt
 			var linie = classLinie.new(p1, p2)
 			linien.append(linie)
-		elif steigung >= 0 && schnur.p1.x > schnittline.get_min_x() || steigung < 0 && schnur.p1.x <= schnittline.get_max_x() :
+		elif steigung > 0 && schnur.p1.x > schnittline.get_min_x() || steigung < 0 && schnur.p1.x <= schnittline.get_max_x() :
 			linien.append(schnur)
 	
 	return linien
 
 
 func get_schnuere_grat():
+	print("schnuere grat")
 	var linien = []
 	var schnuere = get_schnuere()
 	var p_max = get_bounding_box()
-	var bounding_box = Rect2(Vector2(-1,-1), Vector2(p_max.x+2, p_max.y+2))
-	var schnittline = get_schnittlinie_bis_bounding_box()
+	var bounding_box = Rect2(Vector2(-2,-2), Vector2(p_max.x+4, p_max.y+4))
+	var schnittline = get_schnittlinie().get_laengere_linie()
 	var steigung = schnittline.get_steigung()
 	
+	# print("bounding_box ", bounding_box)
+	# print("has_point_0_0", bounding_box.has_point(Vector2(-1,-1)))
+	# print("has_point_max_max", bounding_box.has_point(Vector2(p_max.x,p_max.y)))
+	
 	for schnur in schnuere:
-		var schnittpunkt = schnittline.get_schnittpunkt(schnur.get_laengere_linie(1.2))
-		# print(schnittpunkt)
+		var schnittpunkt = schnittline.get_schnittpunkt(schnur.get_laengere_linie())
+		# print("schnittpunkt ", schnittpunkt)
 		if schnittpunkt != null && bounding_box.has_point(schnittpunkt):
 			var p1 = schnittpunkt
 			var p2 = schnur.p2
 			var linie = classLinie.new(p1, p2)
+			# print("linie", p1, p2)
 			linien.append(linie)
 		elif steigung > 0 && schnur.p1.x < schnittline.get_min_x() || steigung < 0 && schnur.p1.x >= schnittline.get_max_x() :
 			linien.append(schnur)
-	
+			
 	return linien
 
 
@@ -307,14 +301,14 @@ func get_latten_kehle():
 	var linien = []
 	var latten = get_latten()
 	var p_max = get_bounding_box()
-	var bounding_box = Rect2(Vector2(-1,-1), Vector2(p_max.x+10, p_max.y+10))
-	var schnittline = get_schnittlinie().get_laengere_linie(1.5)
+	var bounding_box = Rect2(Vector2(-2,-2), Vector2(p_max.x+4, p_max.y+4))
+	var schnittline = get_schnittlinie().get_laengere_linie()
 	var steigung = schnittline.get_steigung()
 	
 	for latte in latten:
-		var schnittpunkt = schnittline.get_schnittpunkt(latte.get_laengere_linie(1.2))
+		var schnittpunkt = schnittline.get_schnittpunkt(latte.get_laengere_linie())
 		# print(schnittpunkt)
-		if schnittpunkt != null && bounding_box.has_point(schnittpunkt):
+		if steigung != 0 && schnittpunkt != null && bounding_box.has_point(schnittpunkt):
 			var p1 
 			var p2
 			if steigung >= 0 :
@@ -326,8 +320,6 @@ func get_latten_kehle():
 			
 			var linie = classLinie.new(p1, p2)
 			linien.append(linie)
-		else:
-			linien.append(latte)
 		
 	return linien
 
@@ -336,14 +328,17 @@ func get_latten_grat():
 	var linien = []
 	var latten = get_latten()
 	var p_max = get_bounding_box()
-	var bounding_box = Rect2(Vector2(-1,-1), Vector2(p_max.x+2, p_max.y+2))
+	var bounding_box = Rect2(Vector2(-2,-2), Vector2(p_max.x+4, p_max.y+4))
 	var schnittline = get_schnittlinie().get_laengere_linie(1.5)
 	var steigung = schnittline.get_steigung()
 	
+	if steigung == 0:
+		return linien
+	
 	for latte in latten:
-		var schnittpunkt = schnittline.get_schnittpunkt(latte.get_laengere_linie(1.2))
+		var schnittpunkt = schnittline.get_schnittpunkt(latte.get_laengere_linie())
 		#print(schnittpunkt)
-		if steigung != 0 && schnittpunkt != null && bounding_box.has_point(schnittpunkt):
+		if schnittpunkt != null && bounding_box.has_point(schnittpunkt):
 			var p1 
 			var p2
 			if steigung >= 0 :
@@ -357,6 +352,10 @@ func get_latten_grat():
 			linien.append(linie)
 		
 	return linien
+	
+func get_abstand_linie_oben():
+	pass
+
 
 ############### STANDARDEINSTELLUNGEN  #####################
 
@@ -393,4 +392,5 @@ func init_schnittlinie():
 	var sprungpunkteUnten = get_sprungpunkte_unten()
 	var p1 = sprungpunkteOben[0]
 	var p2 = sprungpunkteUnten[sprungpunkteUnten.size()-1]
+	# print(p1, p2)
 	einstellungen.schnittlinie = classLinie.new(p1, p2)
