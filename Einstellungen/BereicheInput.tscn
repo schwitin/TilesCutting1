@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=1]
 
 [ext_resource path="res://Resources/theme.tres" type="Theme" id=1]
-[ext_resource path="res://Einstellungen/SchnuereBereicheInput.gd" type="Script" id=2]
+[ext_resource path="res://Einstellungen/BereicheInput.gd" type="Script" id=2]
 
-[node name="DachdimensionInput" type="Button"]
+[node name="BereicheInput" type="Button"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -36,7 +36,6 @@ popup/exclusive = false
 
 [node name="Container" type="VBoxContainer" parent="PopupPanel"]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -47,60 +46,17 @@ margin/right = 815.0
 margin/bottom = 475.0
 alignment = 0
 
-[node name="UeberschriftContainer" type="HBoxContainer" parent="PopupPanel/Container"]
+[node name="Ueberschrift" type="Label" parent="PopupPanel/Container"]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 1071.0
+margin/right = 815.0
 margin/bottom = 94.0
-alignment = 0
-
-[node name="DeckbreiteLabel" type="Label" parent="PopupPanel/Container/UeberschriftContainer"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 310.0
-margin/bottom = 94.0
-text = "Deckbr."
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="ZiegelLabel" type="Label" parent="PopupPanel/Container/UeberschriftContainer"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 314.0
-margin/top = 0.0
-margin/right = 612.0
-margin/bottom = 94.0
-text = "  Ziegel"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="SchnuereLabel" type="Label" parent="PopupPanel/Container/UeberschriftContainer"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 616.0
-margin/top = 0.0
-margin/right = 1071.0
-margin/bottom = 94.0
-text = "     Schnüre"
+text = "?"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -113,20 +69,19 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 98.0
-margin/right = 1071.0
+margin/right = 815.0
 margin/bottom = 98.0
 alignment = 0
 
 [node name="AddRemoveContainer" type="HBoxContainer" parent="PopupPanel/Container"]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 102.0
-margin/right = 1071.0
+margin/right = 815.0
 margin/bottom = 202.0
 alignment = 0
 

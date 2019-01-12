@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://Resources/theme.tres" type="Theme" id=1]
-[ext_resource path="res://Einstellungen/ZiegelInput.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Einstellungen/SchnuereBereicheInput.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Einstellungen/EinstellungenInput.gd" type="Script" id=2]
+[ext_resource path="res://Einstellungen/ZiegelInput.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Einstellungen/BereicheInput.tscn" type="PackedScene" id=4]
 
-[node name="Einstellungen" type="PanelContainer"]
+[node name="EinstellungenInput" type="PanelContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -15,6 +16,7 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 1675.0
 margin/bottom = 876.0
+script/script = ExtResource( 2 )
 
 [node name="GridContainer" type="GridContainer" parent="."]
 
@@ -58,7 +60,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="ZiegelInput" parent="GridContainer" instance=ExtResource( 2 )]
+[node name="ZiegelInput" parent="GridContainer" instance=ExtResource( 3 )]
 
 margin/left = 915.0
 margin/right = 969.0
@@ -94,7 +96,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="SchnuereInput" parent="GridContainer" instance=ExtResource( 3 )]
+[node name="SchnuereBereichInput" parent="GridContainer" instance=ExtResource( 4 )]
 
 margin/left = 915.0
 margin/top = 104.0
@@ -131,7 +133,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="LattenInput" parent="GridContainer" instance=ExtResource( 3 )]
+[node name="LattenBereichInput" parent="GridContainer" instance=ExtResource( 4 )]
 
 margin/left = 915.0
 margin/top = 208.0
@@ -167,5 +169,7 @@ text = "   "
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[connection signal="changed" from="GridContainer/ZiegelInput" to="." method="_on_ZiegelInput_changed"]
 
 

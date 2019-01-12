@@ -12,9 +12,7 @@ func _init(ziegel_typ):
 	anzahl_schnuere = 3
 
 func _ready():
-	# Called when the node is added to the scene for the first time.
-	# Initialization here
 	pass
 	
-func get_berichbreite():
+func get_berich_groesse():
 	return deckbreite * anzahl_ziegel * anzahl_schnuere

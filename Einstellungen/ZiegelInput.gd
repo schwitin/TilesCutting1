@@ -19,9 +19,7 @@ func _ready():
 		var text = ziegelTyp.name + " (" + ziegelTyp.hersteller + ")"
 		items.add_item(text)
 	
-	if self.text == "?":
-		_on_Items_index_pressed(0)
-		
+	_on_Items_item_pressed(0)
 
 
 func _on_Button_pressed():
