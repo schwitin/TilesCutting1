@@ -19,7 +19,7 @@ func create_label_node(text):
 func alle_abwaehlen_ausser(input_field):
 	var children = get_children()
 	for child in children:
-		if child.get_type() == "LineEdit" && child != input_field:
+		if child.get_type() == "Button" && child != input_field:
 			child.deselect()
 
 

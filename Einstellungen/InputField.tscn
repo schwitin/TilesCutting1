@@ -3,8 +3,9 @@
 [ext_resource path="res://Resources/theme.tres" type="Theme" id=1]
 [ext_resource path="res://Einstellungen/InputField.gd" type="Script" id=2]
 
-[node name="InputField" type="LineEdit"]
+[node name="InputField" type="Button"]
 
+rect/min_size = Vector2( 310, 0 )
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -14,14 +15,14 @@ margin/left = 15.0
 margin/top = 19.0
 margin/right = 325.0
 margin/bottom = 123.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
 text = "1777"
-placeholder/alpha = 0.6
-editable = false
-focus_mode = 2
-caret/caret_blink = false
-caret/caret_blink_speed = 0.65
+flat = false
+align = 2
 script/script = ExtResource( 2 )
 
-[connection signal="focus_enter" from="." to="." method="_on_InputField_focus_enter"]
+[connection signal="pressed" from="." to="." method="_on_InputField_pressed"]
 
 
