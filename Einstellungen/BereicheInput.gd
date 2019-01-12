@@ -38,6 +38,8 @@ func _ready():
 	slider = get_node("PopupPanel/VSlider")
 	get_node("PopupPanel/Container/Ueberschrift").set_text(ueberschrift)
 	set_ziegel_typ(get_beispiel_ziegel_typ())
+	
+
 
 
 func set_ziegel_typ(_ziegelTyp):
@@ -129,6 +131,11 @@ func set_text():
 		gesamtbreite += b.get_berich_groesse()
 		
 	self.text = "" + String(gesamtbreite) + " | " + String(anzahl_bereiche)
+
+
+func _notification(what):        
+    if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST : 
+        get_node("PopupPanel").hide()
 
 
 func get_beispiel_ziegel_typ():
