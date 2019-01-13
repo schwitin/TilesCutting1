@@ -1,47 +1,42 @@
-extends PanelContainer
+extends VBoxContainer
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+# model
 var einstellungen
+
 var container
 var lattenBereicheInput 
 var schnuereBereicheInput
 
+signal einstellungen_uebernehmen()
+
 func _init():
 	var einstellungenClass = preload("res://Model/Einstellungen2.gd")
 	self.einstellungen = einstellungenClass.new()
+	
+	var bereicheInputScene = preload("res://Einstellungen/BereicheInput.tscn")
+	lattenBereicheInput = bereicheInputScene.instance()
+	lattenBereicheInput.init("L")
+	schnuereBereicheInput = bereicheInputScene.instance()
+	schnuereBereicheInput.init("S")
 
 func _ready():
 	self.container = get_node("GridContainer")
-	self.lattenBereicheInput = get_node("GridContainer/LattenBereichInput")
-	self.schnuereBereicheInput = get_node("GridContainer/SchnuereBereichInput")
+	self.container.get_child(5).replace_by(schnuereBereicheInput)
+	self.container.get_child(8).replace_by(lattenBereicheInput)
+
 	
-	var bereicheInputScene = load("res://Einstellungen/BereicheInput.tscn")
-	var lattenBereicheInput = bereicheInputScene.instance()
-	lattenBereicheInput.init("L")
-	var schnuereBereicheInput = bereicheInputScene.instance()
-	schnuereBereicheInput.init("S")
-	
-	self.lattenBereicheInput.replace_by(lattenBereicheInput)
-	self.schnuereBereicheInput.replace_by(schnuereBereicheInput)
-	
-	self.lattenBereicheInput = lattenBereicheInput
-	self.schnuereBereicheInput = schnuereBereicheInput	
-	
-	update_nodes()
-	
+	#update_nodes()
+
+
 
 
 func _on_ZiegelInput_changed( ziegelTyp ):
 	print("_on_ZiegelInput_changed")
 	self.einstellungen.ziegelTyp = ziegelTyp
-	update_nodes()
+	self.lattenBereicheInput.set_ziegel_typ(self.einstellungen.ziegelTyp)
+	self.schnuereBereicheInput.set_ziegel_typ(self.einstellungen.ziegelTyp)
 
-func update_nodes():
-	if self.lattenBereicheInput != null:
-		self.lattenBereicheInput.set_ziegel_typ(self.einstellungen.ziegelTyp)
-	
-	if self.schnuereBereicheInput != null:
-		self.schnuereBereicheInput.set_ziegel_typ(self.einstellungen.ziegelTyp)
-	 
+
+func _on_UebernehmenButton_pressed():
+	print("einstellungen_uebernehmen")
+	emit_signal("einstellungen_uebernehmen")

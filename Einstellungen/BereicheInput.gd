@@ -37,7 +37,9 @@ func _ready():
 	addButton = get_node("PopupPanel/Container/AddRemoveContainer/AddButton")
 	slider = get_node("PopupPanel/VSlider")
 	get_node("PopupPanel/Container/Ueberschrift").set_text(ueberschrift)
-	set_ziegel_typ(get_beispiel_ziegel_typ())
+	
+	if self.ziegelTyp == null:
+		set_ziegel_typ(get_beispiel_ziegel_typ())
 	
 
 

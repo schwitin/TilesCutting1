@@ -39,8 +39,8 @@ func crate_decklaenge_node():
 	node.connect("selected", self, "_on_InputField_selected")
 	node.connect("value_changed", self, "_on_decklaenge_changed")
 	node.initial_wert = int(self.bereich.decklaenge)
-	node.anpassung_min = int(self.bereich.decklaenge_min)
-	node.anpassung_max = int(self.bereich.decklaenge_max)
+	node.anpassung_min = int(self.bereich.decklaenge_min - self.bereich.decklaenge)
+	node.anpassung_max = int(self.bereich.decklaenge_max - self.bereich.decklaenge)
 	return node
 
 func create_latten_node():

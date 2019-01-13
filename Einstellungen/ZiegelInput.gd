@@ -1,25 +1,33 @@
 extends Button
 
+# model
+var ziegelTyp setget set_ziegel_typ
+
 var ziegelTypen
 var items
 
 signal changed(ziegelTyp)
 
-func set_ziegel_typ(ziegelTyp) :
-	if ziegelTyp != null :
-		self.text = get_text(ziegelTyp)
+
+func _init():
+	ziegelTypen = get_ziegel_typen()
 
 
 func _ready():
 	items = get_node("Items")
 	items.clear()
-	ziegelTypen = get_ziegel_typen()
-	var idx = 0
+	
 	for ziegelTyp in ziegelTypen:
 		var text = ziegelTyp.name + " (" + ziegelTyp.hersteller + ")"
 		items.add_item(text)
 	
-	_on_Items_item_pressed(0)
+	if self.ziegelTyp == null:
+		set_ziegel_typ(ziegelTypen[0])
+
+	
+func set_ziegel_typ(_ziegelTyp) :
+	ziegelTyp = _ziegelTyp
+	self.text = get_text(ziegelTyp)
 
 
 func _on_Button_pressed():
@@ -50,6 +58,5 @@ func _notification(what):
 
 
 func _on_Items_item_pressed( ID ):
-	var ziegelTyp = ziegelTypen[ID]
-	self.text = get_text(ziegelTyp)
+	set_ziegel_typ(ziegelTypen[ID])
 	emit_signal("changed", ziegelTyp)
