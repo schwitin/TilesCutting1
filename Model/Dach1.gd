@@ -11,16 +11,13 @@ signal changed()
  
 var aktueller_ziegel_index = 0
 
-func _init(einstellungen):
-	self.einstellungen = einstellungen
-	
-	if self.einstellungen.ziegelTyp == null:
-		init_ziegeltyp()
-		init_bereiche_scnuere()
-		init_bereiche_latten()
-	
-	if self.einstellungen.schnittlinie == null:
-		init_schnittlinie()
+func _init(_einstellungen):
+	einstellungen = _einstellungen
+	print("_init", einstellungen)
+	init_schnittlinie()
+	einstellungen.connect("schnuere_changed", self, "init_schnittlinie");
+	einstellungen.connect("latten_changed", self, "init_schnittlinie");
+
 
 func set_grat(_is_grat):
 	is_grat = _is_grat
@@ -250,7 +247,7 @@ func get_schnuere_kehle():
 
 
 func get_schnuere_grat():
-	print("schnuere grat")
+	#print("schnuere grat")
 	var linien = []
 	var schnuere = get_schnuere()
 	var p_max = get_bounding_box()
@@ -291,7 +288,8 @@ func get_latten():
 			var p2 = Vector2(bounding_box.x, y)
 			var linie = classLinie.new(p1, p2)
 			linien.append(linie)
-			
+	
+	print("Anzahl Latten ", linien.size())
 	return linien
 
 
@@ -355,43 +353,13 @@ func get_abstand_linie_oben():
 	pass
 
 
-############### STANDARDEINSTELLUNGEN  #####################
-
-
-func init_bereiche_latten():
-	var bereichClass = load("res://Model/LattenBereich.gd")
-	var bereich = bereichClass.new(einstellungen.ziegelTyp)
-	var bereiche = []
-	bereiche.append(bereich)
-	einstellungen.set_bereiche_latten(bereiche)
-	
-
-func init_bereiche_scnuere():
-	var bereichClass = load("res://Model/SchnuereBereich.gd")
-	var bereich = bereichClass.new(einstellungen.ziegelTyp)
-	var bereiche = []
-	bereiche.append(bereich)
-	einstellungen.set_bereiche_schnuere(bereiche)
-
-
-func init_ziegeltyp() :
-	var dict = {
-			"Name": "Beispiel Ziegel",
-			"Hersteller": "BRAAS",
-			"Laenge" : "482",
-			"Breite" : "292",
-			"VersatzY": "20",
-			"DecklaengeMin" : "414",
-			"DecklaengeMax" : "414",
-			"Deckbreite" : "241"
-		}
-	einstellungen.set_ziegel_typ(classZiegelTyp.new(dict))
-
-
 func init_schnittlinie():
+	print("init_schnittlinie")
+	einstellungen.print_einstellungen()
 	var sprungpunkteOben = get_sprungpunkte_oben()
 	var sprungpunkteUnten = get_sprungpunkte_unten()
 	var p1 = sprungpunkteOben[0]
 	var p2 = sprungpunkteUnten[sprungpunkteUnten.size()-1]
 	# print(p1, p2)
 	einstellungen.schnittlinie = classLinie.new(p1, p2)
+	emit_signal("changed")

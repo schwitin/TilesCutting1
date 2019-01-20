@@ -1,7 +1,10 @@
-extends Container
+extends Button
 
 var zeichenflaeche = null
+
+# Model
 var dach 
+var einstellungen 
 
 var classEinstellungen = preload("res://Model/Einstellungen2.gd")
 var classDach = preload("res://Model/Dach1.gd")
@@ -15,20 +18,44 @@ var isOben = false
 
 signal oben_unten_changed(isOben)
 
+
+func _init(einstellungen = null):
+	init(einstellungen)
+
+func init(_einstellungen):
+	if _einstellungen == null:
+		var einstellungenClass = preload("res://Model/Einstellungen2.gd")
+		einstellungen = einstellungenClass.new()
+	else:
+		einstellungen = _einstellungen
+	
+	dach = classDach.new(einstellungen)
+
+
 func _ready():
 	
-	versatzLabel = get_node("UserInput/Container/WinkelContainer/Versatz/VersatzValue")
-	winkelVLabel = get_node("UserInput/Container/WinkelContainer/VWinkel/WinkelValue")
-	obenUntenButton = get_node("UserInput/Container/SchnittpunktContainer/VBoxContainer/ObenUntenButton")
-	gratKehleButton = get_node("UserInput/Container/SchnittpunktContainer/VBoxContainer/GratKehleButton")
+	versatzLabel = get_node("PopupPanel/UserInput/Container/WinkelContainer/Versatz/VersatzValue")
+	winkelVLabel = get_node("PopupPanel/UserInput/Container/WinkelContainer/VWinkel/WinkelValue")
+	obenUntenButton = get_node("PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/ObenUntenButton")
+	gratKehleButton = get_node("PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/GratKehleButton")
+	zeichenflaeche = get_node("PopupPanel/Zeichenflaeche")
 	
-	dach = classDach.new(classEinstellungen.new()) 
-	zeichenflaeche = get_node("Zeichenflaeche")
+	#einstellungen.connect("", self, "update_dach")
+	
 	zeichenflaeche.dach = dach
+	#print("update_dach")
 	_on_GratKehleButton_pressed()
 	set_user_input_position()
 	emit_signal("oben_unten_changed", isOben)
+	# update_dach()
+	
 
+# func update_dach():
+	
+	
+	
+	# zeichenflaeche.update()
+	
 
 func _on_ObenUntenButton_pressed():
 	isOben = !isOben
@@ -123,6 +150,7 @@ func update_winkel():
 	var winkelV = abs(min(180 - abs(winkel), abs(winkel)))
 	var winkelVStr = "%0.1f" % winkelV
 	winkelVLabel.text = String(winkelVStr)
+	self.text = String(winkelVStr) + "°"
 
 
 func _on_GratKehleButton_pressed():
@@ -136,20 +164,27 @@ func _on_GratKehleButton_pressed():
 	update_labels()
 	
 func set_user_input_position() :
-	var userInput = get_node("UserInput")
+	var userInput = get_node("PopupPanel/UserInput")
 	var userInputBreite = userInput.get_size().width
 	var viewportSize = self.get_viewport_rect().size
 	var viewPortBreite = viewportSize.width
 	userInput.set_pos(Vector2(viewPortBreite - userInputBreite, 0))
 	
-	var zeichenfaeche = get_node("Zeichenflaeche")
-
 	if dach != null :
 		var bounding_box = dach.get_bounding_box()
 		var x = (viewportSize.x - userInputBreite) / bounding_box.x  * 0.95
 		var y = viewportSize.y / bounding_box.y  * 0.95
 		var k = min(x, y)
-		var pos = zeichenfaeche.get_pos()
-		zeichenfaeche.set_pos(Vector2(0,0))
-		zeichenfaeche.set_scale(Vector2(k,k))
-		zeichenfaeche.set_pos(pos)
+		var pos = zeichenflaeche.get_pos()
+		zeichenflaeche.set_pos(Vector2(0,0))
+		zeichenflaeche.set_scale(Vector2(k,k))
+		zeichenflaeche.set_pos(pos)
+
+func _on_SchnittlinieInput_pressed():
+	get_node("PopupPanel").popup_centered()
+
+
+func _notification(what):        
+    if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST : 
+        get_node("PopupPanel").hide()
+

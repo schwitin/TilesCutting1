@@ -23,6 +23,7 @@ func _ready():
 	
 	if self.ziegelTyp == null:
 		set_ziegel_typ(ziegelTypen[0])
+		emit_signal("changed", ziegelTyp)
 
 
 func set_ziegel_typ(_ziegelTyp) :

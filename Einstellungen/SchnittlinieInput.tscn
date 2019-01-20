@@ -4,7 +4,7 @@
 [ext_resource path="res://Einstellungen/SchnittlinieInput.gd" type="Script" id=2]
 [ext_resource path="res://Einstellungen/Zeichenflaeche.gd" type="Script" id=3]
 
-[node name="SchnittlinieInput" type="Container"]
+[node name="SchnittlinieInput" type="Button"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -15,9 +15,27 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 0.0
 margin/bottom = 0.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "?"
+flat = false
 script/script = ExtResource( 2 )
 
-[node name="ColorFrame" type="ColorFrame" parent="."]
+[node name="PopupPanel" type="PopupPanel" parent="."]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 1695.0
+margin/bottom = 901.0
+popup/exclusive = false
+
+[node name="ColorFrame" type="ColorFrame" parent="PopupPanel"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -29,12 +47,12 @@ margin/right = 2307.0
 margin/bottom = 1350.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="Zeichenflaeche" type="Node2D" parent="."]
+[node name="Zeichenflaeche" type="Node2D" parent="PopupPanel"]
 
 transform/pos = Vector2( 26.0203, 27.5387 )
 script/script = ExtResource( 3 )
 
-[node name="UserInput" type="PanelContainer" parent="."]
+[node name="UserInput" type="PanelContainer" parent="PopupPanel"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -45,7 +63,7 @@ margin/top = 9.0
 margin/right = 1682.0
 margin/bottom = 995.0
 
-[node name="Container" type="Container" parent="UserInput"]
+[node name="Container" type="Container" parent="PopupPanel/UserInput"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -56,8 +74,9 @@ margin/top = 7.0
 margin/right = 447.0
 margin/bottom = 979.0
 
-[node name="WinkelContainer" type="VBoxContainer" parent="UserInput/Container"]
+[node name="WinkelContainer" type="VBoxContainer" parent="PopupPanel/UserInput/Container"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -68,7 +87,7 @@ margin/right = 432.0
 margin/bottom = 197.0
 alignment = 0
 
-[node name="Versatz" type="HBoxContainer" parent="UserInput/Container/WinkelContainer"]
+[node name="Versatz" type="HBoxContainer" parent="PopupPanel/UserInput/Container/WinkelContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = false
@@ -80,7 +99,7 @@ margin/right = 431.0
 margin/bottom = 94.0
 alignment = 1
 
-[node name="VersatzValue" type="Label" parent="UserInput/Container/WinkelContainer/Versatz"]
+[node name="VersatzValue" type="Label" parent="PopupPanel/UserInput/Container/WinkelContainer/Versatz"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -96,7 +115,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="VWinkel" type="HBoxContainer" parent="UserInput/Container/WinkelContainer"]
+[node name="VWinkel" type="HBoxContainer" parent="PopupPanel/UserInput/Container/WinkelContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = false
@@ -108,7 +127,7 @@ margin/right = 431.0
 margin/bottom = 192.0
 alignment = 1
 
-[node name="WinkelValue" type="Label" parent="UserInput/Container/WinkelContainer/VWinkel"]
+[node name="WinkelValue" type="Label" parent="PopupPanel/UserInput/Container/WinkelContainer/VWinkel"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -123,7 +142,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="WinkelEinheit" type="Label" parent="UserInput/Container/WinkelContainer/VWinkel"]
+[node name="WinkelEinheit" type="Label" parent="PopupPanel/UserInput/Container/WinkelContainer/VWinkel"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -138,7 +157,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="SchnittpunktContainer" type="PanelContainer" parent="UserInput/Container"]
+[node name="SchnittpunktContainer" type="PanelContainer" parent="PopupPanel/UserInput/Container"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -149,7 +168,7 @@ margin/top = 232.0
 margin/right = 450.0
 margin/bottom = 866.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UserInput/Container/SchnittpunktContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel/UserInput/Container/SchnittpunktContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = false
@@ -161,7 +180,7 @@ margin/right = 437.0
 margin/bottom = 627.0
 alignment = 0
 
-[node name="GratKehleButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer"]
+[node name="GratKehleButton" type="Button" parent="PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -177,7 +196,7 @@ shortcut = null
 text = "Unten"
 flat = false
 
-[node name="ObenUntenButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer"]
+[node name="ObenUntenButton" type="Button" parent="PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -193,8 +212,9 @@ shortcut = null
 text = "Unten"
 flat = false
 
-[node name="NavigationContainer" type="GridContainer" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer"]
+[node name="NavigationContainer" type="GridContainer" parent="PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -205,7 +225,7 @@ margin/right = 430.0
 margin/bottom = 620.0
 columns = 2
 
-[node name="NachLinksButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
+[node name="NachLinksButton" type="Button" parent="PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -222,7 +242,7 @@ text = "|<--"
 flat = false
 align = 0
 
-[node name="NachRechtsButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
+[node name="NachRechtsButton" type="Button" parent="PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -239,7 +259,7 @@ text = "-->|"
 flat = false
 align = 2
 
-[node name="MinusHundertButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
+[node name="MinusHundertButton" type="Button" parent="PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -256,7 +276,7 @@ text = "-100"
 flat = false
 align = 0
 
-[node name="PlusHundertButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
+[node name="PlusHundertButton" type="Button" parent="PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -273,7 +293,7 @@ text = "+100"
 flat = false
 align = 2
 
-[node name="MinusZehnButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
+[node name="MinusZehnButton" type="Button" parent="PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -290,7 +310,7 @@ text = "-10"
 flat = false
 align = 0
 
-[node name="PlusZehnButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
+[node name="PlusZehnButton" type="Button" parent="PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -307,7 +327,7 @@ text = "+10"
 flat = false
 align = 2
 
-[node name="MinusEinsButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
+[node name="MinusEinsButton" type="Button" parent="PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -324,7 +344,7 @@ text = "-1"
 flat = false
 align = 0
 
-[node name="PlusEinsButton" type="Button" parent="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
+[node name="PlusEinsButton" type="Button" parent="PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -341,26 +361,28 @@ text = "+1"
 flat = false
 align = 2
 
-[connection signal="oben_unten_changed" from="." to="Zeichenflaeche" method="_on_SchnittlinieInput_oben_unten_changed"]
+[connection signal="oben_unten_changed" from="." to="PopupPanel/Zeichenflaeche" method="_on_SchnittlinieInput_oben_unten_changed"]
 
-[connection signal="pressed" from="UserInput/Container/SchnittpunktContainer/VBoxContainer/GratKehleButton" to="." method="_on_GratKehleButton_pressed"]
+[connection signal="pressed" from="." to="." method="_on_SchnittlinieInput_pressed"]
 
-[connection signal="pressed" from="UserInput/Container/SchnittpunktContainer/VBoxContainer/ObenUntenButton" to="." method="_on_ObenUntenButton_pressed"]
+[connection signal="pressed" from="PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/GratKehleButton" to="." method="_on_GratKehleButton_pressed"]
 
-[connection signal="pressed" from="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/NachLinksButton" to="." method="_on_NachLinksButton_pressed"]
+[connection signal="pressed" from="PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/ObenUntenButton" to="." method="_on_ObenUntenButton_pressed"]
 
-[connection signal="pressed" from="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/NachRechtsButton" to="." method="_on_NachRechtsButton_pressed"]
+[connection signal="pressed" from="PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/NachLinksButton" to="." method="_on_NachLinksButton_pressed"]
 
-[connection signal="pressed" from="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/MinusHundertButton" to="." method="_on_MinusHundertButton_pressed"]
+[connection signal="pressed" from="PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/NachRechtsButton" to="." method="_on_NachRechtsButton_pressed"]
 
-[connection signal="pressed" from="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/PlusHundertButton" to="." method="_on_PlusHundertButton_pressed"]
+[connection signal="pressed" from="PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/MinusHundertButton" to="." method="_on_MinusHundertButton_pressed"]
 
-[connection signal="pressed" from="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/MinusZehnButton" to="." method="_on_MinusZehnButton_pressed"]
+[connection signal="pressed" from="PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/PlusHundertButton" to="." method="_on_PlusHundertButton_pressed"]
 
-[connection signal="pressed" from="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/PlusZehnButton" to="." method="_on_PlusZehnButton_pressed"]
+[connection signal="pressed" from="PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/MinusZehnButton" to="." method="_on_MinusZehnButton_pressed"]
 
-[connection signal="pressed" from="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/MinusEinsButton" to="." method="_on_MinusEinsButton_pressed"]
+[connection signal="pressed" from="PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/PlusZehnButton" to="." method="_on_PlusZehnButton_pressed"]
 
-[connection signal="pressed" from="UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/PlusEinsButton" to="." method="_on_PlusEinsButton_pressed"]
+[connection signal="pressed" from="PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/MinusEinsButton" to="." method="_on_MinusEinsButton_pressed"]
+
+[connection signal="pressed" from="PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer/PlusEinsButton" to="." method="_on_PlusEinsButton_pressed"]
 
 

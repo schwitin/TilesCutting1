@@ -2,10 +2,12 @@ extends Button
 
 var bereichClass
 var bereichInputScene
-var ziegelTyp setget set_ziegel_typ
 
 # model
-var bereiche = {} setget bereiche_set
+var bereiche = {} #setget bereiche_set
+
+var bereichTyp
+var einstellungen
 
 var bereicheContainer
 var removeButton
@@ -16,10 +18,11 @@ var selected_input_field
 
 signal changed(bereiche_values)
 
-func _init(bereichTyp = "L"):
-	init(bereichTyp)
+func _init(bereichTyp = "L", einstellungen = null):
+	init(bereichTyp, einstellungen)
 
-func init(bereichTyp = "L"):
+func init(_bereichTyp, _einstellungen):
+	bereichTyp = _bereichTyp
 	if bereichTyp == "S":
 		bereichClass = preload("res://Model/SchnuereBereich.gd")
 		bereichInputScene = preload("res://Einstellungen/SchnuereBereichInput.tscn")
@@ -28,6 +31,14 @@ func init(bereichTyp = "L"):
 		bereichClass = preload("res://Model/LattenBereich.gd")
 		bereichInputScene = preload("res://Einstellungen/LattenBereichInput.tscn")
 		ueberschrift = "Deckl.       Latten"
+	
+	if _einstellungen == null:
+		var einstellungenClass = preload("res://Model/Einstellungen2.gd")
+		einstellungen = einstellungenClass.new()
+	else:
+		einstellungen = _einstellungen
+		print("BereicheInput ", einstellungen)
+
 
 
 func _ready():
@@ -36,48 +47,42 @@ func _ready():
 	addButton = get_node("PopupPanel/Container/AddRemoveContainer/AddButton")
 	slider = get_node("PopupPanel/VSlider")
 	get_node("PopupPanel/Container/Ueberschrift").set_text(ueberschrift)
+	set_text()
 	
-	if self.ziegelTyp == null:
-		set_ziegel_typ(get_beispiel_ziegel_typ())
 
+func get_bereiche():
+	if bereichTyp == "S":
+		return einstellungen.bereicheSchuere
+	else:
+		return einstellungen.bereicheLatten
 
-func set_ziegel_typ(_ziegelTyp):
-	ziegelTyp = _ziegelTyp
-	bereiche_set([])
-
-
-func bereiche_set(_bereiche):
+func update_view():
 	var nodes = bereicheContainer.get_children()
 	for node in nodes:
 		bereicheContainer.remove_child(node)
-		
-	bereiche.clear()
-	for bereich in _bereiche:
-		add_bereich(bereich)
-		
-	if self.bereiche.empty():
-		_on_AddButton_pressed()
 	
+	bereiche.clear()
+	
+	for bereich in get_bereiche():
+		add_bereich(bereich)
+	
+	update_button_visibility()
 	set_text()
-
+	
 
 func _on_AddButton_pressed():
-	var bereich = bereichClass.new(self.ziegelTyp)
+	var bereich = bereichClass.new(einstellungen.ziegelTyp)
 	add_bereich(bereich)
 	update_button_visibility()
-	#emit_signal("changed", bereiche.values())
-	set_text()
 
 
 func _on_RemoveButton_pressed():
-	var anzahl_bereiche = bereicheContainer.get_child_count()
-	var letzter_bereich = bereicheContainer.get_child(anzahl_bereiche - 1)
-	bereicheContainer.remove_child(letzter_bereich)
-	bereiche.erase(letzter_bereich)
+	var bereichInput = bereicheContainer.get_children().back()
+	bereicheContainer.remove_child(bereichInput)
 	bereicheContainer.minimum_size_changed()
+	#print(bereiche.has(bereichInput))
+	bereiche.erase(bereichInput)
 	update_button_visibility()
-	emit_signal("changed", bereiche.values())
-	set_text()
 
 
 func update_button_visibility():
@@ -87,17 +92,12 @@ func update_button_visibility():
 
 
 func add_bereich(bereich):
-	#print("addbereich")
+	# print(bereich)
 	var bereichInput = bereichInputScene.instance()
 	bereichInput.connect("selected", self, "_on_InputField_selected")
-	bereichInput.connect("value_changed", self, "_on_bereich_value_changed")
-	bereichInput.bereich = bereich
+	bereichInput.set_bereich(bereich)
 	bereiche[bereichInput] = bereich
 	bereicheContainer.add_child(bereichInput)
-
-
-func _on_DachdimensionInput_pressed():
-	get_node("PopupPanel").popup_centered()
 
 
 func _on_InputField_selected(input_field):
@@ -117,38 +117,36 @@ func _on_slider_value_changed( value ):
 	if null != self.selected_input_field:
 		self.selected_input_field.anpassung_wert = value
 
-
-func _on_bereich_value_changed(bereich):
-	# print("_on_bereich_value_changed")
-	set_text()
-	emit_signal("changed", bereiche.values())
 	
 func set_text():
 	var gesamtbreite = 0
 	var anzahl_bereiche = 0
-	for b in bereiche.values():
+	for b in get_bereiche():
 		anzahl_bereiche += 1 
 		gesamtbreite += b.get_berich_groesse()
 		
 	self.text = "" + String(gesamtbreite) + " | " + String(anzahl_bereiche)
 
 
+func _on_DachdimensionInput_pressed():
+	update_view()
+	get_node("PopupPanel").popup_centered()
+
+
 func _notification(what):        
-    if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST : 
-        get_node("PopupPanel").hide()
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST : 
+		get_node("PopupPanel").hide()
 
 
-func get_beispiel_ziegel_typ():
-	var data = {
-			"Name": "Rubin 9V",
-			"Hersteller": "BRAAS",
-			"Laenge" : "472",
-			"Breite" : "313",
-			"VersatzY": "35",
-			"DecklaengeMin" : "370",
-			"DecklaengeMax" : "400",
-			"Deckbreite" : "267"
-		}
-	var ziegelTypClass = load("res://Model/ZiegelTyp1.gd")
-	var ziegel_typ = ziegelTypClass.new(data)
-	return ziegel_typ
+func _on_PopupPanel_popup_hide():
+	var b = [] # bereiche.values() sind nicht sortiert
+	for bereichInput in bereicheContainer.get_children():
+		b.append(bereiche[bereichInput])
+	
+	if bereichTyp == "S":
+		einstellungen.set_bereiche_schnuere(b)
+	else:
+		einstellungen.set_bereiche_latten(b)
+			    
+	set_text()
+

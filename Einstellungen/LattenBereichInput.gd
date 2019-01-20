@@ -5,7 +5,7 @@ var latten_node
 var gesamtgroesse_node
 
 # model
-var bereich setget bereich_set
+var bereich setget set_bereich
 
 signal value_changed(bereich)
 
@@ -16,7 +16,7 @@ func _ready():
 		self.bereich = lattenBereichClass.new(get_beispiel_ziegel_typ())
 
 
-func bereich_set(_bereich):
+func set_bereich(_bereich):
 	bereich = _bereich
 	var children = get_children()
 	for child in children:
@@ -47,7 +47,7 @@ func create_latten_node():
 	var node = inputFieldScene.instance()
 	node.connect("selected", self, "_on_InputField_selected")
 	node.connect("value_changed", self, "_on_latten_changed")
-	node.initial_wert = 3
+	node.initial_wert = int(self.bereich.anzahl_latten)
 	node.anpassung_min = -2
 	node.anpassung_max = 13
 	return node
