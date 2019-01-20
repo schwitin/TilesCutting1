@@ -16,3 +16,6 @@ func _ready():
 	
 func get_berich_groesse():
 	return deckbreite * anzahl_ziegel * anzahl_schnuere
+
+func get_abstand():
+	return deckbreite * anzahl_ziegel

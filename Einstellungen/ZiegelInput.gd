@@ -24,7 +24,7 @@ func _ready():
 	if self.ziegelTyp == null:
 		set_ziegel_typ(ziegelTypen[0])
 
-	
+
 func set_ziegel_typ(_ziegelTyp) :
 	ziegelTyp = _ziegelTyp
 	self.text = get_text(ziegelTyp)
@@ -32,7 +32,7 @@ func set_ziegel_typ(_ziegelTyp) :
 
 func _on_Button_pressed():
 	items.popup_centered()
-	
+
 
 func get_ziegel_typen():
 	var zeigelTypen = []
@@ -49,9 +49,11 @@ func get_ziegel_typen():
 	
 	return zeigelTypen
 
+
 func get_text(ziegelTyp) : 
 	return ziegelTyp.name + " (" + ziegelTyp.hersteller + ")"
-	
+
+
 func _notification(what):        
     if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST : 
         items.hide()

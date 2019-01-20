@@ -3,7 +3,6 @@ extends Reference
 var einstellungen = null
 var is_grat = true setget set_grat, is_grat
 
-var classAbstand = preload("res://Model/Abstand.gd")
 var classZiegelTyp = preload("res://Model/ZiegelTyp1.gd")
 var classLinie = preload("res://Model/Linie.gd")
 
@@ -15,12 +14,11 @@ var aktueller_ziegel_index = 0
 func _init(einstellungen):
 	self.einstellungen = einstellungen
 	
-	if self.einstellungen.abstaendeX.size() == 0:
-		init_abstaendeX()
-	if self.einstellungen.abstaendeY.size() == 0:
-		init_abstaendeY()
 	if self.einstellungen.ziegelTyp == null:
 		init_ziegeltyp()
+		init_bereiche_scnuere()
+		init_bereiche_latten()
+	
 	if self.einstellungen.schnittlinie == null:
 		init_schnittlinie()
 
@@ -197,15 +195,15 @@ func get_schnittlinie():
 
 
 func get_bounding_box() :
-	var abstaendeX = einstellungen.abstaendeX
+	var bereicheSchuere = einstellungen.bereicheSchuere
 	var x = 0
-	for abstand in abstaendeX :		
-		x = x + (abstand.abstand * abstand.anzahl)
+	for bereich in bereicheSchuere :
+		x = x + bereich.get_berich_groesse()
 		
-	var abstaendeY = einstellungen.abstaendeY
+	var bereicheLatten = einstellungen.bereicheLatten
 	var y = 0
-	for abstand in abstaendeY :
-		y = y + (abstand.abstand * abstand.anzahl)
+	for bereich in bereicheLatten :
+		y = y + bereich.get_berich_groesse()
 	
 	var bounding_box = Vector2(x,y)
 	return bounding_box
@@ -216,11 +214,11 @@ func get_schnuere():
 	var bounding_box = get_bounding_box()
 	linien.append(classLinie.new(Vector2(0,0), Vector2(0, bounding_box.y)))
 	
-	var abstaendeX = einstellungen.abstaendeX
+	var bereicheSchuere = einstellungen.bereicheSchuere
 	var x = 0
-	for abstand in abstaendeX :
-		for i in range(abstand.anzahl):
-			x = x + abstand.abstand
+	for bereich in bereicheSchuere :
+		for i in range(bereich.anzahl_schnuere):
+			x = x + bereich.get_abstand()
 			var p1 = Vector2(x, 0)
 			var p2 = Vector2(x, bounding_box.y)
 			var linie = classLinie.new(p1, p2)
@@ -284,11 +282,11 @@ func get_latten():
 	var bounding_box = get_bounding_box()
 	linien.append(classLinie.new(Vector2(0, bounding_box.y), Vector2(bounding_box.x, bounding_box.y)))
 	
-	var abstaendeY = einstellungen.abstaendeY
+	var bereicheLatten = einstellungen.bereicheLatten
 	var y = bounding_box.y
-	for abstand in abstaendeY :
-		for i in range(abstand.anzahl):
-			y = y - abstand.abstand
+	for bereich in bereicheLatten :
+		for i in range(bereich.anzahl_latten):
+			y = y - bereich.decklaenge
 			var p1 = Vector2(0, y)
 			var p2 = Vector2(bounding_box.x, y)
 			var linie = classLinie.new(p1, p2)
@@ -359,18 +357,21 @@ func get_abstand_linie_oben():
 
 ############### STANDARDEINSTELLUNGEN  #####################
 
-func init_abstaendeX():
-	var abstand = classAbstand.new()
-	abstand.abstand = 964
-	abstand.anzahl = 5
-	einstellungen.abstaendeX.append(abstand)
 
+func init_bereiche_latten():
+	var bereichClass = load("res://Model/LattenBereich.gd")
+	var bereich = bereichClass.new(einstellungen.ziegelTyp)
+	var bereiche = []
+	bereiche.append(bereich)
+	einstellungen.set_bereiche_latten(bereiche)
+	
 
-func init_abstaendeY():
-	var abstand = classAbstand.new()
-	abstand.abstand = 426
-	abstand.anzahl = 9
-	einstellungen.abstaendeY.append(abstand)
+func init_bereiche_scnuere():
+	var bereichClass = load("res://Model/SchnuereBereich.gd")
+	var bereich = bereichClass.new(einstellungen.ziegelTyp)
+	var bereiche = []
+	bereiche.append(bereich)
+	einstellungen.set_bereiche_schnuere(bereiche)
 
 
 func init_ziegeltyp() :
@@ -384,7 +385,7 @@ func init_ziegeltyp() :
 			"DecklaengeMax" : "414",
 			"Deckbreite" : "241"
 		}
-	einstellungen.ziegelTyp = classZiegelTyp.new(dict)
+	einstellungen.set_ziegel_typ(classZiegelTyp.new(dict))
 
 
 func init_schnittlinie():

@@ -1,6 +1,6 @@
 extends Node2D
 
-var classEinstellungen = preload("res://Model/Einstellungen1.gd")
+var classEinstellungen = preload("res://Model/Einstellungen2.gd")
 var classDach = preload("res://Model/Dach1.gd")
 var dach = null setget dach_set
 var isOben = false

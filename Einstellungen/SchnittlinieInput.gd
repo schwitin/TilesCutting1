@@ -3,7 +3,7 @@ extends Container
 var zeichenflaeche = null
 var dach 
 
-var classEinstellungen = preload("res://Model/Einstellungen1.gd")
+var classEinstellungen = preload("res://Model/Einstellungen2.gd")
 var classDach = preload("res://Model/Dach1.gd")
 
 var versatzLabel = null
@@ -146,7 +146,7 @@ func set_user_input_position() :
 
 	if dach != null :
 		var bounding_box = dach.get_bounding_box()
-		var x = (viewportSize.x - userInputBreite) / bounding_box.x  * 0.99
+		var x = (viewportSize.x - userInputBreite) / bounding_box.x  * 0.95
 		var y = viewportSize.y / bounding_box.y  * 0.95
 		var k = min(x, y)
 		var pos = zeichenfaeche.get_pos()

@@ -16,7 +16,6 @@ func _ready():
 	#dach = dachClass.new(einstellungen)
 	
 	scene_uebersicht = preload("res://Uebersicht/Uebersicht.tscn").instance()
-	
 	scene_einzeldarstellung = preload("res://Einzeldarstellung/Einzeldarstellung.tscn").instance()
 	scene_einstellungen = preload("res://Einstellungen/EinstellungenInput.tscn").instance()
 	
@@ -56,15 +55,10 @@ func _on_einzeldarstellung_verlassen():
 	call_deferred("add_child", scene_uebersicht)
 
 
-
-
 func _on_SettingsButton_pressed():
 	var dialog = get_node("SettingsDialog")
 	dialog.einstellungen = einstellungen
 	dialog.popup()
-
-
-
 
 
 func _on_SettingsDialog_einstellungen_geaendert(_einstellungen):

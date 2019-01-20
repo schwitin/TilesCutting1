@@ -7,7 +7,6 @@ var ziegelTyp setget set_ziegel_typ
 # model
 var bereiche = {} setget bereiche_set
 
-
 var bereicheContainer
 var removeButton
 var addButton
@@ -40,13 +39,12 @@ func _ready():
 	
 	if self.ziegelTyp == null:
 		set_ziegel_typ(get_beispiel_ziegel_typ())
-	
-
 
 
 func set_ziegel_typ(_ziegelTyp):
 	ziegelTyp = _ziegelTyp
 	bereiche_set([])
+
 
 func bereiche_set(_bereiche):
 	var nodes = bereicheContainer.get_children()
@@ -67,7 +65,7 @@ func _on_AddButton_pressed():
 	var bereich = bereichClass.new(self.ziegelTyp)
 	add_bereich(bereich)
 	update_button_visibility()
-	emit_signal("changed", bereiche.values())
+	#emit_signal("changed", bereiche.values())
 	set_text()
 
 
