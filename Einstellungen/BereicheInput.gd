@@ -37,7 +37,7 @@ func init(_bereichTyp, _einstellungen):
 		einstellungen = einstellungenClass.new()
 	else:
 		einstellungen = _einstellungen
-		print("BereicheInput ", einstellungen)
+		#print("BereicheInput ", einstellungen)
 
 
 

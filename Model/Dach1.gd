@@ -13,7 +13,7 @@ var aktueller_ziegel_index = 0
 
 func _init(_einstellungen):
 	einstellungen = _einstellungen
-	print("_init", einstellungen)
+	#print("_init", einstellungen)
 	init_schnittlinie()
 	einstellungen.connect("schnuere_changed", self, "init_schnittlinie");
 	einstellungen.connect("latten_changed", self, "init_schnittlinie");
@@ -289,7 +289,7 @@ func get_latten():
 			var linie = classLinie.new(p1, p2)
 			linien.append(linie)
 	
-	print("Anzahl Latten ", linien.size())
+	#print("Anzahl Latten ", linien.size())
 	return linien
 
 
@@ -354,7 +354,7 @@ func get_abstand_linie_oben():
 
 
 func init_schnittlinie():
-	print("init_schnittlinie")
+	#print("init_schnittlinie")
 	einstellungen.print_einstellungen()
 	var sprungpunkteOben = get_sprungpunkte_oben()
 	var sprungpunkteUnten = get_sprungpunkte_unten()

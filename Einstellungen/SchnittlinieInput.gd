@@ -30,6 +30,8 @@ func init(_einstellungen):
 		einstellungen = _einstellungen
 	
 	dach = classDach.new(einstellungen)
+	einstellungen.connect("schnuere_changed", self, "set_user_input_position");
+	einstellungen.connect("latten_changed", self, "set_user_input_position");
 
 
 func _ready():

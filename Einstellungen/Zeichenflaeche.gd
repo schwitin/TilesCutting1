@@ -14,7 +14,7 @@ func _ready():
 	
 
 func dach_set(_dach) : 
-	print("====================")
+	#print("====================")
 	dach = _dach
 	dach.connect("changed", self, "update")
 	##scale_node()

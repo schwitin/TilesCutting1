@@ -26,7 +26,7 @@ func set_bereiche_schnuere(bereiche):
 
 
 func set_bereiche_latten(bereiche):
-	print("set_bereiche_latten", self)
+	#print("set_bereiche_latten", self)
 	bereicheLatten = bereiche
 	emit_signal("latten_changed")
 
