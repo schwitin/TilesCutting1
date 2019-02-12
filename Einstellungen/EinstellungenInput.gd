@@ -11,7 +11,7 @@ var schnittlinieInput
 signal einstellungen_uebernehmen()
 
 func _init():
-	var einstellungenClass = preload("res://Model/Einstellungen2.gd")
+	var einstellungenClass = preload("res://Model/Einstellungen.gd")
 	einstellungen = einstellungenClass.new()
 	#print("EinstellungenInput ", einstellungen)
 	

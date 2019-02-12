@@ -1,12 +1,22 @@
 extends Reference
 
-var bezeichnung
-var groesse
-var ueberlappung
+var name
+var hersteller
+var laenge
+var breite
+var deckLaengeMin
+var deckLaengeMax
+var deckBreite
+var versatzY
 
-func _init(_bezeichnung, _groesse, _ueberlappung):
-	bezeichnung = _bezeichnung
-	groesse = _groesse
-	ueberlappung = _ueberlappung
-	
+
+func _init(ziegelTyp):
+	name = ziegelTyp.Name
+	hersteller = ziegelTyp.Hersteller
+	laenge = ziegelTyp.Laenge 
+	breite = ziegelTyp.Breite
+	deckLaengeMin = ziegelTyp.DecklaengeMin
+	deckLaengeMax = ziegelTyp.DecklaengeMax
+	deckBreite = ziegelTyp.Deckbreite
+	versatzY = ziegelTyp.VersatzY
 

@@ -6,8 +6,8 @@ var zeichenflaeche = null
 var dach 
 var einstellungen 
 
-var classEinstellungen = preload("res://Model/Einstellungen2.gd")
-var classDach = preload("res://Model/Dach1.gd")
+#var classEinstellungen = preload("res://Model/Einstellungen.gd")
+var classDach = preload("res://Model/Dach.gd")
 
 var versatzLabel = null
 var winkelVLabel = null
@@ -24,7 +24,7 @@ func _init(einstellungen = null):
 
 func init(_einstellungen):
 	if _einstellungen == null:
-		var einstellungenClass = preload("res://Model/Einstellungen2.gd")
+		var einstellungenClass = preload("res://Model/Einstellungen.gd")
 		einstellungen = einstellungenClass.new()
 	else:
 		einstellungen = _einstellungen

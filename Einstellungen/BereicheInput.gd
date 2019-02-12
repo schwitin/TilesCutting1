@@ -33,7 +33,7 @@ func init(_bereichTyp, _einstellungen):
 		ueberschrift = "Deckl.       Latten"
 	
 	if _einstellungen == null:
-		var einstellungenClass = preload("res://Model/Einstellungen2.gd")
+		var einstellungenClass = preload("res://Model/Einstellungen.gd")
 		einstellungen = einstellungenClass.new()
 	else:
 		einstellungen = _einstellungen

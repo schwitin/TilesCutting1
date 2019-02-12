@@ -55,14 +55,14 @@ func _on_einzeldarstellung_verlassen():
 	call_deferred("add_child", scene_uebersicht)
 
 
-func _on_SettingsButton_pressed():
-	var dialog = get_node("SettingsDialog")
-	dialog.einstellungen = einstellungen
-	dialog.popup()
+#func _on_SettingsButton_pressed():
+#	var dialog = get_node("SettingsDialog")
+#	dialog.einstellungen = einstellungen
+#	dialog.popup()
 
 
-func _on_SettingsDialog_einstellungen_geaendert(_einstellungen):
-	einstellungen = _einstellungen
-	dach = dachClass.new(einstellungen)
-	var scene = get_child(0)
-	scene.dach = dach
+#func _on_SettingsDialog_einstellungen_geaendert(_einstellungen):
+#	einstellungen = _einstellungen
+#	dach = dachClass.new(einstellungen)
+#	var scene = get_child(0)
+#	scene.dach = dach

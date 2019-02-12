@@ -37,7 +37,7 @@ func _on_Button_pressed():
 
 func get_ziegel_typen():
 	var zeigelTypen = []
-	var ziegelTypClass = load("res://Model/ZiegelTyp1.gd")
+	var ziegelTypClass = load("res://Model/ZiegelTyp.gd")
 	var file = File.new()
 	file.open("res://Resources/ZiegelTyp.json", file.READ)
 	var dict = {}
