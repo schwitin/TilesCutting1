@@ -6,15 +6,22 @@ var scene_einstellungen
 
 
 func _ready():
-	scene_uebersicht = preload("res://Uebersicht/Uebersicht.tscn").instance()
-	scene_einzeldarstellung = preload("res://Einzeldarstellung/Einzeldarstellung.tscn").instance()
-	scene_einstellungen = preload("res://Einstellungen/EinstellungenInput.tscn").instance()
+	var einstellungenClass = preload("res://Model/Einstellungen.gd")
+	var einstellungen = einstellungenClass.new()
 	
-	scene_einzeldarstellung.connect("einzeldarstellung_pressed", self, "_on_einzeldarstellung_pressed")
-	scene_einzeldarstellung.connect("einzeldarstellung_verlassen", self, "_on_einzeldarstellung_verlassen")
+	scene_einstellungen = preload("res://Einstellungen/EinstellungenInput.tscn").instance()
+	scene_einstellungen.init(einstellungen)
+	scene_einstellungen.connect("einstellungen_uebernehmen", self, "_on_einstellungen_uebernehmen")
+	
+	scene_uebersicht = preload("res://Uebersicht/Uebersicht.tscn").instance()
+	scene_uebersicht.init(einstellungen)
 	scene_uebersicht.connect("uebersicht_pressed", self, "_on_uebersicht_pressed")
 	scene_uebersicht.connect("uebersicht_verlassen", self, "_on_uebersicht_verlassen")
-	scene_einstellungen.connect("einstellungen_uebernehmen", self, "_on_einstellungen_uebernehmen")
+	
+	scene_einzeldarstellung = preload("res://Einzeldarstellung/Einzeldarstellung.tscn").instance()
+	scene_einzeldarstellung.init(einstellungen)
+	scene_einzeldarstellung.connect("einzeldarstellung_pressed", self, "_on_einzeldarstellung_pressed")
+	scene_einzeldarstellung.connect("einzeldarstellung_verlassen", self, "_on_einzeldarstellung_verlassen")
 	
 	add_child(scene_einstellungen)
 

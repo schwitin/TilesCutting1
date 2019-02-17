@@ -8,6 +8,7 @@ var schnittlinie = null setget set_schnittlinie
 signal ziegel_typ_changed()
 signal schnuere_changed()
 signal latten_changed()
+signal schnittlinie_changed()
 
 
 func _init():
@@ -35,7 +36,7 @@ func set_bereiche_latten(bereiche):
 func set_schnittlinie(_schnittlinie):
 	#print("set_schnittlinie")
 	schnittlinie = _schnittlinie
-	#emit_signal("changed")
+	emit_signal("schnittlinie_changed")
 	
 
 
