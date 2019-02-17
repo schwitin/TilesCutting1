@@ -42,9 +42,9 @@ func crate_decklaenge_node():
 	var node = inputFieldScene.instance()
 	node.connect("selected", self, "_on_InputField_selected")
 	node.connect("value_changed", self, "_on_decklaenge_changed")
-	node.initial_wert = int(bereich.decklaenge)
-	node.anpassung_min = int(bereich.decklaenge_min - bereich.decklaenge)
-	node.anpassung_max = int(bereich.decklaenge_max - bereich.decklaenge)
+	node.wert = int(bereich.decklaenge)
+	node.min_wert = int(bereich.decklaenge_min)
+	node.max_wert = int(bereich.decklaenge_max)
 	return node
 
 
@@ -52,9 +52,9 @@ func create_latten_node():
 	var node = inputFieldScene.instance()
 	node.connect("selected", self, "_on_InputField_selected")
 	node.connect("value_changed", self, "_on_latten_changed")
-	node.initial_wert = int(bereich.anzahl_latten)
-	node.anpassung_min = -2
-	node.anpassung_max = 13
+	node.wert = int(bereich.anzahl_latten)
+	node.min_wert = 1
+	node.max_wert = 16
 	return node
 
 

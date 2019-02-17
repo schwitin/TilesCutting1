@@ -1,42 +1,29 @@
 extends Button
 
 
-var anpassung_min 
-var anpassung_max
+var min_wert 
+var max_wert
+var wert setget set_wert
 var anpassung_schritt
-var initial_wert setget set_initial_wert
-var anpassung_wert=0 setget set_anpassung_wert
 
 signal selected(input_field)
 signal value_changed(new_value)
 
-func _init(_initial_wert=1000, _anpassung_min = -10, _anpassung_max=10, _anpassung_schritt=1):
-	anpassung_min = _anpassung_min
-	anpassung_max = _anpassung_max
+func _init(_wert=1000, _min_wert = -10, _max_wert=10, _anpassung_schritt=1):
+	min_wert = _min_wert
+	max_wert = _max_wert
 	anpassung_schritt = _anpassung_schritt
-	set_initial_wert(_initial_wert)
-	update_value()
+	set_wert(_wert)
 
 
-func _ready():
-	pass
+func set_wert(_wert):
+	wert = _wert
+	set_text(String(wert))
+	emit_signal("value_changed", wert)
 
-func set_initial_wert(_initial_wert):
-	initial_wert = _initial_wert
-	update_value()
-
-func set_anpassung_wert(_anpassung_wert):
-	anpassung_wert = _anpassung_wert
-	update_value()
-
-func update_value():
-	var neuer_wert = get_wert()
-	# print("neeur_wert ", neuer_wert)
-	set_text(String(neuer_wert))
-	emit_signal("value_changed", neuer_wert)
 
 func get_wert():
-	return initial_wert + anpassung_wert
+	return wert
 
 
 func deselect():

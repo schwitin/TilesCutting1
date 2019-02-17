@@ -41,9 +41,9 @@ func crate_deckbreite_node():
 	var node = inputFieldScene.instance()
 	node.connect("selected", self, "_on_InputField_selected")
 	node.connect("value_changed", self, "_on_deckbreite_changed")
-	node.initial_wert = int(self.bereich.deckbreite)
-	node.anpassung_min = -2
-	node.anpassung_max = 2
+	node.wert = bereich.deckbreite
+	node.min_wert = bereich.deckbreite - 2
+	node.max_wert = bereich.deckbreite + 2
 	return node
 
 
@@ -51,9 +51,9 @@ func create_ziegel_node():
 	var node = inputFieldScene.instance()
 	node.connect("selected", self, "_on_InputField_selected")
 	node.connect("value_changed", self, "_on_ziegel_changed")
-	node.initial_wert = int(self.bereich.anzahl_ziegel)
-	node.anpassung_min = -3
-	node.anpassung_max = 3
+	node.wert = bereich.anzahl_ziegel
+	node.min_wert = 1
+	node.max_wert = 10
 	return node
 
 
@@ -61,9 +61,9 @@ func create_schnuere_node():
 	var node = inputFieldScene.instance()
 	node.connect("selected", self, "_on_InputField_selected")
 	node.connect("value_changed", self, "_on_schnuere_changed")
-	node.initial_wert = int(self.bereich.anzahl_schnuere)
-	node.anpassung_min = -2
-	node.anpassung_max = 13
+	node.wert = bereich.anzahl_schnuere
+	node.min_wert = 1
+	node.max_wert = 10
 	return node
 
 
