@@ -4,6 +4,7 @@ var ziegelTyp = null setget set_ziegel_typ
 var bereicheSchuere = [] setget set_bereiche_schnuere
 var bereicheLatten = [] setget set_bereiche_latten
 var schnittlinie = null setget set_schnittlinie
+var istGrat = false setget set_grat
 
 signal ziegel_typ_changed()
 signal schnuere_changed()
@@ -37,7 +38,10 @@ func set_schnittlinie(_schnittlinie):
 	#print("set_schnittlinie")
 	schnittlinie = _schnittlinie
 	emit_signal("schnittlinie_changed")
-	
+
+
+func set_grat(_istGrat):
+	istGrat = _istGrat
 
 
 ############### STANDARDEINSTELLUNGEN  #####################

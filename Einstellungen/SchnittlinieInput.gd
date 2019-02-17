@@ -46,7 +46,8 @@ func _ready():
 	
 	zeichenflaeche.dach = dach
 	#print("update_dach")
-	_on_GratKehleButton_pressed()
+	set_kehle_grat(self.dach.is_grat())
+	#_on_GratKehleButton_pressed()
 	set_user_input_position()
 	emit_signal("oben_unten_changed", isOben)
 	# update_dach()
@@ -156,7 +157,11 @@ func update_winkel():
 
 
 func _on_GratKehleButton_pressed():
-	self.dach.set_grat(!self.dach.is_grat())
+	set_kehle_grat(!self.dach.is_grat())
+	
+func set_kehle_grat(istGrat):
+	self.dach.set_grat(istGrat)
+	einstellungen.set_grat(istGrat)
 	
 	if self.dach.is_grat:
 		self.gratKehleButton.text = "Grat"

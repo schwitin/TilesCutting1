@@ -36,7 +36,7 @@ func _on_uebersicht_pressed():
 	add_child(scene_einzeldarstellung)
 
 
-func _on_einstellungen_uebernehmen():
+func _on_einstellungen_uebernehmen(einstellungen):
 	remove_child(scene_einstellungen)
 	add_child(scene_uebersicht)
 

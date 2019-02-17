@@ -13,9 +13,9 @@ var versatzY
 func _init(ziegelTyp):
 	name = ziegelTyp.Name
 	hersteller = ziegelTyp.Hersteller
-	laenge = ziegelTyp.Laenge 
-	breite = ziegelTyp.Breite
-	deckLaengeMin = ziegelTyp.DecklaengeMin
-	deckLaengeMax = ziegelTyp.DecklaengeMax
-	deckBreite = ziegelTyp.Deckbreite
-	versatzY = ziegelTyp.VersatzY
+	laenge = int(ziegelTyp.Laenge) 
+	breite = int(ziegelTyp.Breite)
+	deckLaengeMin = int(ziegelTyp.DecklaengeMin)
+	deckLaengeMax = int(ziegelTyp.DecklaengeMax)
+	deckBreite = int(ziegelTyp.Deckbreite)
+	versatzY = int(ziegelTyp.VersatzY)
