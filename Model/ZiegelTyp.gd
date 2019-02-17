@@ -19,4 +19,3 @@ func _init(ziegelTyp):
 	deckLaengeMax = ziegelTyp.DecklaengeMax
 	deckBreite = ziegelTyp.Deckbreite
 	versatzY = ziegelTyp.VersatzY
-

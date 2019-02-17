@@ -1,6 +1,5 @@
 extends Resource
 
-
 var ziegelTyp = null setget set_ziegel_typ
 var bereicheSchuere = [] setget set_bereiche_schnuere
 var bereicheLatten = [] setget set_bereiche_latten
@@ -10,8 +9,10 @@ signal ziegel_typ_changed()
 signal schnuere_changed()
 signal latten_changed()
 
+
 func _init():
 	init_ziegel_typ()
+
 
 func set_ziegel_typ(_ziegelTyp):
 	ziegelTyp = _ziegelTyp
@@ -31,14 +32,11 @@ func set_bereiche_latten(bereiche):
 	emit_signal("latten_changed")
 
 
-
-
 func set_schnittlinie(_schnittlinie):
 	#print("set_schnittlinie")
 	schnittlinie = _schnittlinie
 	#emit_signal("changed")
 	
-
 
 
 ############### STANDARDEINSTELLUNGEN  #####################

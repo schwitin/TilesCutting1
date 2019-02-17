@@ -13,7 +13,6 @@ signal einstellungen_uebernehmen()
 func _init():
 	var einstellungenClass = preload("res://Model/Einstellungen.gd")
 	einstellungen = einstellungenClass.new()
-	#print("EinstellungenInput ", einstellungen)
 	
 	var bereicheInputScene = preload("res://Einstellungen/BereicheInput.tscn")
 	lattenBereicheInput = bereicheInputScene.instance()
@@ -26,10 +25,10 @@ func _init():
 	
 
 func _ready():
-	self.container = get_node("GridContainer")
-	self.container.get_child(5).replace_by(self.schnuereBereicheInput)
-	self.container.get_child(8).replace_by(self.lattenBereicheInput)
-	self.container.get_child(11).replace_by(self.schnittlinieInput)
+	container = get_node("GridContainer")
+	container.get_child(5).replace_by(schnuereBereicheInput)
+	container.get_child(8).replace_by(lattenBereicheInput)
+	container.get_child(11).replace_by(schnittlinieInput)
 
 
 func _on_UebernehmenButton_pressed():

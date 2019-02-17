@@ -1,10 +1,6 @@
 extends Reference
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
 var rect = null setget rect_set, rect_get
-
 var typ = null
 
 var linieClass  = null
@@ -18,7 +14,7 @@ func _init(_position, _typ):
 	
 	linieClass = load("res://Model/Linie.gd")
 	ziegelModelClass = load("res://Model/ZiegelModell.gd")
-	
+
 func rect_get():
 	return rect
 
