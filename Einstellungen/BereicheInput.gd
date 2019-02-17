@@ -105,10 +105,15 @@ func _on_InputField_selected(input_field):
 	for bereich in bereiche.keys():
 		bereich.alle_abwaehlen_ausser(input_field)
 	
-	slider.set_min(input_field.anpassung_min)
-	slider.set_max(input_field.anpassung_max)
-	slider.set_step(input_field.anpassung_schritt)
-	slider.set_value(input_field.anpassung_wert)
+	#slider.set_min(input_field.anpassung_min)
+	#slider.set_max(input_field.anpassung_max)
+	#slider.set_step(input_field.anpassung_schritt)
+	#slider.set_value(input_field.anpassung_wert)
+	
+	slider.set_min(1)
+	slider.set_max(10)
+	slider.set_step(1)
+	slider.set_value(5)
 	
 	self.selected_input_field = input_field
 

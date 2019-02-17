@@ -10,11 +10,11 @@ var anpassung_wert=0 setget set_anpassung_wert
 signal selected(input_field)
 signal value_changed(new_value)
 
-func _init(initial_wert=1000, anpassung_min = -10, anpassung_max=10, anpassung_schritt=1):
-	anpassung_min = anpassung_min
-	anpassung_max = anpassung_max
-	anpassung_schritt = anpassung_schritt
-	initial_wert = set_initial_wert(initial_wert)
+func _init(_initial_wert=1000, _anpassung_min = -10, _anpassung_max=10, _anpassung_schritt=1):
+	anpassung_min = _anpassung_min
+	anpassung_max = _anpassung_max
+	anpassung_schritt = _anpassung_schritt
+	set_initial_wert(_initial_wert)
 	update_value()
 
 
