@@ -120,6 +120,10 @@ func get_schnittpunkt(linie) :
 		return null
 
 
+func get_winkel_zu_vertikale_rad() :
+	var rad = p1.angle_to_point(p2)
+	return rad
+
 func get_winkel_zu_vertikale() :
 	var rad = p1.angle_to_point(p2)
 	var degree = rad * 180 / PI

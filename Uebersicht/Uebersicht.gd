@@ -1,4 +1,4 @@
-extends ColorFrame
+extends Node2D
 
 var einstellungen
 
@@ -20,7 +20,7 @@ func init(_einstellungen):
 	einstellungen = _einstellungen
 	var ziegelTyp = einstellungen.ziegelTyp
 	var ziegelClass = preload("res://Model/Ziegel.gd")
-	var position = Vector2(1300, 50)
+	var position = Vector2(100, 100)
 	ziegel = ziegelClass.new(einstellungen, position)
 	ziegel.set_ausgewaelt(true)
 	ziegel.println()
@@ -32,7 +32,8 @@ func _ready():
 	scale_node(bounding_box)
 
 func _draw():
-	ziegel.zeichne(self)
+	var bounding_box = ziegel.get_bounding_box()
+	ziegel.zeichne(self,  -bounding_box.pos - bounding_box.size / 2)
 	
 	
 func _on_Button_pressed():
@@ -40,14 +41,18 @@ func _on_Button_pressed():
 	
 # TODO konsolidieren
 func scale_node(bounding_box) :
+	var bounding_box = ziegel.get_bounding_box()
+	var schnittlinie = einstellungen.schnittlinie
+	
 	var viewport_size = self.get_viewport_rect().size
-	var x = viewport_size.x / bounding_box.end.x  * 0.95
-	var y = viewport_size.y / bounding_box.end.y  * 0.95
+	var x = viewport_size.x / bounding_box.end.x  * 0.90
+	var y = viewport_size.y / bounding_box.end.y  * 0.90
 	var k = min(x, y)
 	var pos = self.get_pos()
-	self.set_pos(Vector2(0,0))
+	
+	set_pos(Vector2(viewport_size.x / 3, viewport_size.y / 2))
+	set_rot(-schnittlinie.get_winkel_zu_vertikale_rad() + PI)
 	set_scale(Vector2(k,k))
-	self.set_pos(pos)
 
 
 func _notification(what):        
