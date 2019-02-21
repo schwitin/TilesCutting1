@@ -39,6 +39,44 @@ func set_schnittlinie(_schnittlinie):
 	schnittlinie = _schnittlinie
 	emit_signal("schnittlinie_changed")
 
+func get_ziegel_positionen():
+	
+	
+	var ziegelPositionen = []
+	var versatzY = ziegelTyp.versatzY
+	var letztePosition = Vector2(0, 0)
+
+	var bereicheLattenInverted = Array(bereicheLatten)
+	bereicheLattenInverted.invert()
+	var bereicheSchnuereInverted = Array(bereicheSchuere)
+	bereicheSchnuereInverted.invert()
+	
+	if bereicheLattenInverted == null || bereicheSchnuereInverted == null :
+		return []
+	
+	for bereichLatten in bereicheLattenInverted:
+		var decklaenge = bereichLatten.decklaenge 
+		for latteNr in range(bereichLatten.anzahl_latten):
+			var y = letztePosition.y - decklaenge# - versatzY
+			letztePosition.x = 0
+			for bereichSchnuere in bereicheSchnuereInverted:
+				var deckbreite = bereichSchnuere.deckbreite
+				for schnurNr in range(bereichSchnuere.anzahl_schnuere):
+					for ziegelNr in range(bereichSchnuere.anzahl_ziegel):
+						var x = letztePosition.x - deckbreite
+						letztePosition = Vector2(x,y)
+						ziegelPositionen.append(letztePosition)
+	
+	var ziegelPositionenTranslated = []
+	for position in ziegelPositionen:
+		var newPostition = position + -letztePosition
+		newPostition.y = newPostition.y - versatzY
+		ziegelPositionenTranslated.append(newPostition)
+	
+	return ziegelPositionenTranslated
+
+
+
 
 func set_grat(_istGrat):
 	istGrat = _istGrat

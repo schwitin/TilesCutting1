@@ -18,8 +18,8 @@ var selected_input_field
 
 signal changed(bereiche_values)
 
-func _init(bereichTyp = "L", einstellungen = null):
-	init(bereichTyp, einstellungen)
+func _init(bereichTyp = "L", _einstellungen = null):
+	init(bereichTyp, _einstellungen)
 
 func init(_bereichTyp, _einstellungen):
 	bereichTyp = _bereichTyp

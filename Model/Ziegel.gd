@@ -4,6 +4,7 @@ var position
 var einstellungen
 
 var istAusgewaelt  = false setget set_ausgewaelt
+var istGeschnitten = true
 
 
 var linieClass = preload("res://Model/Linie.gd")
@@ -38,17 +39,20 @@ func create_linie(p1, p2):
 
 func zeichne(node, translate=Vector2(0,0)):
 	var points = get_ziegel_polygon_points()
-	var translated_points = []
-	for point in points:
-		translated_points.append( point + translate)
-
-	var colors = []
-	colors.append(Color("FFFFFF"))
-	node.draw_polygon(translated_points, colors)
+	if istGeschnitten:
+		var translated_points = []
+		for point in points:
+			translated_points.append( point + translate)
 	
-	var linien = get_linien()
-	for linie in linien:
-		zeichne_linie(linie, node, translate)
+		var colors = []
+		colors.append(Color("FFFFFF"))
+		#node.draw_polygon(translated_points, colors)
+		
+		var linien = get_linien()
+		for linie in linien:
+			zeichne_linie(linie, node, translate)
+		
+		zeichne_linie(einstellungen.schnittlinie, node, translate)
 
 
 func zeichne_linie(linie, node, translate):
@@ -56,7 +60,7 @@ func zeichne_linie(linie, node, translate):
 	if istAusgewaelt:
 		width = 2.0
 	
-	print(linie.p1, linie.p2)
+	# print(linie.p1, linie.p2)
 	node.draw_line(linie.p1 + translate, linie.p2 + translate, Color("FFFFFF"), width)
 
 
@@ -70,6 +74,7 @@ func set_ausgewaelt(_istAusgewaelt):
 
 func get_ziegel_polygon_points():
 	var polygon_punkte
+	var schnittlinie = einstellungen.schnittlinie.get_laengere_linie()
 	
 	var ecken = get_eckpunkte()		# Erster und letzter Element ist die gleiche Ecke
 	var ecken_und_schnittpunkte = []
@@ -92,7 +97,7 @@ func get_ziegel_polygon_points():
 		# Wenn Schnittpunkt zwischen ecke1 und ecke2 existiert dann diesen auch hinzufügen
 		# Der Schnittpunkt wird dann zwischen ecke1 und ecke2 hinzugefügt
 		var linie = create_linie(ecke1, ecke2).get_laengere_linie()
-		var schnittpunkt = linie.get_schnittpunkt(einstellungen.schnittlinie)
+		var schnittpunkt = linie.get_schnittpunkt(schnittlinie)
 		if null != schnittpunkt:
 			ecken_und_schnittpunkte.append(schnittpunkt)
 			schnittpunkte.append(schnittpunkt)
@@ -103,6 +108,7 @@ func get_ziegel_polygon_points():
 	# Polygon, dessen Start- und Entpunkt unsere Schnittpunkte sind. 
 	if schnittpunkte.size() == 2:
 		var startpunkt = get_startpunkt(schnittpunkte)
+		istGeschnitten = true
 		
 		# Wir verschieben die Punkte von vorne des Arrays nach
 		# hinten solange, bis wir den richtigien Schnittpunkt 

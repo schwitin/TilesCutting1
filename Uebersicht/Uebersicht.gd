@@ -12,8 +12,7 @@ func _init():
 	# Wir brauchen das, damit der Scene-Editor funktioniert.
 	# Einstellungen werden von der Root-Scene neu gesetzt und dieses hier verworfen
 	var einstellungenClass = preload("res://Model/Einstellungen.gd")
-	var einstellungen = einstellungenClass.new()
-	init(einstellungen)
+	init(einstellungenClass.new())
 
 
 func init(_einstellungen):
@@ -23,12 +22,12 @@ func init(_einstellungen):
 	var position = Vector2(100, 100)
 	ziegel = ziegelClass.new(einstellungen, position)
 	ziegel.set_ausgewaelt(true)
-	ziegel.println()
+	#ziegel.println()
 
 
 
 func _ready():
-	var bounding_box = ziegel.get_bounding_box()	
+	var bounding_box = ziegel.get_bounding_box()
 	scale_node(bounding_box)
 
 func _draw():

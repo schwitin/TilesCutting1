@@ -355,7 +355,7 @@ func get_abstand_linie_oben():
 
 func init_schnittlinie():
 	#print("init_schnittlinie")
-	einstellungen.print_einstellungen()
+	# einstellungen.print_einstellungen()
 	var sprungpunkteOben = get_sprungpunkte_oben()
 	var sprungpunkteUnten = get_sprungpunkte_unten()
 	var p1 = sprungpunkteOben[0]

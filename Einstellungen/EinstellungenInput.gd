@@ -14,8 +14,7 @@ func _init():
 	# Wir brauchen das, damit der Scene-Editor funktioniert.
 	# Einstellungen werden von der Root-Scene neu gesetzt und dieses hier verworfen
 	var einstellungenClass = preload("res://Model/Einstellungen.gd")
-	var einstellungen = einstellungenClass.new()
-	init(einstellungen)
+	init(einstellungenClass.new())
 
 
 func init(_einstellungen):
