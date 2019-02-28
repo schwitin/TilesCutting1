@@ -2,10 +2,10 @@ extends Node2D
 
 var einstellungen
 
-signal uebersicht_pressed()
-signal uebersicht_verlassen()
+signal einzeldarstellung_pressed()
+signal einzeldarstellung_verlassen()
 
-var ziegel
+var alle_ziegel = []
 
 
 func _init():
@@ -17,44 +17,52 @@ func _init():
 
 func init(_einstellungen):
 	einstellungen = _einstellungen
-	var ziegelTyp = einstellungen.ziegelTyp
-	var ziegelClass = preload("res://Model/Ziegel.gd")
-	var position = Vector2(100, 100)
-	ziegel = ziegelClass.new(einstellungen, position)
-	ziegel.set_ausgewaelt(true)
-	#ziegel.println()
-
+	
 
 
 func _ready():
-	var bounding_box = ziegel.get_bounding_box()
-	scale_node(bounding_box)
+	scale_node()
+	update()
+	pass
 
 func _draw():
-	var bounding_box = ziegel.get_bounding_box()
-	ziegel.zeichne(self,  -bounding_box.pos - bounding_box.size / 2)
+	var ziegelPositionen = einstellungen.get_ziegel_positionen()
+	var ziegelClass = preload("res://Model/Ziegel.gd")#
+	alle_ziegel.clear()
+	for position in ziegelPositionen:
+		print(position)
+		var ziegel = ziegelClass.new(einstellungen, position)
+		alle_ziegel.append(ziegel)
 	
-	
-func _on_Button_pressed():
-	emit_signal("uebersicht_pressed")
-	
-# TODO konsolidieren
-func scale_node(bounding_box) :
-	var bounding_box = ziegel.get_bounding_box()
-	var schnittlinie = einstellungen.schnittlinie
+	for z in alle_ziegel:
+		z.zeichne(self, Vector2(10, 30))
+
+
+func scale_node() :
+	var ziegelTyp = einstellungen.ziegelTyp
+	var ziegelPositionen = einstellungen.get_ziegel_positionen()
+	var bounding_box = ziegelPositionen.front() + Vector2(ziegelTyp.breite, ziegelTyp.laenge)
 	
 	var viewport_size = self.get_viewport_rect().size
-	var x = viewport_size.x / bounding_box.end.x  * 0.90
-	var y = viewport_size.y / bounding_box.end.y  * 0.90
+	var x = viewport_size.x / bounding_box.x  * 0.95
+	var y = viewport_size.y / bounding_box.y  * 0.95
 	var k = min(x, y)
 	var pos = self.get_pos()
-	
-	set_pos(Vector2(viewport_size.x / 3, viewport_size.y / 2))
-	set_rot(-schnittlinie.get_winkel_zu_vertikale_rad() + PI)
 	set_scale(Vector2(k,k))
+	set_pos(Vector2(10,10))
 
+
+func _on_Button_pressed():
+	emit_signal("einzeldarstellung_pressed")
 
 func _notification(what):        
-	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST : 
-		print("uebersicht_verlassen")
-		emit_signal("uebersicht_verlassen")
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST :
+		#print("einzeldarstellung_verlassen")
+		emit_signal("einzeldarstellung_verlassen")
+
+
+
+
+
+
+
