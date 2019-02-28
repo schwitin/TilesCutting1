@@ -28,13 +28,13 @@ func is_grat():
 
 func get_sprungpunkte_oben():
 	var latten = get_latten()
-	var sprung_latte = latten[latten.size()-1]
+	var sprung_latte = latten[0]
 	return get_sprungpunkte(sprung_latte)
 
 
 func get_sprungpunkte_unten():
 	var latten = get_latten()
-	var sprung_latte = latten[0]
+	var sprung_latte = latten[latten.size()-1]
 	return get_sprungpunkte(sprung_latte)
 
 
@@ -199,9 +199,14 @@ func get_bounding_box() :
 		
 	var bereicheLatten = einstellungen.bereicheLatten
 	var y = 0
+	var letzterBereich
 	for bereich in bereicheLatten :
 		y = y + bereich.get_berich_groesse()
+		letzterBereich = bereich
 	
+	# Jetzt haben wir y bei der Unterseite des untersten Ziegel.
+	# Die Latte, auf der dieser Ziegel hängt, ist etwas höher:
+	y = y - letzterBereich.decklaenge
 	var bounding_box = Vector2(x,y)
 	return bounding_box
 
@@ -255,9 +260,6 @@ func get_schnuere_grat():
 	var schnittline = get_schnittlinie().get_laengere_linie()
 	var steigung = schnittline.get_steigung()
 	
-	# print("bounding_box ", bounding_box)
-	# print("has_point_0_0", bounding_box.has_point(Vector2(-1,-1)))
-	# print("has_point_max_max", bounding_box.has_point(Vector2(p_max.x,p_max.y)))
 	
 	for schnur in schnuere:
 		var schnittpunkt = schnittline.get_schnittpunkt(schnur.get_laengere_linie())
@@ -277,17 +279,16 @@ func get_schnuere_grat():
 func get_latten():
 	var linien = []
 	var bounding_box = get_bounding_box()
-	linien.append(classLinie.new(Vector2(0, bounding_box.y), Vector2(bounding_box.x, bounding_box.y)))
 	
 	var bereicheLatten = einstellungen.bereicheLatten
-	var y = bounding_box.y
+	var y = 0
 	for bereich in bereicheLatten :
 		for i in range(bereich.anzahl_latten):
-			y = y - bereich.decklaenge
 			var p1 = Vector2(0, y)
 			var p2 = Vector2(bounding_box.x, y)
 			var linie = classLinie.new(p1, p2)
 			linien.append(linie)
+			y = y + bereich.decklaenge
 	
 	#print("Anzahl Latten ", linien.size())
 	return linien
@@ -333,7 +334,7 @@ func get_latten_grat():
 	
 	for latte in latten:
 		var schnittpunkt = schnittline.get_schnittpunkt(latte.get_laengere_linie())
-		#print(schnittpunkt)
+		# print(schnittpunkt)
 		if schnittpunkt != null && bounding_box.has_point(schnittpunkt):
 			var p1 
 			var p2
