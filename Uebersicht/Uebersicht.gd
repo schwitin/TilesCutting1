@@ -2,8 +2,9 @@ extends Node2D
 
 var einstellungen
 
-signal einzeldarstellung_pressed()
-signal einzeldarstellung_verlassen()
+signal uebersicht_pressed()
+signal uebersicht_verlassen()
+
 
 var alle_ziegel = []
 
@@ -53,12 +54,13 @@ func scale_node() :
 
 
 func _on_Button_pressed():
-	emit_signal("einzeldarstellung_pressed")
+	emit_signal("uebersicht_pressed")
+
 
 func _notification(what):        
-	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST :
-		#print("einzeldarstellung_verlassen")
-		emit_signal("einzeldarstellung_verlassen")
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST : 
+		print("uebersicht_verlassen")
+		emit_signal("uebersicht_verlassen")
 
 
 

@@ -4,7 +4,7 @@ var position
 var einstellungen
 
 var istAusgewaelt  = false setget set_ausgewaelt
-var istGeschnitten = true
+var istGeschnitten = false
 
 
 var linieClass = preload("res://Model/Linie.gd")
@@ -45,23 +45,29 @@ func zeichne(node, translate=Vector2(0,0)):
 			translated_points.append( point + translate)
 	
 		var colors = []
-		colors.append(Color("FFFFFF"))
-		#node.draw_polygon(translated_points, colors)
+		colors.append(Color("111111"))
+		node.draw_polygon(translated_points, colors)
 		
-		var linien = get_linien()
-		for linie in linien:
-			zeichne_linie(linie, node, translate)
+		var lastPoint = translated_points[translated_points.size() - 1]
+		for point in translated_points:
+			var linie = linieClass.new(lastPoint, point);
+			lastPoint = point
+			zeichne_linie(linie, node)
 		
-		zeichne_linie(einstellungen.schnittlinie, node, translate)
+		#var linien = get_linien()
+		#for linie in linien:
+		#	zeichne_linie(linie, node, translate)
+		
+		#zeichne_linie(einstellungen.schnittlinie, node, translate)
 
 
-func zeichne_linie(linie, node, translate):
+func zeichne_linie(linie, node, translate=Vector2(0,0), color = Color("FFFFFF"), width=1.0):
 	var width = 1.0
 	if istAusgewaelt:
 		width = 2.0
 	
 	# print(linie.p1, linie.p2)
-	node.draw_line(linie.p1 + translate, linie.p2 + translate, Color("FFFFFF"), width)
+	node.draw_line(linie.p1 + translate, linie.p2 + translate, color, width)
 
 
 func get_bounding_box():
@@ -74,7 +80,7 @@ func set_ausgewaelt(_istAusgewaelt):
 
 func get_ziegel_polygon_points():
 	var polygon_punkte
-	var schnittlinie = einstellungen.schnittlinie.get_laengere_linie()
+	var schnittlinie = einstellungen.schnittlinie.get_laengere_linie(2)
 	
 	var ecken = get_eckpunkte()		# Erster und letzter Element ist die gleiche Ecke
 	var ecken_und_schnittpunkte = []

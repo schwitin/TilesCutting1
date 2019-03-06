@@ -39,9 +39,8 @@ func set_schnittlinie(_schnittlinie):
 	schnittlinie = _schnittlinie
 	emit_signal("schnittlinie_changed")
 
+# Gibt positionen der linken oberen aller Ziegels relativ zu der Schnittline 
 func get_ziegel_positionen():
-	
-	
 	var ziegelPositionen = []
 	var versatzY = ziegelTyp.versatzY
 	var letztePosition = Vector2(0, 0)
@@ -57,7 +56,7 @@ func get_ziegel_positionen():
 	for bereichLatten in bereicheLattenInverted:
 		var decklaenge = bereichLatten.decklaenge 
 		for latteNr in range(bereichLatten.anzahl_latten):
-			var y = letztePosition.y - decklaenge# - versatzY
+			var y = letztePosition.y - decklaenge
 			letztePosition.x = 0
 			for bereichSchnuere in bereicheSchnuereInverted:
 				var deckbreite = bereichSchnuere.deckbreite

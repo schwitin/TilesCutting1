@@ -27,7 +27,7 @@ func _ready():
 
 
 func _on_einzeldarstellung_pressed():
-	remove_child(scene_einstellungen)
+	remove_child(scene_einzeldarstellung)
 	add_child(scene_uebersicht)
 
 

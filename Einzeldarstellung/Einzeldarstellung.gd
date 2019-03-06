@@ -2,8 +2,8 @@ extends Node2D
 
 var einstellungen
 
-signal uebersicht_pressed()
-signal uebersicht_verlassen()
+signal einzeldarstellung_pressed()
+signal einzeldarstellung_verlassen()
 
 var ziegel
 
@@ -36,7 +36,7 @@ func _draw():
 	
 	
 func _on_Button_pressed():
-	emit_signal("uebersicht_pressed")
+	emit_signal("einzeldarstellung_pressed")
 	
 # TODO konsolidieren
 func scale_node(bounding_box) :
@@ -54,7 +54,8 @@ func scale_node(bounding_box) :
 	set_scale(Vector2(k,k))
 
 
+
 func _notification(what):        
-	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST : 
-		print("uebersicht_verlassen")
-		emit_signal("uebersicht_verlassen")
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST :
+		#print("einzeldarstellung_verlassen")
+		emit_signal("einzeldarstellung_verlassen")
