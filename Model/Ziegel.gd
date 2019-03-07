@@ -1,5 +1,6 @@
 extends Reference
 
+var nummer
 var position
 var einstellungen
 
@@ -13,6 +14,7 @@ var linieClass = preload("res://Model/Linie.gd")
 func _init(_einstellungen, _position):
 	einstellungen = _einstellungen
 	position = _position
+	get_ziegel_polygon_points() # inizialisierung istGeschnitten
 
 
 func get_linien():
@@ -32,6 +34,20 @@ func get_linien():
 	
 	return linien
 
+func get_zentrum():
+	var laenge = einstellungen.ziegelTyp.laenge
+	var breite = einstellungen.ziegelTyp.breite
+
+	var p1 = position
+	var p2 = Vector2(position.x + breite, position.y)
+	var p3 = Vector2(position.x + breite, position.y + laenge)
+	var p4 = Vector2(position.x, position.y + laenge)
+	
+	var diagonale1 = create_linie(p1, p3)
+	var diagonale2 = create_linie(p2, p4)
+	var zentrum = diagonale1.get_schnittpunkt(diagonale2)
+	return zentrum
+
 
 func create_linie(p1, p2):
 	return linieClass.new(p1, p2)
@@ -45,8 +61,13 @@ func zeichne(node, translate=Vector2(0,0)):
 			translated_points.append( point + translate)
 	
 		var colors = []
-		colors.append(Color("111111"))
+		if istAusgewaelt:
+			colors.append(Color("000000"))
+		else:
+			colors.append(Color("353535"))
+			
 		node.draw_polygon(translated_points, colors)
+		node.draw_circle(get_zentrum() + translate, 5, Color("FFFF00"))
 		
 		var lastPoint = translated_points[translated_points.size() - 1]
 		for point in translated_points:
@@ -62,11 +83,6 @@ func zeichne(node, translate=Vector2(0,0)):
 
 
 func zeichne_linie(linie, node, translate=Vector2(0,0), color = Color("FFFFFF"), width=1.0):
-	var width = 1.0
-	if istAusgewaelt:
-		width = 2.0
-	
-	# print(linie.p1, linie.p2)
 	node.draw_line(linie.p1 + translate, linie.p2 + translate, color, width)
 
 

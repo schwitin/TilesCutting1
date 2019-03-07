@@ -4,7 +4,7 @@ var einstellungen
 
 signal uebersicht_pressed()
 signal uebersicht_verlassen()
-
+signal aktueller_ziegel(aktuellerZiegel)
 
 var alle_ziegel = []
 
@@ -18,23 +18,25 @@ func _init():
 
 func init(_einstellungen):
 	einstellungen = _einstellungen
-	
 
 
 func _ready():
-	scale_node()
-	update()
-	pass
-
-func _draw():
 	var ziegelPositionen = einstellungen.get_ziegel_positionen()
 	var ziegelClass = preload("res://Model/Ziegel.gd")#
-	alle_ziegel.clear()
-	for position in ziegelPositionen:
-		print(position)
-		var ziegel = ziegelClass.new(einstellungen, position)
-		alle_ziegel.append(ziegel)
-	
+	if alle_ziegel.size() == 0:
+		var ziegelNr = 1
+		for position in ziegelPositionen:
+			print(position)
+			var ziegel = ziegelClass.new(einstellungen, position)
+			if ziegel.istGeschnitten:
+				ziegel.nummer = ziegelNr
+				ziegelNr += 1
+				alle_ziegel.append(ziegel)
+
+	scale_node()
+	update()
+
+func _draw():
 	for z in alle_ziegel:
 		z.zeichne(self, Vector2(10, 30))
 
@@ -52,6 +54,26 @@ func scale_node() :
 	set_scale(Vector2(k,k))
 	set_pos(Vector2(10,10))
 
+func set_naechster_ziegel(aktuellerZiegel):
+	var index = alle_ziegel.find_last(aktuellerZiegel)
+	if(index < alle_ziegel.size() - 1):
+		var naechsterZiegel = alle_ziegel[index + 1]
+		ziegel_auswaelen(aktuellerZiegel, naechsterZiegel)
+
+
+func set_vorheriger_ziegel(aktuellerZiegel):
+	var index = alle_ziegel.find_last(aktuellerZiegel)
+	if(index > 0):
+		var naechsterZiegel = alle_ziegel[index - 1]
+		ziegel_auswaelen(aktuellerZiegel, naechsterZiegel)
+
+
+func ziegel_auswaelen(aktuellerZiegel, naechsterZiegel):
+	if aktuellerZiegel != null:
+		aktuellerZiegel.set_ausgewaelt(false)
+	naechsterZiegel.set_ausgewaelt(true)
+	emit_signal("aktueller_ziegel", naechsterZiegel)
+
 
 func _on_Button_pressed():
 	emit_signal("uebersicht_pressed")
@@ -60,11 +82,6 @@ func _on_Button_pressed():
 func _notification(what):        
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST : 
 		print("uebersicht_verlassen")
+		alle_ziegel.clear()
 		emit_signal("uebersicht_verlassen")
-
-
-
-
-
-
 

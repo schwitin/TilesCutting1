@@ -119,6 +119,24 @@ func get_schnittpunkt(linie) :
 	else :
 		return null
 
+# http://www.cyberforum.ru/cpp-beginners/thread1503781-page2.html
+# Отрезок:
+# A (x1,y1)
+# B (x2,y2)
+#
+# Точка:
+# C (x3,y3)
+#
+# a0=x2-x1
+# a1=y2-y1
+# x4=(a0*a1*(y3-y1)+x1*a1^2+x3*a0^2)/(a1^2+a0^2)
+# y4=a1*(x4-x1)/a0+y1
+func get_normale(punkt):
+	var a = p2 - p1
+	var x = (a.x * a.y * (punkt.y - p1.y) + p1.x * pow(a.y, 2) + punkt.x * pow(a.x,2)) / (pow(a.y,2) + pow(a.x,2)+0.0001)
+	var y = a.y * (x - p1.x) / (a.x) + p1.y 
+	return linieClass.new(punkt, Vector2(x,y))
+
 
 func get_winkel_zu_vertikale_rad() :
 	var rad = p1.angle_to_point(p2)

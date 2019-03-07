@@ -23,6 +23,10 @@ func _ready():
 	scene_einzeldarstellung.connect("einzeldarstellung_pressed", self, "_on_einzeldarstellung_pressed")
 	scene_einzeldarstellung.connect("einzeldarstellung_verlassen", self, "_on_einzeldarstellung_verlassen")
 	
+	scene_uebersicht.connect("aktueller_ziegel", scene_einzeldarstellung, "set_aktueller_ziegel")
+	scene_einzeldarstellung.connect("naechster_ziegel", scene_uebersicht, "set_naechster_ziegel")
+	scene_einzeldarstellung.connect("vorheriger_ziegel", scene_uebersicht, "set_vorheriger_ziegel")
+	
 	add_child(scene_einstellungen)
 
 

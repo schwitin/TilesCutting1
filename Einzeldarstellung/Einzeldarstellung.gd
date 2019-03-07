@@ -1,11 +1,16 @@
-extends Node2D
+extends Node
 
 var einstellungen
+var aktuellerZiegel setget set_aktueller_ziegel
 
 signal einzeldarstellung_pressed()
 signal einzeldarstellung_verlassen()
 
-var ziegel
+signal naechster_ziegel(aktuellerZiegel)
+signal vorheriger_ziegel(aktuellerZiegel)
+signal maschine_zenter()
+signal maschine_kalibrierung()
+signal maschnie_position(position)
 
 
 func _init():
@@ -17,45 +22,54 @@ func _init():
 
 func init(_einstellungen):
 	einstellungen = _einstellungen
-	var ziegelTyp = einstellungen.ziegelTyp
-	var ziegelClass = preload("res://Model/Ziegel.gd")
-	var position = Vector2(100, 100)
-	ziegel = ziegelClass.new(einstellungen, position)
-	ziegel.set_ausgewaelt(true)
-	#ziegel.println()
-
 
 
 func _ready():
-	var bounding_box = ziegel.get_bounding_box()
-	scale_node(bounding_box)
+	if aktuellerZiegel == null:
+		emit_signal("naechster_ziegel", null)
 
-func _draw():
-	var bounding_box = ziegel.get_bounding_box()
-	ziegel.zeichne(self,  -bounding_box.pos - bounding_box.size / 2)
+
+func set_aktueller_ziegel(_aktuellerZiegel):
+	aktuellerZiegel = _aktuellerZiegel
+	var zeichenflaeche = get_node("Container/Zeichenflaeche")
+	zeichenflaeche.set_ziegel(aktuellerZiegel)
 	
+	var ziegelNr = get_node("Container/UserInput/NaechsterVorheriger/Wert")
+	ziegelNr.text = String(aktuellerZiegel.nummer)
+	var schnittlinie = aktuellerZiegel.einstellungen.schnittlinie
+	var zentrum = aktuellerZiegel.get_zentrum()
+	var normale = schnittlinie.get_normale(zentrum)
+	var normaleLaenge = normale.p1.distance_to(normale.p2)
 	
-func _on_Button_pressed():
+	var distanzZuMitte = get_node("Container/UserInput/DistanzZuMitte/Wert")
+	distanzZuMitte.text = String(round(normaleLaenge))
+
+
+func _on_Einzeldarstellung_pressed():
 	emit_signal("einzeldarstellung_pressed")
-	
-# TODO konsolidieren
-func scale_node(bounding_box) :
-	var bounding_box = ziegel.get_bounding_box()
-	var schnittlinie = einstellungen.schnittlinie
-	
-	var viewport_size = self.get_viewport_rect().size
-	var x = viewport_size.x / bounding_box.end.x  * 0.90
-	var y = viewport_size.y / bounding_box.end.y  * 0.90
-	var k = min(x, y)
-	var pos = self.get_pos()
-	
-	set_pos(Vector2(viewport_size.x / 3, viewport_size.y / 2))
-	set_rot(-schnittlinie.get_winkel_zu_vertikale_rad() + PI)
-	set_scale(Vector2(k,k))
-
 
 
 func _notification(what):        
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST :
 		#print("einzeldarstellung_verlassen")
 		emit_signal("einzeldarstellung_verlassen")
+
+
+func _on_Vorheriger_pressed():
+	emit_signal("vorheriger_ziegel", aktuellerZiegel)
+
+
+func _on_Naechster_pressed():
+	emit_signal("naechster_ziegel", aktuellerZiegel)
+
+
+func _on_MaschineZenter_pressed():
+	emit_signal("maschine_zenter")
+
+
+func _on_MaschinePosition_pressed():
+	emit_signal("maschnie_position")
+
+
+func _on_MaschineKalibrierung_pressed():
+	emit_signal("maschine_kalibrierung")
