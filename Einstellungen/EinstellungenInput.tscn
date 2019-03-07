@@ -192,7 +192,7 @@ margin/bottom = 516.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-text = "Einstellungen Übernehmen"
+text = "Einstellungen übernehmen"
 flat = false
 
 [connection signal="changed" from="GridContainer/ZiegelInput" to="." method="_on_ZiegelInput_changed"]

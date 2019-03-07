@@ -17,6 +17,8 @@ func create_label_node(text):
 	node.set_text(text)
 	return node
 
+func ersten_eingabefeld_auswaelen():
+	get_children().front().select()
 
 func alle_abwaehlen_ausser(input_field):
 	if selected_input_field != null && input_field != selected_input_field:

@@ -30,10 +30,13 @@ func deselect():
 	add_color_override("font_color", Color(1,1,1))
 	add_color_override("font_color_hover", Color(1,1,1))
 
-
-func _on_InputField_pressed():
+func select():
 	add_color_override("font_color", Color(1,1,0))
 	add_color_override("font_color_hover", Color(1,1,0))
 	update()
 	emit_signal("selected", self)
+
+func _on_InputField_pressed():
+	select()
+	
 

@@ -76,6 +76,8 @@ func update_view():
 	
 	for bereich in get_bereiche():
 		add_bereich(bereich)
+		
+	bereicheContainer.get_children().front().ersten_eingabefeld_auswaelen()
 	
 	update_button_visibility()
 	set_text()
