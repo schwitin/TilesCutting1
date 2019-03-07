@@ -4,12 +4,12 @@ var ziegel
 
 
 func _ready():
-	pass
+	scale_node()
 
 func set_ziegel(_ziegel):
 	ziegel = _ziegel
-	scale_node()
 	update()
+	
 
 
 func _draw():

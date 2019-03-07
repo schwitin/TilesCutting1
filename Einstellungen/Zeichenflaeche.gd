@@ -15,8 +15,12 @@ func _ready():
 
 func dach_set(_dach) : 
 	#print("====================")
+	if dach != null:
+		dach.disconnect("changed", self, "update")
+	
 	dach = _dach
 	dach.connect("changed", self, "update")
+	
 	##scale_node()
 	
 	

@@ -43,7 +43,9 @@ func _ready():
 	set_user_input_position()
 	set_zeichenflaeche_position()
 	
-	einstellungen.connect("schnittlinie_changed", self, "on_schnittlinie_changed")
+	if false == einstellungen.is_connected("schnittlinie_changed", self, "on_schnittlinie_changed"):
+		einstellungen.connect("schnittlinie_changed", self, "on_schnittlinie_changed")
+	
 	emit_signal("oben_unten_changed", isOben)
 
 func on_schnittlinie_changed():

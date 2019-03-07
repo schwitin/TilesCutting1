@@ -32,14 +32,19 @@ func _ready():
 				ziegel.nummer = ziegelNr
 				ziegelNr += 1
 				alle_ziegel.append(ziegel)
-
+		set_naechster_ziegel(null)
+	# einstellungen.connect("schnittlinie_changed", self, "on_schnittlinie_changed")
 	scale_node()
 	update()
+	
 
 func _draw():
 	for z in alle_ziegel:
 		z.zeichne(self, Vector2(10, 30))
 
+
+func on_schnittlinie_changed():
+	set_naechster_ziegel(null)
 
 func scale_node() :
 	var ziegelTyp = einstellungen.ziegelTyp
@@ -53,6 +58,7 @@ func scale_node() :
 	var pos = self.get_pos()
 	set_scale(Vector2(k,k))
 	set_pos(Vector2(10,10))
+	get_node("Button").set_scale(Vector2(100,100))
 
 func set_naechster_ziegel(aktuellerZiegel):
 	var index = alle_ziegel.find_last(aktuellerZiegel)

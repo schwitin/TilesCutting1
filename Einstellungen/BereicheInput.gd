@@ -54,7 +54,8 @@ func _ready():
 	slider = get_node("PopupPanel/VSlider")
 	get_node("PopupPanel/Container/Ueberschrift").set_text(ueberschrift)
 	set_text()
-	einstellungen.connect("ziegel_typ_changed", self, "on_ziegeltyp_changed")
+	if false == einstellungen.is_connected("ziegel_typ_changed", self, "on_ziegeltyp_changed"):
+		einstellungen.connect("ziegel_typ_changed", self, "on_ziegeltyp_changed")
 	
 func on_ziegeltyp_changed():
 	update_view()
