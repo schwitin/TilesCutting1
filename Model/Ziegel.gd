@@ -49,6 +49,15 @@ func get_zentrum():
 	return zentrum
 
 
+func get_distanz_von_schnittlinie_zum_zentrum():
+	var schnittlinie = einstellungen.schnittlinie
+	var zentrum = get_zentrum()
+	var normale = schnittlinie.get_normale(zentrum)
+	var vorzeichen = (normale.p2.x - normale.p1.x + 1 ) / abs(normale.p2.x - normale.p1.x + 1)
+	var distanz = normale.p1.distance_to(normale.p2) * vorzeichen
+	return distanz
+
+
 func create_linie(p1, p2):
 	return linieClass.new(p1, p2)
 

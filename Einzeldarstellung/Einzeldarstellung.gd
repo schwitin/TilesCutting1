@@ -44,12 +44,9 @@ func update_ziegel_nummer():
 
 
 func update_distanz_zum_zentrum():
-	var schnittlinie = aktuellerZiegel.einstellungen.schnittlinie
-	var zentrum = aktuellerZiegel.get_zentrum()
-	var normale = schnittlinie.get_normale(zentrum)
-	var normaleLaenge = normale.p1.distance_to(normale.p2)
+	var distanz = aktuellerZiegel.get_distanz_von_schnittlinie_zum_zentrum()
 	var distanzZumZentrumNode = get_node("Container/UserInput/DistanzZuMitte/Wert")
-	distanzZumZentrumNode.text = String(round(normaleLaenge))
+	distanzZumZentrumNode.text = String(round(distanz))
 
 
 func update_winkel():
@@ -83,7 +80,8 @@ func _on_MaschineZenter_pressed():
 
 
 func _on_MaschinePosition_pressed():
-	emit_signal("maschnie_position")
+	var distanz = aktuellerZiegel.get_distanz_von_schnittlinie_zum_zentrum()
+	emit_signal("maschnie_position", distanz)
 
 
 func _on_MaschineKalibrierung_pressed():
