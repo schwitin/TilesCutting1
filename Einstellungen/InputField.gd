@@ -33,7 +33,7 @@ func deselect():
 func select():
 	add_color_override("font_color", Color(1,1,0))
 	add_color_override("font_color_hover", Color(1,1,0))
-	update()
+	#update()
 	emit_signal("selected", self)
 
 func _on_InputField_pressed():

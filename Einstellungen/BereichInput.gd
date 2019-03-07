@@ -26,7 +26,7 @@ func alle_abwaehlen_ausser(input_field):
 
 
 func _on_InputField_selected( input_field ):
-	if selected_input_field != null:
+	if selected_input_field != null && selected_input_field != input_field:
 		selected_input_field.deselect()
 		
 	selected_input_field = input_field
