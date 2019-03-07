@@ -33,16 +33,31 @@ func set_aktueller_ziegel(_aktuellerZiegel):
 	aktuellerZiegel = _aktuellerZiegel
 	var zeichenflaeche = get_node("Container/Zeichenflaeche")
 	zeichenflaeche.set_ziegel(aktuellerZiegel)
-	
+	update_ziegel_nummer()
+	update_distanz_zum_zentrum()
+	update_winkel()
+
+
+func update_ziegel_nummer():
 	var ziegelNr = get_node("Container/UserInput/NaechsterVorheriger/Wert")
 	ziegelNr.text = String(aktuellerZiegel.nummer)
+
+
+func update_distanz_zum_zentrum():
 	var schnittlinie = aktuellerZiegel.einstellungen.schnittlinie
 	var zentrum = aktuellerZiegel.get_zentrum()
 	var normale = schnittlinie.get_normale(zentrum)
 	var normaleLaenge = normale.p1.distance_to(normale.p2)
-	
-	var distanzZuMitte = get_node("Container/UserInput/DistanzZuMitte/Wert")
-	distanzZuMitte.text = String(round(normaleLaenge))
+	var distanzZumZentrumNode = get_node("Container/UserInput/DistanzZuMitte/Wert")
+	distanzZumZentrumNode.text = String(round(normaleLaenge))
+
+
+func update_winkel():
+	var winkel = aktuellerZiegel.einstellungen.schnittlinie.get_winkel_zu_vertikale()
+	var winkelV = abs(min(180 - abs(winkel), abs(winkel)))
+	var winkelVStr = "%0.1f" % winkelV
+	var winkelNode = get_node("Container/UserInput/Winkel/Wert")
+	winkelNode.text = String(winkelVStr)
 
 
 func _on_Einzeldarstellung_pressed():

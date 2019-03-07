@@ -76,7 +76,6 @@ margin/bottom = 979.0
 
 [node name="WinkelContainer" type="VBoxContainer" parent="PopupPanel/UserInput/Container"]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -89,6 +88,7 @@ alignment = 0
 
 [node name="Versatz" type="HBoxContainer" parent="PopupPanel/UserInput/Container/WinkelContainer"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
