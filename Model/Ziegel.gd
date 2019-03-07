@@ -34,6 +34,7 @@ func get_linien():
 	
 	return linien
 
+
 func get_zentrum():
 	var laenge = einstellungen.ziegelTyp.laenge
 	var breite = einstellungen.ziegelTyp.breite
@@ -98,7 +99,8 @@ func zeichne_linie(linie, node, translate=Vector2(0,0), color = Color("FFFFFF"),
 func get_bounding_box():
 	var bounding_box = Rect2(position, Vector2(einstellungen.ziegelTyp.breite, einstellungen.ziegelTyp.laenge))
 	return bounding_box
-	
+
+
 func set_ausgewaelt(_istAusgewaelt):
 	istAusgewaelt = _istAusgewaelt
 
@@ -127,7 +129,7 @@ func get_ziegel_polygon_points():
 		
 		# Wenn Schnittpunkt zwischen ecke1 und ecke2 existiert dann diesen auch hinzufügen
 		# Der Schnittpunkt wird dann zwischen ecke1 und ecke2 hinzugefügt
-		var linie = create_linie(ecke1, ecke2).get_laengere_linie()
+		var linie = create_linie(ecke1, ecke2)#.get_laengere_linie()
 		var schnittpunkt = linie.get_schnittpunkt(schnittlinie)
 		if null != schnittpunkt:
 			ecken_und_schnittpunkte.append(schnittpunkt)
