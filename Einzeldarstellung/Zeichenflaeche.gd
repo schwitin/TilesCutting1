@@ -24,8 +24,8 @@ func scale_node() :
 	var schnittlinie = ziegel.einstellungen.schnittlinie
 	
 	var viewport_size = self.get_viewport_rect().size
-	var x = viewport_size.x / bounding_box.size.x  * 0.90
-	var y = viewport_size.y / bounding_box.size.y  * 0.90
+	var x = viewport_size.x / bounding_box.size.x  * 0.80
+	var y = viewport_size.y / bounding_box.size.y  * 0.80
 	var k = min(x, y)
 	var pos = self.get_pos()
 	
