@@ -6,7 +6,6 @@ var zeichenflaeche = null
 var dach 
 var einstellungen 
 
-#var classEinstellungen = preload("res://Model/Einstellungen.gd")
 var classDach = preload("res://Model/Dach.gd")
 
 var versatzLabel = null
@@ -35,30 +34,18 @@ func init(_einstellungen):
 
 
 func _ready():
-	
 	versatzLabel = get_node("PopupPanel/UserInput/Container/WinkelContainer/Versatz/VersatzValue")
 	winkelVLabel = get_node("PopupPanel/UserInput/Container/WinkelContainer/VWinkel/WinkelValue")
 	obenUntenButton = get_node("PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/ObenUntenButton")
 	gratKehleButton = get_node("PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/GratKehleButton")
 	zeichenflaeche = get_node("PopupPanel/Zeichenflaeche")
 	
-	#einstellungen.connect("", self, "update_dach")
-	
 	zeichenflaeche.dach = dach
 	#print("update_dach")
 	set_kehle_grat(self.dach.is_grat())
-	#_on_GratKehleButton_pressed()
 	set_user_input_position()
 	emit_signal("oben_unten_changed", isOben)
-	# update_dach()
-	
 
-# func update_dach():
-	
-	
-	
-	# zeichenflaeche.update()
-	
 
 func _on_ObenUntenButton_pressed():
 	isOben = !isOben
@@ -169,7 +156,8 @@ func set_kehle_grat(istGrat):
 		self.gratKehleButton.text = "Kehle"
 	
 	update_labels()
-	
+
+
 func set_user_input_position() :
 	var userInput = get_node("PopupPanel/UserInput")
 	var userInputBreite = userInput.get_size().width
@@ -186,6 +174,7 @@ func set_user_input_position() :
 		zeichenflaeche.set_pos(Vector2(0,0))
 		zeichenflaeche.set_scale(Vector2(k,k))
 		zeichenflaeche.set_pos(pos)
+
 
 func _on_SchnittlinieInput_pressed():
 	get_node("PopupPanel").popup_centered()
