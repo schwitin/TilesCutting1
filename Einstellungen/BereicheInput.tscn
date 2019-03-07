@@ -23,15 +23,14 @@ script/script = ExtResource( 2 )
 
 [node name="PopupPanel" type="PopupPanel" parent="."]
 
-visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 33.0
-margin/top = 22.0
-margin/right = 1674.0
-margin/bottom = 849.0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 1700.0
+margin/bottom = 900.0
 popup/exclusive = false
 
 [node name="Container" type="VBoxContainer" parent="PopupPanel"]
