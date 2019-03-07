@@ -18,9 +18,9 @@ func _init():
 
 func set_ziegel_typ(_ziegelTyp):
 	ziegelTyp = _ziegelTyp
-	emit_signal("ziegel_typ_changed")
 	init_bereiche_latten()
 	init_bereiche_scnuere()
+	emit_signal("ziegel_typ_changed")
 
 
 func set_bereiche_schnuere(bereiche):

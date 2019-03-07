@@ -27,11 +27,8 @@ func init(_einstellungen):
 		einstellungen = einstellungenClass.new()
 	else:
 		einstellungen = _einstellungen
-	
 	dach = classDach.new(einstellungen)
-	einstellungen.connect("schnuere_changed", self, "set_user_input_position");
-	einstellungen.connect("latten_changed", self, "set_user_input_position");
-
+	
 
 func _ready():
 	versatzLabel = get_node("PopupPanel/UserInput/Container/WinkelContainer/Versatz/VersatzValue")
@@ -44,7 +41,14 @@ func _ready():
 	#print("update_dach")
 	set_kehle_grat(self.dach.is_grat())
 	set_user_input_position()
+	set_zeichenflaeche_position()
+	
+	einstellungen.connect("schnittlinie_changed", self, "on_schnittlinie_changed")
 	emit_signal("oben_unten_changed", isOben)
+
+func on_schnittlinie_changed():
+	set_zeichenflaeche_position()
+	update_labels()
 
 
 func _on_ObenUntenButton_pressed():
@@ -158,22 +162,26 @@ func set_kehle_grat(istGrat):
 	update_labels()
 
 
-func set_user_input_position() :
+func set_zeichenflaeche_position():
+	var bounding_box = dach.get_bounding_box()
+	var userInput = get_node("PopupPanel/UserInput")
+	var userInputBreite = userInput.get_size().width
+	var viewportSize = self.get_viewport_rect().size
+	var x = (viewportSize.x - userInputBreite) / bounding_box.x  * 0.95
+	var y = viewportSize.y / bounding_box.y  * 0.95
+	var k = min(x, y)
+	var pos = zeichenflaeche.get_pos()
+	zeichenflaeche.set_pos(Vector2(0,0))
+	zeichenflaeche.set_scale(Vector2(k,k))
+	zeichenflaeche.set_pos(pos)
+
+
+func set_user_input_position():
 	var userInput = get_node("PopupPanel/UserInput")
 	var userInputBreite = userInput.get_size().width
 	var viewportSize = self.get_viewport_rect().size
 	var viewPortBreite = viewportSize.width
 	userInput.set_pos(Vector2(viewPortBreite - userInputBreite, 0))
-	
-	if dach != null :
-		var bounding_box = dach.get_bounding_box()
-		var x = (viewportSize.x - userInputBreite) / bounding_box.x  * 0.95
-		var y = viewportSize.y / bounding_box.y  * 0.95
-		var k = min(x, y)
-		var pos = zeichenflaeche.get_pos()
-		zeichenflaeche.set_pos(Vector2(0,0))
-		zeichenflaeche.set_scale(Vector2(k,k))
-		zeichenflaeche.set_pos(pos)
 
 
 func _on_SchnittlinieInput_pressed():

@@ -40,3 +40,7 @@ func _on_UebernehmenButton_pressed():
 	#print("einstellungen_uebernehmen")
 	emit_signal("einstellungen_uebernehmen", einstellungen)
 
+
+
+func _on_ZiegelInput_changed( ziegelTyp ):
+	einstellungen.set_ziegel_typ(ziegelTyp)

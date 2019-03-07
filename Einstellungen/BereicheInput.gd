@@ -16,28 +16,34 @@ var slider
 var ueberschrift
 var selected_input_field
 
-signal changed(bereiche_values)
+# signal changed(bereiche_values)
 
 func _init(bereichTyp = "L", _einstellungen = null):
 	init(bereichTyp, _einstellungen)
 
 func init(_bereichTyp, _einstellungen):
 	bereichTyp = _bereichTyp
-	if bereichTyp == "S":
-		bereichClass = preload("res://Model/SchnuereBereich.gd")
-		bereichInputScene = preload("res://Einstellungen/SchnuereBereichInput.tscn")
-		ueberschrift = "Deckbr.    Ziegel       Schnüre"
-	else:
-		bereichClass = preload("res://Model/LattenBereich.gd")
-		bereichInputScene = preload("res://Einstellungen/LattenBereichInput.tscn")
-		ueberschrift = "Deckl.       Latten"
 	
 	if _einstellungen == null:
 		var einstellungenClass = preload("res://Model/Einstellungen.gd")
 		einstellungen = einstellungenClass.new()
 	else:
 		einstellungen = _einstellungen
+	
+	
+	
+	if bereichTyp == "S":
+		bereichClass = preload("res://Model/SchnuereBereich.gd")
+		bereichInputScene = preload("res://Einstellungen/SchnuereBereichInput.tscn")
+		ueberschrift = "Deckbr.    Ziegel       Schnüre"
+		
+	else:
+		bereichClass = preload("res://Model/LattenBereich.gd")
+		bereichInputScene = preload("res://Einstellungen/LattenBereichInput.tscn")
+		ueberschrift = "Deckl.       Latten"
+	
 		#print("BereicheInput ", einstellungen)
+	#
 
 
 
@@ -48,7 +54,11 @@ func _ready():
 	slider = get_node("PopupPanel/VSlider")
 	get_node("PopupPanel/Container/Ueberschrift").set_text(ueberschrift)
 	set_text()
+	einstellungen.connect("ziegel_typ_changed", self, "on_ziegeltyp_changed")
 	
+func on_ziegeltyp_changed():
+	update_view()
+
 
 func get_bereiche():
 	if bereichTyp == "S":
@@ -68,7 +78,7 @@ func update_view():
 	
 	update_button_visibility()
 	set_text()
-	
+
 
 func _on_AddButton_pressed():
 	var bereich = bereichClass.new(einstellungen.ziegelTyp)
