@@ -2,6 +2,16 @@
 	"Metaden":{},
 	"ZiegelTypList":[
 		{
+			"Name": "Muster-Ziegel",
+			"Hersteller": "Unbekannt",
+			"Laenge" : "482",
+			"Breite" : "292",
+			"VersatzY": "16",
+			"DecklaengeMin" : "410",
+			"DecklaengeMax" : "430",
+			"Deckbreite" : "241"
+		},		
+		{
 			"Name": "Rubin 9V",
 			"Hersteller": "BRAAS",
 			"Laenge" : "472",
@@ -21,6 +31,7 @@
 			"DecklaengeMax" : "370",
 			"Deckbreite" : "234"
 		}
+		
 		
 	]
 }

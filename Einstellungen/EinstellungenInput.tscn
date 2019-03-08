@@ -8,16 +8,20 @@
 
 [node name="EinstellungenInput" type="VBoxContainer"]
 
+anchor/left = 3
+anchor/top = 3
+anchor/right = 3
+anchor/bottom = 3
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 theme/theme = ExtResource( 1 )
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 1675.0
-margin/bottom = 876.0
-alignment = 0
+margin/left = 835.0
+margin/top = 439.0
+margin/right = -840.0
+margin/bottom = -437.0
+alignment = 1
 script/script = ExtResource( 2 )
 
 [node name="GridContainer" type="GridContainer" parent="."]
@@ -27,10 +31,54 @@ focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 0.0
+margin/top = 79.0
 margin/right = 1675.0
-margin/bottom = 412.0
+margin/bottom = 595.0
 columns = 3
+
+[node name="ConnectButton" type="Button" parent="GridContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 818.0
+margin/bottom = 100.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Maschine verbinden"
+flat = false
+
+[node name="AbstandLabel5" type="Label" parent="GridContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 822.0
+margin/top = 3.0
+margin/right = 897.0
+margin/bottom = 97.0
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="AbstandLabel6" type="Label" parent="GridContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 901.0
+margin/top = 3.0
+margin/right = 955.0
+margin/bottom = 97.0
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 [node name="ZiegelTypLabel" type="Label" parent="GridContainer"]
 
@@ -39,9 +87,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 0.0
-margin/top = 3.0
-margin/right = 786.0
-margin/bottom = 97.0
+margin/top = 107.0
+margin/right = 818.0
+margin/bottom = 201.0
 text = "Ziegel Typ"
 percent_visible = 1.0
 lines_skipped = 0
@@ -53,10 +101,10 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 790.0
-margin/top = 3.0
-margin/right = 865.0
-margin/bottom = 97.0
+margin/left = 822.0
+margin/top = 107.0
+margin/right = 897.0
+margin/bottom = 201.0
 text = "   "
 percent_visible = 1.0
 lines_skipped = 0
@@ -64,9 +112,10 @@ max_lines_visible = -1
 
 [node name="ZiegelInput" parent="GridContainer" instance=ExtResource( 3 )]
 
-margin/left = 869.0
-margin/right = 923.0
-margin/bottom = 100.0
+margin/left = 901.0
+margin/top = 104.0
+margin/right = 955.0
+margin/bottom = 204.0
 
 [node name="SchnuereLabel" type="Label" parent="GridContainer"]
 
@@ -75,9 +124,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 0.0
-margin/top = 107.0
-margin/right = 786.0
-margin/bottom = 201.0
+margin/top = 211.0
+margin/right = 818.0
+margin/bottom = 305.0
 text = "Schnuere Bereiche"
 percent_visible = 1.0
 lines_skipped = 0
@@ -89,10 +138,10 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 790.0
-margin/top = 107.0
-margin/right = 865.0
-margin/bottom = 201.0
+margin/left = 822.0
+margin/top = 211.0
+margin/right = 897.0
+margin/bottom = 305.0
 text = "   "
 percent_visible = 1.0
 lines_skipped = 0
@@ -100,10 +149,10 @@ max_lines_visible = -1
 
 [node name="SchnuereBereichInput" parent="GridContainer" instance=ExtResource( 4 )]
 
-margin/left = 869.0
-margin/top = 104.0
-margin/right = 923.0
-margin/bottom = 204.0
+margin/left = 901.0
+margin/top = 208.0
+margin/right = 955.0
+margin/bottom = 308.0
 
 [node name="LattenLabel" type="Label" parent="GridContainer"]
 
@@ -112,9 +161,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 0.0
-margin/top = 211.0
-margin/right = 786.0
-margin/bottom = 305.0
+margin/top = 315.0
+margin/right = 818.0
+margin/bottom = 409.0
 text = "Latten Bereiche"
 percent_visible = 1.0
 lines_skipped = 0
@@ -126,10 +175,10 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 790.0
-margin/top = 211.0
-margin/right = 865.0
-margin/bottom = 305.0
+margin/left = 822.0
+margin/top = 315.0
+margin/right = 897.0
+margin/bottom = 409.0
 text = "   "
 percent_visible = 1.0
 lines_skipped = 0
@@ -137,10 +186,10 @@ max_lines_visible = -1
 
 [node name="LattenBereichInput" parent="GridContainer" instance=ExtResource( 4 )]
 
-margin/left = 869.0
-margin/top = 208.0
-margin/right = 923.0
-margin/bottom = 308.0
+margin/left = 901.0
+margin/top = 312.0
+margin/right = 955.0
+margin/bottom = 412.0
 
 [node name="LattenLabel1" type="Label" parent="GridContainer"]
 
@@ -149,9 +198,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 0.0
-margin/top = 315.0
-margin/right = 786.0
-margin/bottom = 409.0
+margin/top = 419.0
+margin/right = 818.0
+margin/bottom = 513.0
 text = "Schnittlinie Position"
 percent_visible = 1.0
 lines_skipped = 0
@@ -163,10 +212,10 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 790.0
-margin/top = 315.0
-margin/right = 865.0
-margin/bottom = 409.0
+margin/left = 822.0
+margin/top = 419.0
+margin/right = 897.0
+margin/bottom = 513.0
 text = "   "
 percent_visible = 1.0
 lines_skipped = 0
@@ -174,10 +223,24 @@ max_lines_visible = -1
 
 [node name="SchnittlinieInput" parent="GridContainer" instance=ExtResource( 5 )]
 
-margin/left = 869.0
-margin/top = 312.0
-margin/right = 923.0
-margin/bottom = 412.0
+margin/left = 901.0
+margin/top = 416.0
+margin/right = 955.0
+margin/bottom = 516.0
+
+[node name="Abstand" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 599.0
+margin/right = 1675.0
+margin/bottom = 693.0
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 [node name="UebernehmenButton" type="Button" parent="."]
 
@@ -186,14 +249,16 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 416.0
+margin/top = 697.0
 margin/right = 1675.0
-margin/bottom = 516.0
+margin/bottom = 797.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 text = "Einstellungen übernehmen"
 flat = false
+
+[connection signal="pressed" from="GridContainer/ConnectButton" to="." method="_on_ConnectButton_pressed"]
 
 [connection signal="changed" from="GridContainer/ZiegelInput" to="." method="_on_ZiegelInput_changed"]
 

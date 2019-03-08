@@ -27,6 +27,8 @@ func init(_einstellungen):
 func _ready():
 	if aktuellerZiegel == null:
 		emit_signal("naechster_ziegel", null)
+	
+	global.connect("data_received", self, "_on_data_received")
 
 
 func set_aktueller_ziegel(_aktuellerZiegel):
@@ -36,6 +38,7 @@ func set_aktueller_ziegel(_aktuellerZiegel):
 	update_ziegel_nummer()
 	update_distanz_zum_zentrum()
 	update_winkel()
+	sende_ziegel_to_maschine()
 
 
 func update_ziegel_nummer():
@@ -86,3 +89,17 @@ func _on_MaschinePosition_pressed():
 
 func _on_MaschineKalibrierung_pressed():
 	emit_signal("maschine_kalibrierung")
+
+func _on_data_received(data_received):
+	if "vorheriger" in data_received:
+		emit_signal("naechster_ziegel", aktuellerZiegel)
+	else:
+		emit_signal("vorheriger_ziegel", aktuellerZiegel)
+
+func sende_ziegel_to_maschine():
+	var distanz = round(aktuellerZiegel.get_distanz_von_schnittlinie_zum_zentrum())
+	if global.bluetooth:
+		global.bluetooth.sendData("P" + String(distanz))
+	else:
+		print("Module not initialized!")
+	
