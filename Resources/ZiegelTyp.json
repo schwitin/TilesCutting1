@@ -2,8 +2,8 @@
 	"Metaden":{},
 	"ZiegelTypList":[
 		{
-			"Name": "Muster-Ziegel",
-			"Hersteller": "Unbekannt",
+			"Name": "Muster",
+			"Hersteller": "1",
 			"Laenge" : "482",
 			"Breite" : "292",
 			"VersatzY": "16",

@@ -9,7 +9,7 @@ var bluetooth
 func _ready():
 	if(Globals.has_singleton("GodotBluetooth")):
 		bluetooth = Globals.get_singleton("GodotBluetooth")
-		bluetooth.init(get_instance_ID(), true)
+		bluetooth.init(get_instance_ID(), false)
 	pass
 
 #GodotBluetooth Callbacks
