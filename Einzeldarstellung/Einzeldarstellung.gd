@@ -99,7 +99,7 @@ func _on_data_received(data_received):
 func sende_ziegel_to_maschine():
 	var distanz = round(aktuellerZiegel.get_distanz_von_schnittlinie_zum_zentrum())
 	if global.bluetooth:
-		global.bluetooth.sendData("P" + String(distanz))
+		global.bluetooth.sendData("{P" + String(distanz) + "}")
 	else:
 		print("Module not initialized!")
 	

@@ -60,4 +60,4 @@ func _on_disconnected():
 	get_node("GridContainer/ConnectButton").set_text("Maschine verbinden")
 	
 func _on_connected():
-	get_node("GridContainer/ConnectButton").text = "Verbindung beenden"
+	get_node("ConnectButton").text = "Verbindung beenden"
