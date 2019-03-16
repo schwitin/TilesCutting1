@@ -1,0 +1,49 @@
+https://www.websequencediagrams.com/
+
+
+title Übertragungsprotokoll
+
+
+Arduino->Android: {B}
+note right of Arduino: B=Bereit
+Arduino->Android: {B}
+note left of Arduino: Arduino sendet {B} alle paar Sekunden \n solage, bis das Startpaket vom \n Android ankommt.
+note right of Android: Android wird eingeschaltet
+note right of Android: Benutzer kommt auf die Seite \n mit dem Knopf "Senden",\n der Knopf ist noch deaktiviert.
+Arduino->Android: {B}
+note right of Android: Der Knopf "Senden" wird aktiviert. Der Benutzer \nstartet die Übertragung. Der Knopf wird nach dem \nKlick sofort deaktiviert.
+Android->Arduino:{S;Ngrat1;W30;A40}
+note left of Android: S=Start der Übertragung der Ziegeldaten \nN=Name des Schnittes \nW=Winkel \nA=Anzahl der Ziegelpakte
+note left of Arduino: Hier merkt sich Arduino, wann die \nÜbertragung gestartet wurde, und, \nfalls nach wenigen Sekunden kein \n{EOF} ankommt, so nimmt Arduino an, \ndass keine erfolgreiche Übertragung \nmehr möglich ist und fängt an mit {B} \nbereitschaft zu signalisieren.
+Arduino->Android:{E}
+note right of Arduino:E=Paket ist fehlerhaft.
+Android->Arduino:{S;Ngarat1;W30;A40}
+note right of Android: sendet das Startpaket erneut.
+Arduino->Android:{OK}
+note right of Arduino: OK=Paket erfolgreich empfangen.
+Android->Arduino:{Z;R1;S1;D-40}
+note left of Android: Z=Ziegel, R=Reihe, S=Spalte, D=Distanz
+note right of Android: Sendet das erste Ziegelpaket.
+Arduino->Android:{E}
+Android->Arduino:{Z;R1;S1;D-40}
+note right of Android: Senden das Ziegelpaket erneut.
+Arduino->Android:{OK}
+Android->Arduino:{Z;R1;S2;D50}
+note right of Android: Sendet das nächste Ziegelpaket.
+Arduino->Android:{OK}
+Android->Arduino:...Ziegel 2-40
+note right of Android: Sendet restliche Ziegelpakete.
+Arduino->Android:{OK}
+Android->Arduino:{EOF}
+note left of Android: EOF=Ende der Übertragung
+note right of Android: Signalisiert das Ende der Übertragung.\nDer Knopf "Senden" ist weiterhin deaktiviert.
+Arduino->Android:{OK}
+note right of Android: Android geht in StandBy Modus, \n die Kommunikation ist nicht möglich. \n Arduino kann ohne Android arbeiten.
+Arduino->Android:{Z;Ngrat1;R1;S1}
+note left of Arduino: Sendet den aktuellen Ziegel. \nWartet jedoch nicht auf {OK}, \nda Android ggf. nicht erreichbar ist.
+Arduino->Android: ...Ziegel 2-40
+note left of Arduino: Alle Ziegel sind verarbeitet.
+Arduino->Android: {B}
+
+
+
