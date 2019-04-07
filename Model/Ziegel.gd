@@ -1,5 +1,6 @@
 extends Reference
 
+var reihe
 var nummer
 var position
 var einstellungen

@@ -6,11 +6,10 @@ var aktuellerZiegel setget set_aktueller_ziegel
 signal einzeldarstellung_pressed()
 signal einzeldarstellung_verlassen()
 
-signal naechster_ziegel(aktuellerZiegel)
-signal vorheriger_ziegel(aktuellerZiegel)
-signal maschine_zenter()
-signal maschine_kalibrierung()
-signal maschnie_position(position)
+signal naechste_reihe(aktuellerZiegel)
+signal vorherige_reihe(aktuellerZiegel)
+signal naechste_nummer(aktuellerZiegel)
+signal vorherige_nummer(aktuellerZiegel)
 
 
 func _init():
@@ -26,9 +25,9 @@ func init(_einstellungen):
 
 func _ready():
 	if aktuellerZiegel == null:
-		emit_signal("naechster_ziegel", null)
+		emit_signal("naechste_reihe", null)
 	
-	global.connect("data_received", self, "_on_data_received")
+#	global.connect("data_received", self, "_on_data_received")
 
 
 func set_aktueller_ziegel(_aktuellerZiegel):
@@ -36,15 +35,19 @@ func set_aktueller_ziegel(_aktuellerZiegel):
 	var zeichenflaeche = get_node("Container/Zeichenflaeche")
 	zeichenflaeche.set_ziegel(aktuellerZiegel)
 	update_ziegel_nummer()
+	update_ziegel_reihe()
 	update_distanz_zum_zentrum()
 	update_winkel()
-	sende_ziegel_to_maschine()
 
 
 func update_ziegel_nummer():
-	var ziegelNr = get_node("Container/UserInput/NaechsterVorheriger/Wert")
-	ziegelNr.text = String(aktuellerZiegel.nummer)
+	var node = get_node("Container/UserInput/NaechsteVorherigeNummer/Wert")
+	node.text = String(aktuellerZiegel.nummer)
 
+
+func update_ziegel_reihe():
+	var node = get_node("Container/UserInput/NaechsteVorherigeReihe/Wert")
+	node.text = String(aktuellerZiegel.reihe)
 
 func update_distanz_zum_zentrum():
 	var distanz = aktuellerZiegel.get_distanz_von_schnittlinie_zum_zentrum()
@@ -70,36 +73,34 @@ func _notification(what):
 		emit_signal("einzeldarstellung_verlassen")
 
 
-func _on_Vorheriger_pressed():
-	emit_signal("vorheriger_ziegel", aktuellerZiegel)
+func _on_VorherigeReihe_pressed():
+	emit_signal("vorherige_reihe", aktuellerZiegel)
 
 
-func _on_Naechster_pressed():
-	emit_signal("naechster_ziegel", aktuellerZiegel)
+func _on_NaechsteReihe_pressed():
+	emit_signal("naechste_reihe", aktuellerZiegel)
 
 
-func _on_MaschineZenter_pressed():
-	emit_signal("maschine_zenter")
+func _on_NaechsteNummer_pressed():
+	emit_signal("naechste_nummer", aktuellerZiegel)
 
 
-func _on_MaschinePosition_pressed():
-	var distanz = aktuellerZiegel.get_distanz_von_schnittlinie_zum_zentrum()
-	emit_signal("maschnie_position", distanz)
+func _on_VorherigeNummer_pressed():
+	emit_signal("vorherige_nummer", aktuellerZiegel)
 
 
-func _on_MaschineKalibrierung_pressed():
-	emit_signal("maschine_kalibrierung")
 
-func _on_data_received(data_received):
-	if "vorheriger" in data_received:
-		emit_signal("naechster_ziegel", aktuellerZiegel)
-	else:
-		emit_signal("vorheriger_ziegel", aktuellerZiegel)
+#func _on_data_received(data_received):
+#	if "vorheriger" in data_received:
+#		emit_signal("naechster_ziegel", aktuellerZiegel)
+#	else:
+#		emit_signal("vorheriger_ziegel", aktuellerZiegel)
 
-func sende_ziegel_to_maschine():
-	var distanz = round(aktuellerZiegel.get_distanz_von_schnittlinie_zum_zentrum())
-	if global.bluetooth:
-		global.bluetooth.sendData("{P" + String(distanz) + "}")
-	else:
-		print("Module not initialized!")
-	
+#func sende_ziegel_to_maschine():
+#	var distanz = round(aktuellerZiegel.get_distanz_von_schnittlinie_zum_zentrum())
+#	if global.bluetooth:
+#		global.bluetooth.sendData("{P" + String(distanz) + "}")
+#	else:
+#		print("Module not initialized!")
+
+

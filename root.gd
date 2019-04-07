@@ -16,7 +16,7 @@ func _ready():
 	scene_uebersicht = preload("res://Uebersicht/Uebersicht.tscn").instance()
 	scene_uebersicht.init(einstellungen)
 	scene_uebersicht.connect("uebersicht_pressed", self, "_on_uebersicht_pressed")
-	scene_uebersicht.connect("uebersicht_verlassen", self, "_on_uebersicht_verlassen")
+	scene_uebersicht.connect("uebersicht_verlassen", self, "_on_uebersicht_verlassen")	
 	
 	scene_einzeldarstellung = preload("res://Einzeldarstellung/Einzeldarstellung.tscn").instance()
 	scene_einzeldarstellung.init(einstellungen)
@@ -24,8 +24,11 @@ func _ready():
 	scene_einzeldarstellung.connect("einzeldarstellung_verlassen", self, "_on_einzeldarstellung_verlassen")
 	
 	scene_uebersicht.connect("aktueller_ziegel", scene_einzeldarstellung, "set_aktueller_ziegel")
-	scene_einzeldarstellung.connect("naechster_ziegel", scene_uebersicht, "set_naechster_ziegel")
-	scene_einzeldarstellung.connect("vorheriger_ziegel", scene_uebersicht, "set_vorheriger_ziegel")
+	scene_einzeldarstellung.connect("naechste_nummer", scene_uebersicht, "set_naechste_nummer")
+	scene_einzeldarstellung.connect("vorherige_nummer", scene_uebersicht, "set_vorherige_nummer")
+	scene_einzeldarstellung.connect("naechste_reihe", scene_uebersicht, "set_naechste_reihe")
+	scene_einzeldarstellung.connect("vorherige_reihe", scene_uebersicht, "set_vorherige_reihe")
+	einstellungen.connect("schnittlinie_changed", scene_uebersicht, "update_ziegel")
 	
 	add_child(scene_einstellungen)
 
@@ -40,7 +43,7 @@ func _on_uebersicht_pressed():
 	add_child(scene_einzeldarstellung)
 
 
-func _on_einstellungen_uebernehmen(einstellungen):
+func _on_einstellungen_uebernehmen():
 	remove_child(scene_einstellungen)
 	add_child(scene_uebersicht)
 

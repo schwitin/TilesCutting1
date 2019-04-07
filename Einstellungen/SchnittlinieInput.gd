@@ -142,7 +142,7 @@ func update_labels():
 
 
 func update_winkel():
-	var winkel = dach.einstellungen.schnittlinie.get_winkel_zu_vertikale()
+	var winkel = einstellungen.schnittlinie.get_winkel_zu_vertikale()
 	var winkelV = abs(min(180 - abs(winkel), abs(winkel)))
 	var winkelVStr = "%0.1f" % winkelV
 	winkelVLabel.text = String(winkelVStr)
@@ -194,3 +194,6 @@ func _notification(what):
     if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST : 
         get_node("PopupPanel").hide()
 
+
+func _on_PopupPanel_popup_hide():
+	einstellungen.schnittlinie = dach.get_schnittlinie()

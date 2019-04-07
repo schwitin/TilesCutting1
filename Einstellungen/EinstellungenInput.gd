@@ -8,7 +8,7 @@ var lattenBereicheInput
 var schnuereBereicheInput
 var schnittlinieInput
 
-signal einstellungen_uebernehmen(einstellungen)
+signal einstellungen_uebernehmen()
 
 func _init():
 	# Wir brauchen das, damit der Scene-Editor funktioniert.
@@ -35,13 +35,13 @@ func _ready():
 	container.get_child(8).replace_by(lattenBereicheInput)
 	container.get_child(11).replace_by(schnittlinieInput)
 	
-	global.connect("connected", self, "_on_connected")
-	global.connect("disconnected", self, "_on_disconnected")
+	#global.connect("connected", self, "_on_connected")
+	#global.connect("disconnected", self, "_on_disconnected")
 
 
 func _on_UebernehmenButton_pressed():
 	#print("einstellungen_uebernehmen")
-	emit_signal("einstellungen_uebernehmen", einstellungen)
+	emit_signal("einstellungen_uebernehmen")
 
 
 

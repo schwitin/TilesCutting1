@@ -39,6 +39,45 @@ func set_schnittlinie(_schnittlinie):
 	schnittlinie = _schnittlinie
 	emit_signal("schnittlinie_changed")
 
+func get_ziegel():
+	if bereicheLatten == null || bereicheSchuere == null :
+		return []
+	
+	
+	var alleZiegelReihen = []
+	var letztePosition = Vector2(0, -ziegelTyp.versatzY)
+	
+	for bereichLatten in bereicheLatten:
+		var decklaenge = bereichLatten.decklaenge 
+		for latteNr in range(bereichLatten.anzahl_latten):
+			var ziegelReihe = get_ziegelreihe(letztePosition, latteNr)
+			alleZiegelReihen.append(ziegelReihe)
+			letztePosition.y += decklaenge
+	
+	return alleZiegelReihen
+
+func get_ziegelreihe(letztePosition, latteNr):
+	var ziegelReihe=[]
+	var ziegelNummerInDerReihe = 1
+	letztePosition.x = 0
+	for bereichSchnuere in bereicheSchuere:
+		var deckbreite = bereichSchnuere.deckbreite
+		for schnurNr in range(bereichSchnuere.anzahl_schnuere):
+			for ziegelNr in range(bereichSchnuere.anzahl_ziegel):
+				var ziegel = createZiegel(letztePosition, latteNr+1, ziegelNummerInDerReihe)
+				if ziegel.istGeschnitten:
+					ziegelNummerInDerReihe += 1
+					ziegelReihe.append(ziegel)
+				letztePosition.x += deckbreite
+	return ziegelReihe
+
+func createZiegel(position, reihe, nummer):
+	var ziegelClass = preload("res://Model/Ziegel.gd")
+	var ziegel = ziegelClass.new(self, position)
+	ziegel.reihe = reihe
+	ziegel.nummer = nummer
+	return ziegel
+
 # Gibt positionen der linken oberen aller Ziegels relativ zu der Schnittline 
 func get_ziegel_positionen():
 	var ziegelPositionen = []

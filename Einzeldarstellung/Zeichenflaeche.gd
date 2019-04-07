@@ -8,6 +8,7 @@ func _ready():
 
 func set_ziegel(_ziegel):
 	ziegel = _ziegel
+	scale_node()
 	update()
 	
 
@@ -20,6 +21,8 @@ func _draw():
 
 # TODO konsolidieren
 func scale_node() :
+	if ziegel == null:
+		return
 	var bounding_box = ziegel.get_bounding_box()
 	var schnittlinie = ziegel.einstellungen.schnittlinie
 	

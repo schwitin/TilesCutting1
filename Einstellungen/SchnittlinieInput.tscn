@@ -24,6 +24,7 @@ script/script = ExtResource( 2 )
 
 [node name="PopupPanel" type="PopupPanel" parent="."]
 
+visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -363,6 +364,8 @@ align = 2
 [connection signal="oben_unten_changed" from="." to="PopupPanel/Zeichenflaeche" method="_on_SchnittlinieInput_oben_unten_changed"]
 
 [connection signal="pressed" from="." to="." method="_on_SchnittlinieInput_pressed"]
+
+[connection signal="popup_hide" from="PopupPanel" to="." method="_on_PopupPanel_popup_hide"]
 
 [connection signal="pressed" from="PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/GratKehleButton" to="." method="_on_GratKehleButton_pressed"]
 

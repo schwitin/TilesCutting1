@@ -59,100 +59,6 @@ margin/right = -1233.0
 margin/bottom = -825.0
 alignment = 0
 
-[node name="NaechsterVorheriger" type="HBoxContainer" parent="Container/UserInput"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = false
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 316.0
-margin/bottom = 65.0
-alignment = 0
-
-[node name="Vorheriger" type="Button" parent="Container/UserInput/NaechsterVorheriger"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-theme/theme = ExtResource( 4 )
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 102.0
-margin/bottom = 65.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-text = "<   "
-flat = false
-
-[node name="AbstandL" type="Label" parent="Container/UserInput/NaechsterVorheriger"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-theme/theme = ExtResource( 4 )
-margin/left = 106.0
-margin/top = 3.0
-margin/right = 122.0
-margin/bottom = 62.0
-text = " "
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Wert" type="Label" parent="Container/UserInput/NaechsterVorheriger"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-theme/theme = ExtResource( 4 )
-margin/left = 126.0
-margin/top = 3.0
-margin/right = 190.0
-margin/bottom = 62.0
-text = "99"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="AbstandR" type="Label" parent="Container/UserInput/NaechsterVorheriger"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-theme/theme = ExtResource( 4 )
-margin/left = 194.0
-margin/top = 3.0
-margin/right = 210.0
-margin/bottom = 62.0
-text = " "
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Naechster" type="Button" parent="Container/UserInput/NaechsterVorheriger"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-theme/theme = ExtResource( 4 )
-margin/left = 214.0
-margin/top = 0.0
-margin/right = 316.0
-margin/bottom = 65.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-text = "   >"
-flat = false
-
 [node name="DistanzZuMitte" type="HBoxContainer" parent="Container/UserInput"]
 
 editor/display_folded = true
@@ -161,9 +67,9 @@ focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 69.0
+margin/top = 0.0
 margin/right = 316.0
-margin/bottom = 128.0
+margin/bottom = 59.0
 alignment = 0
 
 [node name="Prefix" type="Label" parent="Container/UserInput/DistanzZuMitte"]
@@ -222,9 +128,9 @@ focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 132.0
+margin/top = 63.0
 margin/right = 316.0
-margin/bottom = 191.0
+margin/bottom = 122.0
 alignment = 0
 
 [node name="Prefix" type="Label" parent="Container/UserInput/Winkel"]
@@ -277,31 +183,129 @@ max_lines_visible = -1
 
 [node name="Abstand1" type="Label" parent="Container/UserInput"]
 
-focus/ignore_mouse = false
+focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
-size_flags/vertical = 2
+size_flags/vertical = 0
+theme/theme = ExtResource( 4 )
 margin/left = 0.0
-margin/top = 195.0
+margin/top = 126.0
 margin/right = 316.0
-margin/bottom = 209.0
+margin/bottom = 185.0
+text = " "
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Abstand4" type="Label" parent="Container/UserInput"]
+[node name="ReiheLabel" type="Label" parent="Container/UserInput"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+theme/theme = ExtResource( 4 )
+margin/left = 0.0
+margin/top = 189.0
+margin/right = 316.0
+margin/bottom = 248.0
+text = "Reihe"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="NaechsteVorherigeReihe" type="HBoxContainer" parent="Container/UserInput"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 252.0
+margin/right = 316.0
+margin/bottom = 317.0
+alignment = 0
+
+[node name="VorherigeReihe" type="Button" parent="Container/UserInput/NaechsteVorherigeReihe"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
+theme/theme = ExtResource( 4 )
 margin/left = 0.0
-margin/top = 213.0
-margin/right = 316.0
-margin/bottom = 227.0
+margin/top = 0.0
+margin/right = 102.0
+margin/bottom = 65.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "<   "
+flat = false
+
+[node name="AbstandL" type="Label" parent="Container/UserInput/NaechsteVorherigeReihe"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+theme/theme = ExtResource( 4 )
+margin/left = 106.0
+margin/top = 3.0
+margin/right = 122.0
+margin/bottom = 62.0
+text = " "
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="Wert" type="Label" parent="Container/UserInput/NaechsteVorherigeReihe"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+theme/theme = ExtResource( 4 )
+margin/left = 126.0
+margin/top = 3.0
+margin/right = 190.0
+margin/bottom = 62.0
+text = "99"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="AbstandR" type="Label" parent="Container/UserInput/NaechsteVorherigeReihe"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+theme/theme = ExtResource( 4 )
+margin/left = 194.0
+margin/top = 3.0
+margin/right = 210.0
+margin/bottom = 62.0
+text = " "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="NaechsteReihe" type="Button" parent="Container/UserInput/NaechsteVorherigeReihe"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+theme/theme = ExtResource( 4 )
+margin/left = 214.0
+margin/top = 0.0
+margin/right = 316.0
+margin/bottom = 65.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "   >"
+flat = false
 
 [node name="Abstand5" type="Label" parent="Container/UserInput"]
 
@@ -310,14 +314,42 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 231.0
+margin/top = 321.0
 margin/right = 316.0
-margin/bottom = 245.0
+margin/bottom = 335.0
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="MaschineZenter" type="Button" parent="Container/UserInput"]
+[node name="ZiegelLabel" type="Label" parent="Container/UserInput"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+theme/theme = ExtResource( 4 )
+margin/left = 0.0
+margin/top = 339.0
+margin/right = 316.0
+margin/bottom = 398.0
+text = "Ziegel"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="NaechsteVorherigeNummer" type="HBoxContainer" parent="Container/UserInput"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 402.0
+margin/right = 316.0
+margin/bottom = 467.0
+alignment = 0
+
+[node name="VorherigeNummer" type="Button" parent="Container/UserInput/NaechsteVorherigeNummer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -325,87 +357,88 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 theme/theme = ExtResource( 4 )
 margin/left = 0.0
-margin/top = 249.0
-margin/right = 316.0
-margin/bottom = 314.0
+margin/top = 0.0
+margin/right = 102.0
+margin/bottom = 65.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-text = "----->|<-----"
+text = "<   "
 flat = false
 
-[node name="Abstand2" type="Label" parent="Container/UserInput"]
+[node name="AbstandL" type="Label" parent="Container/UserInput/NaechsteVorherigeNummer"]
 
-focus/ignore_mouse = false
+focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 318.0
-margin/right = 316.0
-margin/bottom = 332.0
+size_flags/vertical = 0
+theme/theme = ExtResource( 4 )
+margin/left = 106.0
+margin/top = 3.0
+margin/right = 122.0
+margin/bottom = 62.0
+text = " "
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="MaschinePosition" type="Button" parent="Container/UserInput"]
+[node name="Wert" type="Label" parent="Container/UserInput/NaechsteVorherigeNummer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+theme/theme = ExtResource( 4 )
+margin/left = 126.0
+margin/top = 3.0
+margin/right = 190.0
+margin/bottom = 62.0
+text = "99"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="AbstandR" type="Label" parent="Container/UserInput/NaechsteVorherigeNummer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+theme/theme = ExtResource( 4 )
+margin/left = 194.0
+margin/top = 3.0
+margin/right = 210.0
+margin/bottom = 62.0
+text = " "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="NaechsteNummer" type="Button" parent="Container/UserInput/NaechsteVorherigeNummer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 theme/theme = ExtResource( 4 )
-margin/left = 0.0
-margin/top = 336.0
+margin/left = 214.0
+margin/top = 0.0
 margin/right = 316.0
-margin/bottom = 401.0
+margin/bottom = 65.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-text = "     ----->|    "
-flat = false
-
-[node name="Abstand3" type="Label" parent="Container/UserInput"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 405.0
-margin/right = 316.0
-margin/bottom = 419.0
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="MaschineKalibrierung" type="Button" parent="Container/UserInput"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-theme/theme = ExtResource( 4 )
-margin/left = 0.0
-margin/top = 423.0
-margin/right = 316.0
-margin/bottom = 488.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-text = "|<--------->|"
+text = "   >"
 flat = false
 
 [connection signal="pressed" from="Container/EinzeldarstellungButton" to="." method="_on_Einzeldarstellung_pressed"]
 
-[connection signal="pressed" from="Container/UserInput/NaechsterVorheriger/Vorheriger" to="." method="_on_Vorheriger_pressed"]
+[connection signal="pressed" from="Container/UserInput/NaechsteVorherigeReihe/VorherigeReihe" to="." method="_on_VorherigeReihe_pressed"]
 
-[connection signal="pressed" from="Container/UserInput/NaechsterVorheriger/Naechster" to="." method="_on_Naechster_pressed"]
+[connection signal="pressed" from="Container/UserInput/NaechsteVorherigeReihe/NaechsteReihe" to="." method="_on_NaechsteReihe_pressed"]
 
-[connection signal="pressed" from="Container/UserInput/MaschineZenter" to="." method="_on_MaschineZenter_pressed"]
+[connection signal="pressed" from="Container/UserInput/NaechsteVorherigeNummer/VorherigeNummer" to="." method="_on_VorherigeNummer_pressed"]
 
-[connection signal="pressed" from="Container/UserInput/MaschinePosition" to="." method="_on_MaschinePosition_pressed"]
-
-[connection signal="pressed" from="Container/UserInput/MaschineKalibrierung" to="." method="_on_MaschineKalibrierung_pressed"]
+[connection signal="pressed" from="Container/UserInput/NaechsteVorherigeNummer/NaechsteNummer" to="." method="_on_NaechsteNummer_pressed"]
 
 

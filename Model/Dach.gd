@@ -363,4 +363,4 @@ func init_schnittlinie():
 	var p2 = sprungpunkteUnten[sprungpunkteUnten.size()-1]
 	# print(p1, p2)
 	einstellungen.schnittlinie = classLinie.new(p1, p2)
-	emit_signal("changed")
+	#emit_signal("changed")

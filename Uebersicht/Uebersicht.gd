@@ -1,12 +1,11 @@
 extends Node2D
 
 var einstellungen
+var alleZiegelReihen
 
 signal uebersicht_pressed()
 signal uebersicht_verlassen()
 signal aktueller_ziegel(aktuellerZiegel)
-
-var alle_ziegel = []
 
 
 func _init():
@@ -20,36 +19,35 @@ func init(_einstellungen):
 	einstellungen = _einstellungen
 
 
-func _ready():
-	var ziegelPositionen = einstellungen.get_ziegel_positionen()
-	var ziegelClass = preload("res://Model/Ziegel.gd")#
-	if alle_ziegel.size() == 0:
-		var ziegelNr = 1
-		for position in ziegelPositionen:
-			print(position)
-			var ziegel = ziegelClass.new(einstellungen, position)
-			if ziegel.istGeschnitten:
-				ziegel.nummer = ziegelNr
-				ziegelNr += 1
-				alle_ziegel.append(ziegel)
-		set_naechster_ziegel(null)
-	# einstellungen.connect("schnittlinie_changed", self, "on_schnittlinie_changed")
-	scale_node()
+func update_ziegel():
+	alleZiegelReihen = einstellungen.get_ziegel()
 	update()
-	
 
+
+func _ready():
+	scale_node()
+
+# Zeichnet alle Ziegel von unten nach oben und von rechts nach links
 func _draw():
-	for z in alle_ziegel:
-		z.zeichne(self, Vector2(10, 30))
+	#alleZiegelReihen = einstellungen.get_ziegel()
+	for i in range(alleZiegelReihen.size()):
+		var reihe = alleZiegelReihen[alleZiegelReihen.size() - i - 1]
+		for j in range(reihe.size()):
+			var ziegel = reihe[reihe.size() - j - 1]
+			ziegel.zeichne(self)
 
 
 func on_schnittlinie_changed():
 	set_naechster_ziegel(null)
 
+
 func scale_node() :
 	var ziegelTyp = einstellungen.ziegelTyp
-	var ziegelPositionen = einstellungen.get_ziegel_positionen()
-	var bounding_box = ziegelPositionen.front() + Vector2(ziegelTyp.breite, ziegelTyp.laenge)
+	var ersterZiegel = alleZiegelReihen[0][0]
+	var letzteReihe = alleZiegelReihen[alleZiegelReihen.size() - 1]
+	var letzerZiegel = letzteReihe[letzteReihe.size() - 1]
+	
+	var bounding_box = Vector2(letzerZiegel.position.x + ziegelTyp.deckBreite, letzerZiegel.position.y + ziegelTyp.versatzY + ziegelTyp.deckLaengeMax)
 	
 	var viewport_size = self.get_viewport_rect().size
 	var x = viewport_size.x / bounding_box.x  * 0.95
@@ -57,27 +55,63 @@ func scale_node() :
 	var k = min(x, y)
 	var pos = self.get_pos()
 	set_scale(Vector2(k,k))
-	set_pos(Vector2(10,10))
+	set_pos(Vector2(10, ziegelTyp.versatzY + 10))
 	get_node("Button").set_scale(Vector2(100,100))
 
-func set_naechster_ziegel(aktuellerZiegel):
-	var index = alle_ziegel.find_last(aktuellerZiegel)
-	if(index < alle_ziegel.size() - 1):
-		var naechsterZiegel = alle_ziegel[index + 1]
+func set_naechste_reihe(aktuellerZiegel):
+	if (aktuellerZiegel == null):
+		ziegel_auswaelen(null, alleZiegelReihen[0][0])
+		return
+
+	var aktuelleReihe = alleZiegelReihen[aktuellerZiegel.reihe - 1] # reihe fängt mit 1 an
+	if aktuellerZiegel.reihe < alleZiegelReihen.size(): # riehe fängt mir 1 an 
+		var naechsteReihe = alleZiegelReihen[aktuellerZiegel.reihe]
+		var naechsterZiegel = naechsteReihe[0]
+		ziegel_auswaelen(aktuellerZiegel, naechsterZiegel)
+	
+	
+func set_vorherige_reihe(aktuellerZiegel):
+	if (aktuellerZiegel == null):
+		ziegel_auswaelen(null, alleZiegelReihen[0][0])
+		return
+	
+	if aktuellerZiegel.reihe > 1:
+		var vorherigeReihe = alleZiegelReihen[aktuellerZiegel.reihe - 2]
+		var naechsterZiegel = vorherigeReihe[0]
 		ziegel_auswaelen(aktuellerZiegel, naechsterZiegel)
 
 
-func set_vorheriger_ziegel(aktuellerZiegel):
-	var index = alle_ziegel.find_last(aktuellerZiegel)
-	if(index > 0):
-		var naechsterZiegel = alle_ziegel[index - 1]
+func set_naechste_nummer(aktuellerZiegel):
+	if (aktuellerZiegel == null):
+		ziegel_auswaelen(null, alleZiegelReihen[0][0])
+		return
+	
+	var aktuelleReihe = alleZiegelReihen[aktuellerZiegel.reihe - 1] # reihe fängt mit 1 an
+	var aktuelleNummerInDerReihe = aktuellerZiegel.nummer # fängt mit 1 an
+	var hatNachtenZiegel = aktuelleNummerInDerReihe < aktuelleReihe.size()
+	if hatNachtenZiegel:
+		var naechsterZiegel = aktuelleReihe[aktuelleNummerInDerReihe]
 		ziegel_auswaelen(aktuellerZiegel, naechsterZiegel)
+
+
+func set_vorherige_nummer(aktuellerZiegel):
+	if (aktuellerZiegel == null):
+		ziegel_auswaelen(null, alleZiegelReihen[0][0])
+		return
+	
+	var aktuelleReihe = alleZiegelReihen[aktuellerZiegel.reihe - 1]
+	var aktuelleNummerInDerReihe = aktuellerZiegel.nummer # fängt mit 1 an
+	var hatVorherigenZiegel = aktuelleNummerInDerReihe > 1
+	if hatVorherigenZiegel:
+		var vorherigerZiegel = aktuelleReihe[aktuelleNummerInDerReihe-2]
+		ziegel_auswaelen(aktuellerZiegel, vorherigerZiegel)
 
 
 func ziegel_auswaelen(aktuellerZiegel, naechsterZiegel):
 	if aktuellerZiegel != null:
 		aktuellerZiegel.set_ausgewaelt(false)
 	naechsterZiegel.set_ausgewaelt(true)
+	#update()
 	emit_signal("aktueller_ziegel", naechsterZiegel)
 
 
@@ -88,6 +122,6 @@ func _on_Button_pressed():
 func _notification(what):        
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST : 
 		print("uebersicht_verlassen")
-		alle_ziegel.clear()
+		#alleZiegelReihen = null
 		emit_signal("uebersicht_verlassen")
 
