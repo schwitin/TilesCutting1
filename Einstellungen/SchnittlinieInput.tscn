@@ -76,6 +76,7 @@ margin/bottom = 824.0
 
 [node name="WinkelContainer" type="VBoxContainer" parent="PopupPanel/UserInput/Container"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -360,8 +361,6 @@ shortcut = null
 text = "+1"
 flat = false
 align = 2
-
-[connection signal="oben_unten_changed" from="." to="PopupPanel/Zeichenflaeche" method="_on_SchnittlinieInput_oben_unten_changed"]
 
 [connection signal="pressed" from="." to="." method="_on_SchnittlinieInput_pressed"]
 

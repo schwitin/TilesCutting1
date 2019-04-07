@@ -2,6 +2,7 @@ extends Reference
 
 var einstellungen = null
 var is_grat = true setget set_grat, is_grat
+var schnittlinie
 
 var classZiegelTyp = preload("res://Model/ZiegelTyp.gd")
 var classLinie = preload("res://Model/Linie.gd")
@@ -15,8 +16,7 @@ func _init(_einstellungen):
 	einstellungen = _einstellungen
 	#print("_init", einstellungen)
 	init_schnittlinie()
-	einstellungen.connect("schnuere_changed", self, "init_schnittlinie");
-	einstellungen.connect("latten_changed", self, "init_schnittlinie");
+	is_grat = einstellungen.istGrat
 
 
 func set_grat(_is_grat):
@@ -113,7 +113,7 @@ func bewege_schnittlinie_oben(mm):
 	var bounding_box = get_bounding_box()
 	var schnittlinie = get_schnittlinie()
 	var x = schnittlinie.p1.x + mm
-	if x > 0 && x < bounding_box.x:
+	if x >= 0 && x <= bounding_box.x:
 		schnittlinie.p1.x = x
 		emit_signal("changed")
 
@@ -122,7 +122,7 @@ func bewege_schnittlinie_unten(mm):
 	var bounding_box = get_bounding_box()
 	var schnittlinie = get_schnittlinie()
 	var x = schnittlinie.p2.x + mm
-	if x > 0 && x < bounding_box.x:
+	if x >= 0 && x <= bounding_box.x:
 		schnittlinie.p2.x = x
 		emit_signal("changed")
 
@@ -188,7 +188,8 @@ func get_sprungpunkt_rechts(sprungpunkte, x):
 
 
 func get_schnittlinie():
-	return einstellungen.schnittlinie
+	return schnittlinie
+	#return einstellungen.schnittlinie
 
 
 func get_bounding_box() :
@@ -357,10 +358,11 @@ func get_abstand_linie_oben():
 func init_schnittlinie():
 	#print("init_schnittlinie")
 	# einstellungen.print_einstellungen()
-	var sprungpunkteOben = get_sprungpunkte_oben()
-	var sprungpunkteUnten = get_sprungpunkte_unten()
-	var p1 = sprungpunkteOben[0]
-	var p2 = sprungpunkteUnten[sprungpunkteUnten.size()-1]
-	# print(p1, p2)
-	einstellungen.schnittlinie = classLinie.new(p1, p2)
-	#emit_signal("changed")
+	if einstellungen.schnittlinie == null:
+		var sprungpunkteOben = get_sprungpunkte_oben()
+		var sprungpunkteUnten = get_sprungpunkte_unten()
+		var p1 = sprungpunkteOben[0]
+		var p2 = sprungpunkteUnten[sprungpunkteUnten.size()-1]
+		schnittlinie = classLinie.new(p1, p2)
+	else:
+		schnittlinie = einstellungen.schnittlinie

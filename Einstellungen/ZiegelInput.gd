@@ -23,12 +23,12 @@ func _ready():
 	
 	if self.ziegelTyp == null:
 		set_ziegel_typ(ziegelTypen[0])
-		emit_signal("changed", ziegelTyp)
 
 
 func set_ziegel_typ(_ziegelTyp) :
 	ziegelTyp = _ziegelTyp
 	self.text = get_text(ziegelTyp)
+	emit_signal("changed", ziegelTyp)
 
 
 func _on_Button_pressed():
@@ -62,4 +62,3 @@ func _notification(what):
 
 func _on_Items_item_pressed( ID ):
 	set_ziegel_typ(ziegelTypen[ID])
-	emit_signal("changed", ziegelTyp)

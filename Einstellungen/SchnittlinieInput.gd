@@ -13,9 +13,8 @@ var winkelVLabel = null
 var obenUntenButton = null
 var gratKehleButton = null
 
-var isOben = false
+#var isOben = false
 
-signal oben_unten_changed(isOben)
 
 
 func _init(einstellungen = null):
@@ -27,8 +26,8 @@ func init(_einstellungen):
 		einstellungen = einstellungenClass.new()
 	else:
 		einstellungen = _einstellungen
-	dach = classDach.new(einstellungen)
 	
+	einstellungen.connect("schnittlinie_changed", self, "on_schnittlinie_changed")
 
 func _ready():
 	versatzLabel = get_node("PopupPanel/UserInput/Container/WinkelContainer/Versatz/VersatzValue")
@@ -37,35 +36,34 @@ func _ready():
 	gratKehleButton = get_node("PopupPanel/UserInput/Container/SchnittpunktContainer/VBoxContainer/GratKehleButton")
 	zeichenflaeche = get_node("PopupPanel/Zeichenflaeche")
 	
-	zeichenflaeche.dach = dach
+	init_dach()
 	#print("update_dach")
-	set_kehle_grat(self.dach.is_grat())
+	
+	update_kehle_grat_label()
+	update_winkel_label()
+	update_oben_unten_label()
 	set_user_input_position()
-	set_zeichenflaeche_position()
 	
-	if false == einstellungen.is_connected("schnittlinie_changed", self, "on_schnittlinie_changed"):
-		einstellungen.connect("schnittlinie_changed", self, "on_schnittlinie_changed")
 	
-	emit_signal("oben_unten_changed", isOben)
 
 func on_schnittlinie_changed():
-	set_zeichenflaeche_position()
-	update_labels()
-
+	init_dach()
+	
+func init_dach():
+	dach = classDach.new(einstellungen)
+	if zeichenflaeche != null:
+		zeichenflaeche.init(dach)
+		update_labels()
+		set_zeichenflaeche_position()
 
 func _on_ObenUntenButton_pressed():
-	isOben = !isOben
-	if isOben:
-		obenUntenButton.text = "Oben"
-	else :
-		obenUntenButton.text = "Unten"
+	# isOben = !isOben
+	zeichenflaeche.set_oben_unten(!zeichenflaeche.isOben)
+	update_oben_unten_label()
 	
-	update_labels()
-	emit_signal("oben_unten_changed", isOben)
-
 
 func _on_NachLinksButton_pressed():
-	if isOben:
+	if zeichenflaeche.isOben:
 		dach.bewege_schnittlinie_oben_nach_links()
 	else:
 		dach.bewege_schnittlinie_unten_nach_links()
@@ -73,7 +71,7 @@ func _on_NachLinksButton_pressed():
 
 
 func _on_NachRechtsButton_pressed():
-	if isOben:
+	if zeichenflaeche.isOben:
 		dach.bewege_schnittlinie_oben_nach_rechts()
 	else:
 		dach.bewege_schnittlinie_unten_nach_rechts()
@@ -81,7 +79,7 @@ func _on_NachRechtsButton_pressed():
 
 
 func _on_MinusHundertButton_pressed():
-	if isOben:
+	if zeichenflaeche.isOben:
 		dach.bewege_schnittlinie_oben(-100)
 	else:
 		dach.bewege_schnittlinie_unten(-100)
@@ -90,7 +88,7 @@ func _on_MinusHundertButton_pressed():
 
 
 func _on_PlusHundertButton_pressed():
-	if isOben:
+	if zeichenflaeche.isOben:
 		dach.bewege_schnittlinie_oben(100)
 	else:
 		dach.bewege_schnittlinie_unten(100)
@@ -99,7 +97,7 @@ func _on_PlusHundertButton_pressed():
 
 
 func _on_MinusZehnButton_pressed():
-	if isOben:
+	if zeichenflaeche.isOben:
 		dach.bewege_schnittlinie_oben(-10)
 	else:
 		dach.bewege_schnittlinie_unten(-10)
@@ -107,7 +105,7 @@ func _on_MinusZehnButton_pressed():
 
 
 func _on_PlusZehnButton_pressed():
-	if isOben:
+	if zeichenflaeche.isOben:
 		dach.bewege_schnittlinie_oben(10)
 	else:
 		dach.bewege_schnittlinie_unten(10)
@@ -116,14 +114,14 @@ func _on_PlusZehnButton_pressed():
 
 
 func _on_MinusEinsButton_pressed():
-	if isOben:
+	if zeichenflaeche.isOben:
 		dach.bewege_schnittlinie_oben(-1)
 	else:
 		dach.bewege_schnittlinie_unten(-1)
 	update_labels()
 
 func _on_PlusEinsButton_pressed():
-	if isOben:
+	if zeichenflaeche.isOben:
 		dach.bewege_schnittlinie_oben(1)
 	else:
 		dach.bewege_schnittlinie_unten(1)
@@ -132,36 +130,40 @@ func _on_PlusEinsButton_pressed():
 
 func update_labels():
 	var versatz
-	if isOben:
+	if zeichenflaeche.isOben:
 		versatz = dach.get_abstand_von_schnittlinie_zum_naechsten_schnur_oben()
 	else:
 		versatz = dach.get_abstand_von_schnittlinie_zum_naechsten_schnur_unten()
 	
 	versatzLabel.text = String(round(versatz))
-	update_winkel()
+	update_winkel_label()
 
 
-func update_winkel():
+func update_winkel_label():
 	var winkel = einstellungen.schnittlinie.get_winkel_zu_vertikale()
 	var winkelV = abs(min(180 - abs(winkel), abs(winkel)))
 	var winkelVStr = "%0.1f" % winkelV
 	winkelVLabel.text = String(winkelVStr)
-	self.text = String(winkelVStr) + "°"
+	set_text(String(winkelVStr) + "°")
+
+
+func update_kehle_grat_label():
+	if dach.is_grat:
+		gratKehleButton.text = "Grat"
+	else: 
+		gratKehleButton.text = "Kehle"
+
+
+func update_oben_unten_label():
+	if zeichenflaeche.isOben:
+		obenUntenButton.text = "Oben"
+	else :
+		obenUntenButton.text = "Unten"
 
 
 func _on_GratKehleButton_pressed():
-	set_kehle_grat(!self.dach.is_grat())
-	
-func set_kehle_grat(istGrat):
-	self.dach.set_grat(istGrat)
-	einstellungen.set_grat(istGrat)
-	
-	if self.dach.is_grat:
-		self.gratKehleButton.text = "Grat"
-	else: 
-		self.gratKehleButton.text = "Kehle"
-	
-	update_labels()
+	dach.set_grat(!dach.is_grat())
+	update_kehle_grat_label()
 
 
 func set_zeichenflaeche_position():
@@ -197,3 +199,4 @@ func _notification(what):
 
 func _on_PopupPanel_popup_hide():
 	einstellungen.schnittlinie = dach.get_schnittlinie()
+	einstellungen.set_grat(dach.is_grat)
