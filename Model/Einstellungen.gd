@@ -56,34 +56,23 @@ func set_grat(_istGrat):
 
 ############### STANDARDEINSTELLUNGEN  #####################
 func init_ziegel_typ():
-	var data = {
-			"Name": "Rubin 9V",
-			"Hersteller": "BRAAS",
-			"Laenge" : "472",
-			"Breite" : "313",
-			"VersatzY": "35",
-			"DecklaengeMin" : "370",
-			"DecklaengeMax" : "400",
-			"Deckbreite" : "267"
-		}
-	var ziegelTypClass = load("res://Model/ZiegelTyp.gd")
-	var ziegel_typ = ziegelTypClass.new(data)
-	self.set_ziegel_typ(ziegel_typ)
+	set_ziegel_typ(global.ziegelTypen[0])
+
 
 func init_bereiche_latten():
 	var bereichClass = load("res://Model/LattenBereich.gd")
-	var bereich = bereichClass.new(self.ziegelTyp)
+	var bereich = bereichClass.new(ziegelTyp)
 	var bereiche = []
 	bereiche.append(bereich)
-	self.set_bereiche_latten(bereiche)
-	
+	set_bereiche_latten(bereiche)
+
 
 func init_bereiche_scnuere():
 	var bereichClass = load("res://Model/SchnuereBereich.gd")
-	var bereich = bereichClass.new(self.ziegelTyp)
+	var bereich = bereichClass.new(ziegelTyp)
 	var bereiche = []
 	bereiche.append(bereich)
-	self.set_bereiche_schnuere(bereiche)
+	set_bereiche_schnuere(bereiche)
 
 
 func init_schnittlinie():
