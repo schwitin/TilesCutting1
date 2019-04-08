@@ -355,6 +355,85 @@ func get_abstand_linie_oben():
 	pass
 
 
+###################################################################################
+# Ermittelt alle Ziegel für das Dach, das durch Latten-, Schnürebereiche und die 
+# Schnttlinie definiert ist. Es wird ein zweidimensionaler Array zurückgegeben.
+# Die erste Dimension sind die Ziegelreihen (Arrays), die zweite Dimension
+# sind die Ziegel dieser Reihe, wobei die Reihe nur geschnittene Ziegel enthält.
+###################################################################################
+func get_ziegel():
+	if einstellungen.bereicheLatten == null || einstellungen.bereicheSchuere == null || einstellungen.schnittlinie == null:
+		return []
+	
+	# Rstes Element ist die oberste Ziegelreihe
+	var alleZiegelReihen = []
+	
+	# Wir starten mit der obersten Latte
+	var lattenPositionY = 0
+	# Wir gehen über alle Bereiche und ermitteln erstmal die Decklänge für diesen Bereich
+	for bereichLatten in einstellungen.bereicheLatten:
+		var decklaenge = bereichLatten.decklaenge 
+		# Wir gehen über alle Latten des Bereichs, ermitteln je latte die Ziegelreihe
+		# und fügen diese den alleZiegelReihen hinzu. Es werden nur geschnittene Ziegel 
+		# berücksichtigt.
+		for latteNr in range(bereichLatten.anzahl_latten):
+			# Erster Element ist der linke Ziegel in der Reihe.
+			var ziegelReihe = get_ziegelreihe(lattenPositionY, latteNr+1)
+			alleZiegelReihen.append(ziegelReihe)
+			# Wir verschieben lattenPositionY um eine Decklänge (=Lattenabstand) nach unten.
+			lattenPositionY += decklaenge
+	
+	return alleZiegelReihen
+
+###################################################
+# Erstellt die Ziegelreihe für die übergebene Latte
+# Es werden nur geschnittenen Ziegel berücksichtigt
+###################################################
+func get_ziegelreihe(lattenPositionY, latteNr):
+	# Erster Element ist der linke Ziegel in der Reihe.
+	var ziegelReihe = []
+	
+	# Wir müssen um versatzY nach oben gehen, weil der Ziegel mit der Latte nicht 
+	# bündig ist, sonder ragt um versatzY über die Latte raus.
+	var ziegelPosition = Vector2(0, lattenPositionY - einstellungen.ziegelTyp.versatzY)
+	
+	# y = Reihe, 
+	# x = Ziegel in der Reihe
+	var ziegelPositionLogisch = Vector2(1, latteNr)
+	
+	# Wir gehen über alle Bereiche und ermitteln die Deckbreite für jeden Bereich
+	for bereichSchnuere in einstellungen.bereicheSchuere:
+		var deckbreite = bereichSchnuere.deckbreite
+		# Wir gehen über alle Schnüre im Bereich.
+		for schnurNr in range(bereichSchnuere.anzahl_schnuere):
+			# Wir erstellen alle Ziegel für jeden Schnur und,
+			# wenn der Ziegel geschnitten ist nehmen wir diesen in
+			# die ziegelReihe auf. 
+			for ziegelNr in range(bereichSchnuere.anzahl_ziegel):
+				var ziegel = createZiegel(ziegelPosition, ziegelPositionLogisch)
+				if ziegel.istGeschnitten:
+					ziegelReihe.append(ziegel)
+					ziegelPositionLogisch.x += 1
+				# Wir die verschieben die ziegelPositionX um die 
+				# Deckbreite (=Ziegelbreite - Überlappung) nach rechts. 
+				ziegelPosition.x += deckbreite
+	
+	return ziegelReihe
+
+
+####################################################################
+# Erstellt einen Ziegel 
+# position - ist die absolute Postion in mm relativ zu der oberen linken Ecke
+# logischePosition - welcher Reihe der Ziegel angehört und welche Postion er in der Reiche hat 
+####################################################################
+func createZiegel(position, positionLogisch):
+	var ziegelClass = preload("res://Model/Ziegel.gd")
+	var ziegel = ziegelClass.new(einstellungen, position)
+	ziegel.reihe = positionLogisch.y
+	ziegel.nummer = positionLogisch.x
+	return ziegel
+
+
 func init_schnittlinie():
 	#print("init_schnittlinie")
 	# einstellungen.print_einstellungen()

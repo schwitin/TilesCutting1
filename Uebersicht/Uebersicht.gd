@@ -7,6 +7,8 @@ signal uebersicht_pressed()
 signal uebersicht_verlassen()
 signal aktueller_ziegel(aktuellerZiegel)
 
+var classDach = preload("res://Model/Dach.gd")
+
 
 func _init():
 	# Wir brauchen das, damit der Scene-Editor funktioniert.
@@ -20,7 +22,8 @@ func init(_einstellungen):
 
 
 func update_ziegel():
-	alleZiegelReihen = einstellungen.get_ziegel()
+	var dach = classDach.new(einstellungen)
+	alleZiegelReihen = dach.get_ziegel()
 	update()
 
 

@@ -10,6 +10,7 @@ signal ziegel_typ_changed()
 signal schnuere_changed()
 signal latten_changed()
 signal schnittlinie_changed()
+signal grat_kehle_changed()
 
 var classDach = preload("res://Model/Dach.gd")
 
@@ -20,8 +21,7 @@ func _init():
 
 func set_ziegel_typ(_ziegelTyp):
 	ziegelTyp = _ziegelTyp
-	schnittlinie = null
-	bereicheLatten.clear()
+	bereicheSchuere.clear()
 	bereicheSchuere.clear()
 	init_bereiche_latten()
 	init_bereiche_scnuere()
@@ -30,7 +30,6 @@ func set_ziegel_typ(_ziegelTyp):
 
 func set_bereiche_schnuere(bereiche):
 	bereicheSchuere = bereiche
-	schnittlinie = null
 	init_schnittlinie()
 	emit_signal("schnuere_changed")
 
@@ -47,88 +46,12 @@ func set_schnittlinie(_schnittlinie):
 	#print("set_schnittlinie")
 	schnittlinie = _schnittlinie
 	emit_signal("schnittlinie_changed")
-	
-
-
-func get_ziegel():
-	if bereicheLatten == null || bereicheSchuere == null :
-		return []
-	
-	
-	var alleZiegelReihen = []
-	var letztePosition = Vector2(0, -ziegelTyp.versatzY)
-	
-	for bereichLatten in bereicheLatten:
-		var decklaenge = bereichLatten.decklaenge 
-		for latteNr in range(bereichLatten.anzahl_latten):
-			var ziegelReihe = get_ziegelreihe(letztePosition, latteNr)
-			alleZiegelReihen.append(ziegelReihe)
-			letztePosition.y += decklaenge
-	
-	return alleZiegelReihen
-
-func get_ziegelreihe(letztePosition, latteNr):
-	var ziegelReihe=[]
-	var ziegelNummerInDerReihe = 1
-	letztePosition.x = 0
-	for bereichSchnuere in bereicheSchuere:
-		var deckbreite = bereichSchnuere.deckbreite
-		for schnurNr in range(bereichSchnuere.anzahl_schnuere):
-			for ziegelNr in range(bereichSchnuere.anzahl_ziegel):
-				var ziegel = createZiegel(letztePosition, latteNr+1, ziegelNummerInDerReihe)
-				if ziegel.istGeschnitten:
-					ziegelNummerInDerReihe += 1
-					ziegelReihe.append(ziegel)
-				letztePosition.x += deckbreite
-	return ziegelReihe
-
-func createZiegel(position, reihe, nummer):
-	var ziegelClass = preload("res://Model/Ziegel.gd")
-	var ziegel = ziegelClass.new(self, position)
-	ziegel.reihe = reihe
-	ziegel.nummer = nummer
-	return ziegel
-
-# Gibt positionen der linken oberen aller Ziegels relativ zu der Schnittline 
-func get_ziegel_positionen():
-	var ziegelPositionen = []
-	var versatzY = ziegelTyp.versatzY
-	var letztePosition = Vector2(0, 0)
-
-	var bereicheLattenInverted = Array(bereicheLatten)
-	bereicheLattenInverted.invert()
-	var bereicheSchnuereInverted = Array(bereicheSchuere)
-	bereicheSchnuereInverted.invert()
-	
-	if bereicheLattenInverted == null || bereicheSchnuereInverted == null :
-		return []
-	
-	for bereichLatten in bereicheLattenInverted:
-		var decklaenge = bereichLatten.decklaenge 
-		for latteNr in range(bereichLatten.anzahl_latten):
-			var y = letztePosition.y - decklaenge
-			letztePosition.x = 0
-			for bereichSchnuere in bereicheSchnuereInverted:
-				var deckbreite = bereichSchnuere.deckbreite
-				for schnurNr in range(bereichSchnuere.anzahl_schnuere):
-					for ziegelNr in range(bereichSchnuere.anzahl_ziegel):
-						var x = letztePosition.x - deckbreite
-						letztePosition = Vector2(x,y)
-						ziegelPositionen.append(letztePosition)
-	
-	var ziegelPositionenTranslated = []
-	for position in ziegelPositionen:
-		var newPostition = position + -letztePosition
-		newPostition.y = newPostition.y - versatzY
-		ziegelPositionenTranslated.append(newPostition)
-	
-	return ziegelPositionenTranslated
-
-
 
 
 func set_grat(_istGrat):
-	istGrat = _istGrat
+	if istGrat != _istGrat:
+		istGrat = _istGrat
+		emit_signal("grat_kehle_changed")
 
 
 ############### STANDARDEINSTELLUNGEN  #####################
@@ -165,6 +88,9 @@ func init_bereiche_scnuere():
 
 func init_schnittlinie():
 	if bereicheLatten.size() > 0 && bereicheSchuere.size() > 0:
+		# wir setzen die schnittlinie auf null damit diese neu
+		# berechnet wird. 
+		schnittlinie = null 
 		var dach = classDach.new(self)
 		set_schnittlinie(dach.get_schnittlinie()) 
 
