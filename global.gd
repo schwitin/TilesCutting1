@@ -1,16 +1,24 @@
 extends Node
 
+var bluetooth
+
 signal connected
 signal disconnected
 signal data_received
 
-var bluetooth
+var ziegelTypen
+var classZiegelTypDAO = preload("res://Model/ZiegelTypDAO.gd")
+signal ziegel_typen_geladen 
 
 func _ready():
 	if(Globals.has_singleton("GodotBluetooth")):
 		bluetooth = Globals.get_singleton("GodotBluetooth")
 		bluetooth.init(get_instance_ID(), false)
-	pass
+	
+	
+	var zeigelTypenDAO = classZiegelTypDAO.new()
+	ziegelTypen = zeigelTypenDAO.ziegelTypen
+
 
 #GodotBluetooth Callbacks
 func _on_connected(device_name, device_adress):
