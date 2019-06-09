@@ -130,8 +130,5 @@ func _on_Button_pressed():
 
 
 func _notification(what):        
-	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST : 
-		print("uebersicht_verlassen")
-		#alleZiegelReihen = null
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST :
 		emit_signal("uebersicht_verlassen")
-

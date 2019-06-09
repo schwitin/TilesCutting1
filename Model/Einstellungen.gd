@@ -1,5 +1,6 @@
 extends Resource
 
+var version = 1.0
 var name = null
 var dachName = null
 var ziegelTyp = null setget set_ziegel_typ
@@ -17,7 +18,7 @@ func _init(_dachName, _name):
 	init_ziegel_typ()
 	dachName = _dachName
 	name = _name
-	
+
 
 func init(einstellungenDictionary):
 	load_ziegel_typ(einstellungenDictionary)
@@ -25,8 +26,10 @@ func init(einstellungenDictionary):
 	load_bereiche_schnuere(einstellungenDictionary)
 	load_schnittlinie(einstellungenDictionary)
 	set_grat(einstellungenDictionary.istGrat)
+	version = einstellungenDictionary.version
 	name = einstellungenDictionary.name
 	dachName = einstellungenDictionary.dachName
+	#print(to_maschine_string())
 
 
 func set_ziegel_typ(_ziegelTyp):
@@ -137,6 +140,7 @@ func to_dictionary():
 		sBereiche.append(bereichSchnuere.to_dictionary())
 
 	var d = {
+		version = version,
 		name = name,
 		dachName = dachName,
 		ziegelTyp = ziegelTyp.name,
@@ -146,3 +150,16 @@ func to_dictionary():
 		schnittlinie = schnittlinie.to_dictionary(),
 	}
 	return d
+
+
+func to_maschine_string(separator = ""):
+	var maschineStr = "%15-s" % name
+	#var maschineStr = "|" + name + "|"
+	var classDach = preload("res://Model/Dach.gd")
+	var dach = classDach.new(self)
+	var alleZiegel = dach.get_ziegel()
+	alleZiegel.invert()
+	for reihe in alleZiegel:
+		for ziegel in reihe:
+			maschineStr += ziegel.to_maschine_string() + separator
+	return maschineStr

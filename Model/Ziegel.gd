@@ -59,6 +59,11 @@ func get_distanz_von_schnittlinie_zum_zentrum():
 	var distanz = normale.p1.distance_to(normale.p2) * vorzeichen
 	return distanz
 
+func get_winkel_zu_vertikale():
+	var winkel = einstellungen.schnittlinie.get_winkel_zu_vertikale()
+	var winkelV = abs(min(180 - abs(winkel), abs(winkel)))
+	return winkelV
+
 
 func create_linie(p1, p2):
 	return linieClass.new(p1, p2)
@@ -208,3 +213,13 @@ func println():
 	print("Position : ", position)
 	var bounding_box = get_bounding_box()
 	print("Bounding box: " , bounding_box.end)
+
+
+func to_maschine_string(separator = ""):
+	var reiheStr = "%02d" % reihe
+	var nummerStr = "%02d" % nummer
+	var distanzStr = "%03+d" % get_distanz_von_schnittlinie_zum_zentrum()
+	var windelV = get_winkel_zu_vertikale()
+	var winkelStr = "%04d" % (windelV * 10)
+	var vorschubFlexStr = "VVV"
+	return reiheStr +  separator + nummerStr +  separator + distanzStr +  separator + winkelStr +  separator + vorschubFlexStr

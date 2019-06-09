@@ -57,7 +57,7 @@ func create_latten_node():
 	node.connect("selected", self, "_on_InputField_selected")
 	node.connect("value_changed", self, "_on_latten_changed")
 	node.wert = int(bereich.anzahl_latten)
-	node.min_wert = 1
+	node.min_wert = 2
 	node.max_wert = 16
 	return node
 

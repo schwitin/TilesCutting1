@@ -57,7 +57,7 @@ func create_ziegel_node():
 	node.connect("selected", self, "_on_InputField_selected")
 	node.connect("value_changed", self, "_on_ziegel_changed")
 	node.wert = bereich.anzahl_ziegel
-	node.min_wert = 1
+	node.min_wert = 2
 	node.max_wert = 10
 	return node
 

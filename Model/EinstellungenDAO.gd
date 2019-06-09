@@ -50,6 +50,7 @@ func get_schnitt(dach, schnittName):
 			return schnitt
 	return null
 
+
 func list():
 	var list = []
 	var einstellungenDir = Directory.new()

@@ -56,8 +56,7 @@ func update_distanz_zum_zentrum():
 
 
 func update_winkel():
-	var winkel = aktuellerZiegel.einstellungen.schnittlinie.get_winkel_zu_vertikale()
-	var winkelV = abs(min(180 - abs(winkel), abs(winkel)))
+	var winkelV = aktuellerZiegel.get_winkel_zu_vertikale()
 	var winkelVStr = "%0.1f" % winkelV
 	var winkelNode = get_node("Container/UserInput/Winkel/Wert")
 	winkelNode.text = String(winkelVStr)
@@ -95,12 +94,4 @@ func _on_VorherigeNummer_pressed():
 #		emit_signal("naechster_ziegel", aktuellerZiegel)
 #	else:
 #		emit_signal("vorheriger_ziegel", aktuellerZiegel)
-
-#func sende_ziegel_to_maschine():
-#	var distanz = round(aktuellerZiegel.get_distanz_von_schnittlinie_zum_zentrum())
-#	if global.bluetooth:
-#		global.bluetooth.sendData("{P" + String(distanz) + "}")
-#	else:
-#		print("Module not initialized!")
-
 
