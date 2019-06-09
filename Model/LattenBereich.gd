@@ -13,5 +13,17 @@ func _init(ziegel_typ):
 	anzahl_latten = 3
 
 
+func init(dictionary):
+	decklaenge = dictionary.decklaenge
+	anzahl_latten = dictionary.anzahl_latten
+
+
 func get_berich_groesse():
 	return decklaenge * anzahl_latten
+
+func to_dictionary():
+	var d = {
+		decklaenge = decklaenge,
+		anzahl_latten = anzahl_latten
+	}
+	return d

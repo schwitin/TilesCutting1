@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://Resources/theme.tres" type="Theme" id=1]
+[ext_resource path="res://Einstellungen/Bereiche/InputField.gd" type="Script" id=2]
+
+
+[node name="InputField" type="Button"]
+
+rect/min_size = Vector2( 200, 0 )
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+theme/theme = ExtResource( 1 )
+margin/left = 15.0
+margin/top = 19.0
+margin/right = 215.0
+margin/bottom = 123.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "1777"
+flat = false
+align = 2
+script/script = ExtResource( 2 )
+
+[connection signal="pressed" from="." to="." method="_on_InputField_pressed"]
+
+

@@ -1,6 +1,5 @@
 extends Node
 
-var einstellungen
 var aktuellerZiegel setget set_aktueller_ziegel
 
 signal einzeldarstellung_pressed()
@@ -12,22 +11,23 @@ signal naechste_nummer(aktuellerZiegel)
 signal vorherige_nummer(aktuellerZiegel)
 
 
-func _init():
-	# Wir brauchen das, damit der Scene-Editor funktioniert.
-	# Einstellungen werden von der Root-Scene neu gesetzt und dieses hier verworfen
-	var einstellungenClass = preload("res://Model/Einstellungen.gd")
-	init(einstellungenClass.new())
-
-
-func init(_einstellungen):
-	einstellungen = _einstellungen
-
-
 func _ready():
+	# Unkommentieren, wenn dieses Szene einzeln zum Testen gestertet wird
+	# test()
 	if aktuellerZiegel == null:
 		emit_signal("naechste_reihe", null)
 	
 #	global.connect("data_received", self, "_on_data_received")
+
+func test():
+	var einstellungenClass = preload("res://Model/Einstellungen.gd")
+	var einstellungen = einstellungenClass.new("dummy")
+	var ziegelClass = preload("res://Model/Ziegel.gd")	
+	var ziegel = ziegelClass.new(einstellungen, Vector2(0,0))
+	ziegel.nummer = 1
+	ziegel.reihe = 1
+	ziegel.istGeschnitten = true
+	set_aktueller_ziegel(ziegel)
 
 
 func set_aktueller_ziegel(_aktuellerZiegel):

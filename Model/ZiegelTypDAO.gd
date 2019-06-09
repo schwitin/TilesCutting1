@@ -5,7 +5,14 @@ var ziegelTypen = []
 func _init():
 	load_ziegel_typen()
 
-
+func get_ziegel_typ(name):
+	var ziegelTyp = null
+	for z in ziegelTypen:
+		if z.name == name:
+			ziegelTyp = z
+			break
+	return ziegelTyp
+	
 func load_ziegel_typen():
 	var ziegelTypClass = load("res://Model/ZiegelTyp.gd")
 	var file = File.new()

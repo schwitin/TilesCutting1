@@ -370,18 +370,20 @@ func get_ziegel():
 	
 	# Wir starten mit der obersten Latte
 	var lattenPositionY = 0
+	var lattenNr = 1
 	# Wir gehen über alle Bereiche und ermitteln erstmal die Decklänge für diesen Bereich
 	for bereichLatten in einstellungen.bereicheLatten:
 		var decklaenge = bereichLatten.decklaenge 
 		# Wir gehen über alle Latten des Bereichs, ermitteln je latte die Ziegelreihe
 		# und fügen diese den alleZiegelReihen hinzu. Es werden nur geschnittene Ziegel 
 		# berücksichtigt.
-		for latteNr in range(bereichLatten.anzahl_latten):
+		for l in range(bereichLatten.anzahl_latten):
 			# Erster Element ist der linke Ziegel in der Reihe.
-			var ziegelReihe = get_ziegelreihe(lattenPositionY, latteNr+1)
+			var ziegelReihe = get_ziegelreihe(lattenPositionY, lattenNr)
 			alleZiegelReihen.append(ziegelReihe)
 			# Wir verschieben lattenPositionY um eine Decklänge (=Lattenabstand) nach unten.
 			lattenPositionY += decklaenge
+			lattenNr += 1
 	
 	return alleZiegelReihen
 

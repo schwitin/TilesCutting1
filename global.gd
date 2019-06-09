@@ -6,18 +6,11 @@ signal connected
 signal disconnected
 signal data_received
 
-var ziegelTypen
-var classZiegelTypDAO = preload("res://Model/ZiegelTypDAO.gd")
-signal ziegel_typen_geladen 
 
 func _ready():
 	if(Globals.has_singleton("GodotBluetooth")):
 		bluetooth = Globals.get_singleton("GodotBluetooth")
 		bluetooth.init(get_instance_ID(), false)
-	
-	
-	var zeigelTypenDAO = classZiegelTypDAO.new()
-	ziegelTypen = zeigelTypenDAO.ziegelTypen
 
 
 #GodotBluetooth Callbacks

@@ -11,6 +11,13 @@ func _init(_p1, _p2):
 	p2 = _p2
 
 
+func init(dictionary):
+	p1.x = dictionary.p1x
+	p1.y = dictionary.p1y
+	p2.x = dictionary.p2x
+	p2.y = dictionary.p2y
+
+
 func p1_set(_p1):
 	p1 = _p1
 	
@@ -156,3 +163,14 @@ func get_winkel_zu_horizontale() :
 func clone():
 	var clone = linieClass.new(p1, p2)
 	return clone
+
+
+func to_dictionary():
+	var d = {
+		p1x = p1.x,
+		p1y = p1.y,
+		
+		p2x = p2.x,
+		p2y = p2.y,
+	}
+	return d

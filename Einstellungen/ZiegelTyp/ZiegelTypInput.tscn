@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://Resources/theme.tres" type="Theme" id=1]
+[ext_resource path="res://Einstellungen/ZiegelTyp/ZiegelTypInput.gd" type="Script" id=2]
+
+[node name="ZiegelTypInput" type="Button"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+theme/theme = ExtResource( 1 )
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "?"
+flat = false
+script/script = ExtResource( 2 )
+
+[node name="Items" type="PopupMenu" parent="."]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 481.0
+margin/bottom = 102.0
+popup/exclusive = false
+items = [  ]
+
+[connection signal="pressed" from="." to="." method="_on_Button_pressed"]
+
+[connection signal="item_pressed" from="Items" to="." method="_on_Items_item_pressed"]
+
+
