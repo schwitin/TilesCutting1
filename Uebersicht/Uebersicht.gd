@@ -12,7 +12,7 @@ var classDach = preload("res://Model/Dach.gd")
 
 func _init():
 	# Unkommentieren, wenn dieses Szene einzeln zum Testen gestertet wird
-	# test()
+	#test()
 	pass
 
 
@@ -22,7 +22,7 @@ func init(_einstellungen):
 
 func test():
 	var einstellungenClass = preload("res://Model/Einstellungen.gd")
-	init(einstellungenClass.new("dummy"))
+	init(einstellungenClass.new("dummy", "dummy"))
 
 
 func update_ziegel():
@@ -45,8 +45,8 @@ func _draw():
 				ziegel.zeichne(self)
 
 
-func on_schnittlinie_changed():
-	set_naechster_ziegel(null)
+#func on_schnittlinie_changed():
+	#set_naechster_ziegel(null)
 
 
 func scale_node() :
@@ -62,9 +62,9 @@ func scale_node() :
 		var x = viewport_size.x / bounding_box.x  * 0.95
 		var y = viewport_size.y / bounding_box.y  * 0.95
 		var k = min(x, y)
-		var pos = self.get_pos()
-		set_scale(Vector2(k,k))
-		set_pos(Vector2(10, ziegelTyp.versatzY + 10))
+		#var pos = self.position
+		scale = Vector2(k,k)
+		position = Vector2(10, ziegelTyp.versatzY + 10)
 		get_node("Button").set_scale(Vector2(100,100))
 
 
@@ -73,7 +73,7 @@ func set_naechste_reihe(aktuellerZiegel):
 		ziegel_auswaelen(null, alleZiegelReihen[0][0])
 		return
 
-	var aktuelleReihe = alleZiegelReihen[aktuellerZiegel.reihe - 1] # reihe fängt mit 1 an
+	#var aktuelleReihe = alleZiegelReihen[aktuellerZiegel.reihe - 1] # reihe fängt mit 1 an
 	if aktuellerZiegel.reihe < alleZiegelReihen.size(): # riehe fängt mir 1 an 
 		var naechsteReihe = alleZiegelReihen[aktuellerZiegel.reihe]
 		var naechsterZiegel = naechsteReihe[0]
@@ -130,5 +130,5 @@ func _on_Button_pressed():
 
 
 func _notification(what):        
-	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST :
+	if what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST :
 		emit_signal("uebersicht_verlassen")

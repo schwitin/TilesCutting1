@@ -1,19 +1,22 @@
 extends Node
 
-var bluetooth
-
 signal connected
 signal disconnected
 signal data_received
 
+var bluetooth
 
 func _ready():
-	if(Globals.has_singleton("GodotBluetooth")):
-		bluetooth = Globals.get_singleton("GodotBluetooth")
-		bluetooth.init(get_instance_ID(), false)
-
+	if(Engine.has_singleton("GodotBluetooth")):
+		bluetooth = Engine.get_singleton("GodotBluetooth")
+		bluetooth.init(get_instance_id(), true)
+		print("---------BT OK -------------")
+	else:
+		print("---------BT NOT INITIALIZED -------------")
 
 #GodotBluetooth Callbacks
+#warning-ignore:unused_argument
+#warning-ignore:unused_argument
 func _on_connected(device_name, device_adress):
 	emit_signal("connected")
 	pass

@@ -1,30 +1,30 @@
 extends Reference
 
 var einstellungen = null
-var is_grat = true setget set_grat, is_grat
+var isGrat = true setget set_grat, is_grat
 var schnittlinie
 
-var classZiegelTyp = preload("res://Model/ZiegelTyp.gd")
+#var classZiegelTyp = preload("res://Model/ZiegelTyp.gd")
 var classLinie = preload("res://Model/Linie.gd")
 
 signal changed()
 
  
-var aktueller_ziegel_index = 0
+#var aktueller_ziegel_index = 0
 
 func _init(_einstellungen):
 	einstellungen = _einstellungen
 	#print("_init", einstellungen)
 	init_schnittlinie()
-	is_grat = einstellungen.istGrat
+	isGrat = einstellungen.istGrat
 
 
 func set_grat(_is_grat):
-	is_grat = _is_grat
+	isGrat = _is_grat
 	emit_signal("changed")
 	
 func is_grat():
-	return is_grat
+	return isGrat
 
 func get_sprungpunkte_oben():
 	var latten = get_latten()
@@ -78,7 +78,7 @@ func get_abstand_von_schnittlinie_zum_naechsten_schnur_unten():
 
 
 func get_linie_von_schnittlinie_zum_naechsten_schnur(schnittlinie_ende, sprungpunkte):
-	var schnittlinie = get_schnittlinie()
+	#var schnittlinie = get_schnittlinie()
 	var sprungpunkt = get_naechsten_sichtbaren_sprungpunkt(sprungpunkte, schnittlinie_ende)
 	var linie = null
 	if sprungpunkt != null:
@@ -220,6 +220,7 @@ func get_schnuere():
 	var bereicheSchuere = einstellungen.bereicheSchuere
 	var x = 0
 	for bereich in bereicheSchuere :
+		#warning-ignore:unused_variable
 		for i in range(bereich.anzahl_schnuere):
 			x = x + bereich.get_abstand()
 			var p1 = Vector2(x, 0)
@@ -283,6 +284,7 @@ func get_latten():
 	
 	var bereicheLatten = einstellungen.bereicheLatten
 	var y = 0
+	#warning-ignore:unused_variable
 	for bereich in bereicheLatten :
 		for i in range(bereich.anzahl_latten):
 			var p1 = Vector2(0, y)
@@ -377,6 +379,7 @@ func get_ziegel():
 		# Wir gehen über alle Latten des Bereichs, ermitteln je latte die Ziegelreihe
 		# und fügen diese den alleZiegelReihen hinzu. Es werden nur geschnittene Ziegel 
 		# berücksichtigt.
+		#warning-ignore:unused_variable
 		for l in range(bereichLatten.anzahl_latten):
 			# Erster Element ist der linke Ziegel in der Reihe.
 			var ziegelReihe = get_ziegelreihe(lattenPositionY, lattenNr)
@@ -407,10 +410,12 @@ func get_ziegelreihe(lattenPositionY, latteNr):
 	for bereichSchnuere in einstellungen.bereicheSchuere:
 		var deckbreite = bereichSchnuere.deckbreite
 		# Wir gehen über alle Schnüre im Bereich.
+		#warning-ignore:unused_variable
 		for schnurNr in range(bereichSchnuere.anzahl_schnuere):
 			# Wir erstellen alle Ziegel für jeden Schnur und,
 			# wenn der Ziegel geschnitten ist nehmen wir diesen in
 			# die ziegelReihe auf. 
+			#warning-ignore:unused_variable
 			for ziegelNr in range(bereichSchnuere.anzahl_ziegel):
 				var ziegel = createZiegel(ziegelPosition, ziegelPositionLogisch)
 				if ziegel.istGeschnitten:

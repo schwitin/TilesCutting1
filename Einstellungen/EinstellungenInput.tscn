@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Resources/theme.tres" type="Theme" id=1]
 [ext_resource path="res://Einstellungen/EinstellungenInput.gd" type="Script" id=2]
@@ -6,349 +6,173 @@
 [ext_resource path="res://Einstellungen/Bereiche/BereicheInput.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Einstellungen/Schnittlinie/SchnittlinieInput.tscn" type="PackedScene" id=5]
 
-[node name="EinstellungenInput" type="VBoxContainer"]
-
-anchor/left = 3
-anchor/top = 3
-anchor/right = 3
-anchor/bottom = 3
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-theme/theme = ExtResource( 1 )
-margin/left = 632.0
-margin/top = 393.0
-margin/right = -630.0
-margin/bottom = -390.0
-alignment = 1
-script/script = ExtResource( 2 )
-
-[node name="Ueberschrift" type="Label" parent="."]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 1262.0
-margin/bottom = 59.0
-text = "Beispiel__Grat_1"
-align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="HSeparator" type="HSeparator" parent="."]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 63.0
-margin/right = 1262.0
-margin/bottom = 66.0
-
-[node name="GridContainer" type="GridContainer" parent="."]
-
-editor/display_folded = true
-focus/ignore_mouse = false
-focus/stop_mouse = false
-size_flags/horizontal = 2
-size_flags/vertical = 3
-margin/left = 0.0
-margin/top = 70.0
-margin/right = 1262.0
-margin/bottom = 421.0
-columns = 3
-
-[node name="ZiegelTypLabel" type="Label" parent="GridContainer"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 1
-margin/left = 0.0
-margin/top = 12.0
-margin/right = 496.0
-margin/bottom = 71.0
-text = "Ziegel Typ"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="AbstandLabel1" type="Label" parent="GridContainer"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 1
-margin/left = 500.0
-margin/top = 12.0
-margin/right = 548.0
-margin/bottom = 71.0
-text = "   "
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="ZiegelTypInput" parent="GridContainer" instance=ExtResource( 3 )]
-
-size_flags/vertical = 1
-margin/left = 552.0
-margin/top = 9.0
-margin/right = 591.0
-margin/bottom = 74.0
-
-[node name="SchnuereLabel" type="Label" parent="GridContainer"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 1
-margin/left = 0.0
-margin/top = 100.0
-margin/right = 496.0
-margin/bottom = 159.0
-text = "Schnuere Bereiche"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="AbstandLabel2" type="Label" parent="GridContainer"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 1
-margin/left = 500.0
-margin/top = 100.0
-margin/right = 548.0
-margin/bottom = 159.0
-text = "   "
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="SchnuereBereichInput" parent="GridContainer" instance=ExtResource( 4 )]
-
-size_flags/vertical = 1
-margin/left = 552.0
-margin/top = 97.0
-margin/right = 591.0
-margin/bottom = 162.0
-
-[node name="LattenLabel" type="Label" parent="GridContainer"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 1
-margin/left = 0.0
-margin/top = 188.0
-margin/right = 496.0
-margin/bottom = 247.0
-text = "Latten Bereiche"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="AbstandLabel3" type="Label" parent="GridContainer"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 1
-margin/left = 500.0
-margin/top = 188.0
-margin/right = 548.0
-margin/bottom = 247.0
-text = "   "
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="LattenBereichInput" parent="GridContainer" instance=ExtResource( 4 )]
-
-size_flags/vertical = 1
-margin/left = 552.0
-margin/top = 185.0
-margin/right = 591.0
-margin/bottom = 250.0
-
-[node name="LattenLabel1" type="Label" parent="GridContainer"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 1
-margin/left = 0.0
-margin/top = 276.0
-margin/right = 496.0
-margin/bottom = 335.0
-text = "Schnittlinie Position"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="AbstandLabel4" type="Label" parent="GridContainer"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 1
-margin/left = 500.0
-margin/top = 276.0
-margin/right = 548.0
-margin/bottom = 335.0
-text = "   "
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="SchnittlinieInput" parent="GridContainer" instance=ExtResource( 5 )]
-
-size_flags/vertical = 1
-margin/left = 552.0
-margin/top = 273.0
-margin/right = 591.0
-margin/bottom = 338.0
-
-[node name="HSeparator1" type="HSeparator" parent="."]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 425.0
-margin/right = 1262.0
-margin/bottom = 428.0
+[node name="EinstellungenInput" type="Control"]
+margin_right = 1280.0
+margin_bottom = 800.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 1280.0
+margin_bottom = 800.0
 
-focus/ignore_mouse = false
-focus/stop_mouse = false
-size_flags/horizontal = 2
-size_flags/vertical = 3
-margin/left = 0.0
-margin/top = 432.0
-margin/right = 1262.0
-margin/bottom = 783.0
-alignment = 0
+[node name="Ueberschrift" type="Label" parent="VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 59.0
+text = "Beispiel__Grat_1"
+align = 1
 
-[node name="VisualisierenButton" type="Button" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+margin_top = 63.0
+margin_right = 1280.0
+margin_bottom = 67.0
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 1
-margin/left = 0.0
-margin/top = 24.0
-margin/right = 1262.0
-margin/bottom = 89.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+editor/display_folded = true
+margin_top = 71.0
+margin_right = 1280.0
+margin_bottom = 429.0
+size_flags_vertical = 3
+columns = 3
+
+[node name="ZiegelTypLabel" type="Label" parent="VBoxContainer/GridContainer"]
+margin_top = 13.0
+margin_right = 496.0
+margin_bottom = 72.0
+size_flags_vertical = 6
+text = "Ziegel Typ"
+
+[node name="AbstandLabel1" type="Label" parent="VBoxContainer/GridContainer"]
+margin_left = 500.0
+margin_top = 13.0
+margin_right = 548.0
+margin_bottom = 72.0
+size_flags_vertical = 6
+text = "   "
+
+[node name="ZiegelTypInput" parent="VBoxContainer/GridContainer" instance=ExtResource( 3 )]
+margin_left = 552.0
+margin_top = 10.0
+margin_right = 591.0
+margin_bottom = 75.0
+size_flags_vertical = 6
+
+[node name="SchnuereLabel" type="Label" parent="VBoxContainer/GridContainer"]
+margin_top = 103.0
+margin_right = 496.0
+margin_bottom = 162.0
+size_flags_vertical = 6
+text = "Schnuere Bereiche"
+
+[node name="AbstandLabel2" type="Label" parent="VBoxContainer/GridContainer"]
+margin_left = 500.0
+margin_top = 103.0
+margin_right = 548.0
+margin_bottom = 162.0
+size_flags_vertical = 6
+text = "   "
+
+[node name="SchnuereBereichInput" parent="VBoxContainer/GridContainer" instance=ExtResource( 4 )]
+margin_left = 552.0
+margin_top = 100.0
+margin_right = 591.0
+margin_bottom = 165.0
+size_flags_vertical = 6
+
+[node name="LattenLabel" type="Label" parent="VBoxContainer/GridContainer"]
+margin_top = 193.0
+margin_right = 496.0
+margin_bottom = 252.0
+size_flags_vertical = 6
+text = "Latten Bereiche"
+
+[node name="AbstandLabel3" type="Label" parent="VBoxContainer/GridContainer"]
+margin_left = 500.0
+margin_top = 193.0
+margin_right = 548.0
+margin_bottom = 252.0
+size_flags_vertical = 6
+text = "   "
+
+[node name="LattenBereichInput" parent="VBoxContainer/GridContainer" instance=ExtResource( 4 )]
+margin_left = 552.0
+margin_top = 190.0
+margin_right = 591.0
+margin_bottom = 255.0
+size_flags_vertical = 6
+
+[node name="LattenLabel1" type="Label" parent="VBoxContainer/GridContainer"]
+margin_top = 283.0
+margin_right = 496.0
+margin_bottom = 342.0
+size_flags_vertical = 6
+text = "Schnittlinie Position"
+
+[node name="AbstandLabel4" type="Label" parent="VBoxContainer/GridContainer"]
+margin_left = 500.0
+margin_top = 283.0
+margin_right = 548.0
+margin_bottom = 342.0
+size_flags_vertical = 6
+text = "   "
+
+[node name="SchnittlinieInput" parent="VBoxContainer/GridContainer" instance=ExtResource( 5 )]
+margin_left = 552.0
+margin_top = 280.0
+margin_right = 591.0
+margin_bottom = 345.0
+size_flags_vertical = 6
+
+[node name="HSeparator1" type="HSeparator" parent="VBoxContainer"]
+margin_top = 433.0
+margin_right = 1280.0
+margin_bottom = 437.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+editor/display_folded = true
+margin_top = 441.0
+margin_right = 1280.0
+margin_bottom = 800.0
+size_flags_vertical = 3
+
+[node name="VisualisierenButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 65.0
+size_flags_vertical = 2
 text = "Visualisieren"
-flat = false
 
-[node name="VerbindenButton" type="Button" parent="VBoxContainer"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 1
-margin/left = 0.0
-margin/top = 142.0
-margin/right = 1262.0
-margin/bottom = 207.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
+[node name="VerbindenButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+margin_top = 121.0
+margin_right = 1280.0
+margin_bottom = 186.0
+size_flags_vertical = 2
 text = "Maschine verbinden"
-flat = false
 
-[node name="SendenButton" type="Button" parent="VBoxContainer"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 1
-margin/left = 0.0
-margin/top = 261.0
-margin/right = 1262.0
-margin/bottom = 326.0
+[node name="SendenButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+margin_top = 242.0
+margin_right = 1280.0
+margin_bottom = 307.0
+size_flags_vertical = 2
 disabled = true
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
 text = "Senden"
-flat = false
 
-[node name="Timer" type="Timer" parent="."]
-
-process_mode = 1
+[node name="Timer" type="Timer" parent="VBoxContainer"]
 wait_time = 5.0
 one_shot = true
-autostart = false
 
 [node name="WaitDialog" type="PopupDialog" parent="."]
-
-visibility/visible = false
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 31.0
-margin/right = 1262.0
-margin/bottom = 783.0
-popup/exclusive = false
+margin_top = 36.0
+margin_right = 1280.0
+margin_bottom = 751.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="WaitDialog"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = false
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 40.0
-margin/bottom = 40.0
 alignment = 1
 
 [node name="Label" type="Label" parent="WaitDialog/VBoxContainer"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 3
-size_flags/vertical = 3
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 369.0
-margin/bottom = 59.0
+margin_right = 369.0
+margin_bottom = 59.0
 text = "Übertragung..."
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[connection signal="changed" from="GridContainer/ZiegelTypInput" to="." method="_on_ZiegelInput_changed"]
-
-[connection signal="schnuere_oder_latten_bereiche_changed" from="GridContainer/SchnuereBereichInput" to="." method="_on_schnuere_oder_latten_bereiche_changed"]
-
-[connection signal="schnuere_oder_latten_bereiche_changed" from="GridContainer/LattenBereichInput" to="." method="_on_schnuere_oder_latten_bereiche_changed"]
-
-[connection signal="schnittlinie_changed" from="GridContainer/SchnittlinieInput" to="." method="_on_SchnittlinieInput_schnittlinie_changed"]
-
-[connection signal="pressed" from="VBoxContainer/VisualisierenButton" to="." method="_on_VisualisierenButton_pressed"]
-
-[connection signal="pressed" from="VBoxContainer/VerbindenButton" to="." method="_on_VerbindenButton_pressed"]
-
-[connection signal="pressed" from="VBoxContainer/SendenButton" to="." method="_on_SendenButton_pressed"]
-
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-
-
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/VisualisierenButton" to="." method="_on_VisualisierenButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/VerbindenButton" to="." method="_on_VerbindenButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/SendenButton" to="." method="_on_SendenButton_pressed"]
+[connection signal="timeout" from="VBoxContainer/Timer" to="." method="_on_Timer_timeout"]

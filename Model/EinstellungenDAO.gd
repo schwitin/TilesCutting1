@@ -55,7 +55,7 @@ func list():
 	var list = []
 	var einstellungenDir = Directory.new()
 	if einstellungenDir.open(EINSTELLUNGEN_DIR) == OK:
-		var currentDir = einstellungenDir.get_current_dir()
+		#var currentDir = einstellungenDir.get_current_dir()
 		einstellungenDir.list_dir_begin()
 		while true:
 			var fileName = einstellungenDir.get_next()
@@ -76,7 +76,8 @@ func save(name, dach):
 	var dict = {
 		dach = dEinstellungen
 	}
-	var json = dict.to_json()
+	
+	var json = JSON.print(dict, "  ")
 	print(json)
 	
 	var file = File.new()
@@ -91,12 +92,13 @@ func read(name):
 	var file = File.new()
 	var path = EINSTELLUNGEN_DIR + name + ".cfg"
 	file.open(path, file.READ)
-	var dict = {}
-	var parse_result = dict.parse_json(file.get_as_text())
+	
+	var parse_result = JSON.parse(file.get_as_text())
 	file.close()
 	
 	var dach = []
-	if parse_result == OK:
+	if parse_result.error == OK:
+		var dict = parse_result.result
 		for dEinstellungen in dict.dach:
 			var e = einstellungenClass.new("dummyDach", "dummy")
 			e.init(dEinstellungen)

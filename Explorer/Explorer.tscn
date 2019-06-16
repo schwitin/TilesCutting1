@@ -1,74 +1,38 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Explorer/Explorer.gd" type="Script" id=1]
-[ext_resource path="res://Explorer/List.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Resources/theme.tres" type="Theme" id=1]
+[ext_resource path="res://Explorer/Explorer.gd" type="Script" id=2]
+[ext_resource path="res://Explorer/List.tscn" type="PackedScene" id=3]
 
 [node name="Explorer" type="Control"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 1278.0
-margin/bottom = 797.0
-script/script = ExtResource( 1 )
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 1280.0
+margin_bottom = 800.0
 
-focus/ignore_mouse = false
-focus/stop_mouse = false
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 4.0
-margin/top = 6.0
-margin/right = 1277.0
-margin/bottom = 793.0
-alignment = 0
-
-[node name="Daecher" parent="HBoxContainer" instance=ExtResource( 2 )]
-
-size_flags/horizontal = 3
-size_flags/vertical = 3
-margin/right = 631.0
-margin/bottom = 787.0
+[node name="Daecher" parent="HBoxContainer" instance=ExtResource( 3 )]
+margin_right = 634.0
+margin_bottom = 800.0
+size_flags_horizontal = 3
 
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+margin_left = 638.0
+margin_right = 642.0
+margin_bottom = 800.0
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 635.0
-margin/top = 0.0
-margin/right = 638.0
-margin/bottom = 787.0
-
-[node name="Schnitte" parent="HBoxContainer" instance=ExtResource( 2 )]
-
-size_flags/horizontal = 3
-size_flags/vertical = 3
-margin/left = 642.0
-margin/right = 1273.0
-margin/bottom = 787.0
-
+[node name="Schnitte" parent="HBoxContainer" instance=ExtResource( 3 )]
+margin_left = 646.0
+margin_right = 1280.0
+margin_bottom = 800.0
+size_flags_horizontal = 3
 [connection signal="item_new" from="HBoxContainer/Daecher" to="." method="_on_Daecher_item_new"]
-
 [connection signal="item_removed" from="HBoxContainer/Daecher" to="." method="_on_Daecher_item_removed"]
-
 [connection signal="item_renamed" from="HBoxContainer/Daecher" to="." method="_on_Daecher_item_renamed"]
-
 [connection signal="item_selected" from="HBoxContainer/Daecher" to="." method="_on_Daecher_item_selected"]
-
 [connection signal="custom_button_pressed" from="HBoxContainer/Schnitte" to="." method="_on_Schnitte_custom_button_pressed"]
-
 [connection signal="item_new" from="HBoxContainer/Schnitte" to="." method="_on_Schnitte_item_new"]
-
 [connection signal="item_removed" from="HBoxContainer/Schnitte" to="." method="_on_Schnitte_item_removed"]
-
 [connection signal="item_renamed" from="HBoxContainer/Schnitte" to="." method="_on_Schnitte_item_renamed"]
-
 [connection signal="item_selected" from="HBoxContainer/Schnitte" to="." method="_on_Schnitte_item_selected"]
-
-

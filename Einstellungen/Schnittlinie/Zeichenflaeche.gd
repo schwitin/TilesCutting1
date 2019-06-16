@@ -39,7 +39,7 @@ func draw_schnittlinie():
 
 func draw_schnuere() :
 	var linien
-	if dach.is_grat:
+	if dach.isGrat:
 		linien = dach.get_schnuere_grat()
 	else:
 		linien = dach.get_schnuere_kehle()
@@ -50,7 +50,7 @@ func draw_schnuere() :
 
 func draw_latten():
 	var linien
-	if dach.is_grat:
+	if dach.isGrat:
 		linien = dach.get_latten_grat()
 	else:
 		linien = dach.get_latten_kehle()

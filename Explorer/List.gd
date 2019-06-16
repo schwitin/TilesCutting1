@@ -95,9 +95,9 @@ func select_item_by_name(name):
 
 func popup_dialog(dialog):
 	dialog.popup_centered()
-	var pos = dialog.get_pos()
+	var pos = dialog.rect_position
 	pos.y = 30
-	dialog.set_pos(pos)
+	dialog.rect_position = pos
 
 
 func _on_Next_pressed():

@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends Control
 
 # model
 var einstellungen
@@ -23,11 +23,11 @@ func test():
 
 func _ready():
 	if einstellungen != null:
-		var _ueberschrift = get_node("Ueberschrift")
-		var _ziegelTypInput = get_node("GridContainer/ZiegelTypInput")
-		var _schnuereBereicheInput = get_node("GridContainer/SchnuereBereichInput")
-		var _lattenBereicheInput = get_node("GridContainer/LattenBereichInput")
-		var _schnittlinieInput = get_node("GridContainer/SchnittlinieInput")
+		var _ueberschrift = get_node("VBoxContainer/Ueberschrift")
+		var _ziegelTypInput = get_node("VBoxContainer/GridContainer/ZiegelTypInput")
+		var _schnuereBereicheInput = get_node("VBoxContainer/GridContainer/SchnuereBereichInput")
+		var _lattenBereicheInput = get_node("VBoxContainer/GridContainer/LattenBereichInput")
+		var _schnittlinieInput = get_node("VBoxContainer/GridContainer/SchnittlinieInput")
 		_ueberschrift.set_text(einstellungen.dachName + " " + einstellungen.name)
 		_ziegelTypInput.set_ziegel_typ(einstellungen.ziegelTyp)
 		_schnuereBereicheInput.init("S", einstellungen)
@@ -45,9 +45,9 @@ func _on_VisualisierenButton_pressed():
 
 func _on_ZiegelInput_changed( ziegelTyp ):
 	einstellungen.set_ziegel_typ(ziegelTyp)
-	var schnuereBereichInputNode = get_node("GridContainer/SchnuereBereichInput")
-	var lattenBereichInputNode = get_node("GridContainer/SchnuereBereichInput")
-	var schnittlinieInputNode = get_node("GridContainer/SchnittlinieInput")
+	var schnuereBereichInputNode = get_node("VBoxContainer/GridContainer/SchnuereBereichInput")
+	var lattenBereichInputNode = get_node("VBoxContainer/GridContainer/SchnuereBereichInput")
+	var schnittlinieInputNode = get_node("VBoxContainer/GridContainer/SchnittlinieInput")
 	schnuereBereichInputNode.update_text()
 	lattenBereichInputNode.update_text()
 	schnittlinieInputNode.update_text()
@@ -56,7 +56,7 @@ func _on_ZiegelInput_changed( ziegelTyp ):
 
 func _on_schnuere_oder_latten_bereiche_changed():
 	einstellungen.init_schnittlinie()
-	var schnittlinieInputNode = get_node("GridContainer/SchnittlinieInput")
+	var schnittlinieInputNode = get_node("VBoxContainer/GridContainer/SchnittlinieInput")
 	schnittlinieInputNode.update_control()
 	emit_signal("einstellungen_cahnged")
 
@@ -70,38 +70,38 @@ func _on_VerbindenButton_pressed():
 	if global.bluetooth:
 		global.bluetooth.getPairedDevices(true)
 	else:
-		get_node("VBoxContainer/VerbindenButton").set_disabled(true)
+		get_node("VBoxContainer/VBoxContainer/VerbindenButton").set_disabled(true)
 		print("Module not initialized!")
 
 
 func _on_disconnected():
-	get_node("VBoxContainer/VerbindenButton").set_text("Maschine verbinden")
-	get_node("VBoxContainer/SendenButton").set_disabled(true)
+	get_node("VBoxContainer/VBoxContainer/VerbindenButton").set_text("Maschine verbinden")
+	get_node("VBoxContainer/VBoxContainer/SendenButton").set_disabled(true)
 
 
 func _on_connected():
-	get_node("VBoxContainer/VerbindenButton").set_text("Verbindung beenden")
-	get_node("VBoxContainer/SendenButton").set_disabled(false)
+	get_node("VBoxContainer/VBoxContainer/VerbindenButton").set_text("Verbindung beenden")
+	get_node("VBoxContainer/VBoxContainer/SendenButton").set_disabled(false)
 
 
 func _notification(what):        
-	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST : 
-		var schnuerePopup = get_node("GridContainer/SchnuereBereichInput/PopupPanel")
+	if what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST :
+		var schnuerePopup = get_node("VBoxContainer/GridContainer/SchnuereBereichInput/PopupPanel")
 		if schnuerePopup.is_visible():
 			schnuerePopup.hide()
 			return
 		
-		var lattenPopup = get_node("GridContainer/LattenBereichInput/PopupPanel")
+		var lattenPopup = get_node("VBoxContainer/GridContainer/LattenBereichInput/PopupPanel")
 		if lattenPopup.is_visible():
 			lattenPopup.hide()
 			return
 		
-		var schnittliniePopup = get_node("GridContainer/SchnittlinieInput/PopupPanel")
+		var schnittliniePopup = get_node("VBoxContainer/GridContainer/SchnittlinieInput/PopupPanel")
 		if schnittliniePopup.is_visible():
 			schnittliniePopup.hide()
 			return
 		
-		var ziegelTypPopup = get_node("GridContainer/ZiegelTypInput/Items")
+		var ziegelTypPopup = get_node("VBoxContainer/GridContainer/ZiegelTypInput/Items")
 		if ziegelTypPopup.is_visible():
 			ziegelTypPopup.hide()
 			return
@@ -112,11 +112,11 @@ func _notification(what):
 func _on_SendenButton_pressed():
 	if global.bluetooth:
 		get_node("WaitDialog").popup_centered()
-		get_node("Timer").start()
+		get_node("VBoxContainer/Timer").start()
 		var data = einstellungen.to_maschine_string()
 		global.bluetooth.sendData("{S" + data + "}")
 	else:
-		get_node("VBoxContainer/SendenButton").set_disabled(true)
+		get_node("VBoxContainer/VBoxContainer/SendenButton").set_disabled(true)
 		print("Module not initialized!")
 		
 

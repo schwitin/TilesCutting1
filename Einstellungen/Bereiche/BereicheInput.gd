@@ -18,13 +18,13 @@ signal schnuere_oder_latten_bereiche_changed
 var isDirty = false
 
 func _ready():
-	#test()
+	test()
 	pass
 
 
 func test():
 	var einstellungenClass = preload("res://Model/Einstellungen.gd")
-	var einstellungen = einstellungenClass.new("dummy")
+	var einstellungen = einstellungenClass.new("dummy", "dummy")
 	var bereichTyp = "S"
 	init(bereichTyp, einstellungen)
 
@@ -34,7 +34,7 @@ func init(_bereichTyp, _einstellungen):
 	bereichTyp = _bereichTyp
 	einstellungen = _einstellungen
 	update_text()
-	var ueberschriftNode = get_node("PopupPanel/Container/Ueberschrift")
+	var ueberschriftNode = get_node("PopupPanel/HBoxContainer/Container/Ueberschrift")
 	
 	if bereichTyp == "S":
 		bereichClass = preload("res://Model/SchnuereBereich.gd")
@@ -54,7 +54,7 @@ func get_bereiche():
 
 
 func get_bereiche_container():
-	return get_node("PopupPanel/Container/BereicheContainer")
+	return get_node("PopupPanel/HBoxContainer/Container/BereicheContainer")
 
 
 func clear_bereiche_view():
@@ -83,10 +83,10 @@ func add_bereich(bereich):
 
 
 func update_button_visibility():
-	var removeButton = get_node("PopupPanel/Container/AddRemoveContainer/RemoveButton")
-	var addButton = get_node("PopupPanel/Container/AddRemoveContainer/AddButton")
-	addButton.set_hidden(bereiche.keys().size() > 4)
-	removeButton.set_hidden(bereiche.keys().size() < 2)
+	var removeButton = get_node("PopupPanel/HBoxContainer/Container/AddRemoveContainer/RemoveButton")
+	var addButton = get_node("PopupPanel/HBoxContainer/Container/AddRemoveContainer/AddButton")
+	addButton.disabled = (bereiche.keys().size() > 4)
+	removeButton.disabled = (bereiche.keys().size() < 2)
 
 
 func update_text():
@@ -104,7 +104,7 @@ func _on_InputField_selected(input_field):
 	for bereich in bereiche.keys():
 		bereich.alle_abwaehlen_ausser(input_field)
 	
-	var slider = get_node("PopupPanel/VSlider")
+	var slider = get_node("PopupPanel/HBoxContainer/VSlider")
 	slider.set_min(input_field.min_wert)
 	slider.set_max(input_field.max_wert)
 	slider.set_step(input_field.anpassung_schritt)

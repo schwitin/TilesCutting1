@@ -26,11 +26,11 @@ func _ready():
 
 func set_ziegel_typ(_ziegelTyp) :
 	ziegelTyp = _ziegelTyp
-	self.text = get_text(ziegelTyp)
+	self.text = get_beschriftung(ziegelTyp)
 	
 
 
-func get_text(ziegelTyp) : 
+func get_beschriftung(ziegelTyp) : 
 	return ziegelTyp.name + " (" + ziegelTyp.hersteller + ")"
 
 
