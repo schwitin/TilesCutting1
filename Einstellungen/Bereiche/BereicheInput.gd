@@ -18,7 +18,7 @@ signal schnuere_oder_latten_bereiche_changed
 var isDirty = false
 
 func _ready():
-	test()
+	#test()
 	pass
 
 
