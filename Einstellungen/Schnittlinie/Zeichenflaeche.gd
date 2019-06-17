@@ -59,5 +59,7 @@ func draw_latten():
 		draw_linie(linie)
 
 
-func draw_linie(line, farbe=Color("ffff00"), dicke=3.5):
-	draw_line(line.p1, line.p2, farbe, dicke)
+func draw_linie(line, farbe=Color("ffff00"), dicke=2.0):
+	var scale = (self.scale.x + self.scale.y) / 2.0
+	var linienDicke = 1.0 / scale * dicke
+	draw_line(line.p1, line.p2, farbe, linienDicke)

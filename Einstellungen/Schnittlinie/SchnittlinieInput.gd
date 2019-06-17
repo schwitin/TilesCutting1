@@ -93,16 +93,17 @@ func update_oben_unten_label():
 
 func set_zeichenflaeche_position():
 	var bounding_box = dach.get_bounding_box()
+	bounding_box +=  + Vector2(bounding_box.x * 0.1, bounding_box.y * 0.1)
 	var userInput = get_node("PopupPanel/PanelContainer/Container")
-	var userInputBreite = userInput.get_size().x
+	var userInputBreite = userInput.rect_size.x
 	var viewportSize = self.get_viewport_rect().size
-	var x = (viewportSize.x - userInputBreite) / bounding_box.x  * 0.98
-	var y = viewportSize.y / bounding_box.y  * 0.98
+	var x = (viewportSize.x - userInputBreite) / bounding_box.x  * 0.99
+	var y = viewportSize.y / bounding_box.y  * 0.99
 	var k = min(x, y)
 	var pos = zeichenflaeche.position
 	zeichenflaeche.position = Vector2(0,0)
 	zeichenflaeche.scale = Vector2(k,k)
-	zeichenflaeche.position = pos
+	zeichenflaeche.position = Vector2(30,30)
 
 
 func set_user_input_position():

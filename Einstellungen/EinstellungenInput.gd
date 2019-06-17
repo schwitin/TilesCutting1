@@ -20,8 +20,7 @@ func test():
 	var einstellungenClass = preload("res://Model/Einstellungen.gd")
 	init(einstellungenClass.new("dummy"))
 
-
-func _ready():
+func _enter_tree():
 	if einstellungen != null:
 		var _ueberschrift = get_node("VBoxContainer/Ueberschrift")
 		var _ziegelTypInput = get_node("VBoxContainer/GridContainer/ZiegelTypInput")
