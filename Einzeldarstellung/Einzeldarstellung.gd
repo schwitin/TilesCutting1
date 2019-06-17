@@ -96,7 +96,7 @@ func set_user_input_position():
 	# var selfSize = get_tree().get_root().size
 	var userInputNode = get_node("UserInput")
 	var userInputSize = userInputNode.rect_size
-	var pos = Vector2(selfSize.x - 316, 0)
+	var pos = Vector2(selfSize.x - userInputSize.x, 0)
 	#var pos = Vector2(900,0)
 	userInputNode.rect_position = pos
 
