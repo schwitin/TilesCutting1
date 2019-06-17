@@ -7,151 +7,150 @@
 [ext_resource path="res://Einstellungen/Schnittlinie/SchnittlinieInput.tscn" type="PackedScene" id=5]
 
 [node name="EinstellungenInput" type="Control"]
-margin_right = 1280.0
-margin_bottom = 800.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_right = 1280.0
-margin_bottom = 800.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="Ueberschrift" type="Label" parent="VBoxContainer"]
-margin_right = 1280.0
+margin_right = 1920.0
 margin_bottom = 59.0
 text = "Beispiel__Grat_1"
 align = 1
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 margin_top = 63.0
-margin_right = 1280.0
+margin_right = 1920.0
 margin_bottom = 67.0
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
-editor/display_folded = true
 margin_top = 71.0
-margin_right = 1280.0
-margin_bottom = 429.0
+margin_right = 1920.0
+margin_bottom = 569.0
 size_flags_vertical = 3
 columns = 3
 
 [node name="ZiegelTypLabel" type="Label" parent="VBoxContainer/GridContainer"]
-margin_top = 13.0
+margin_top = 31.0
 margin_right = 496.0
-margin_bottom = 72.0
+margin_bottom = 90.0
 size_flags_vertical = 6
 text = "Ziegel Typ"
 
 [node name="AbstandLabel1" type="Label" parent="VBoxContainer/GridContainer"]
 margin_left = 500.0
-margin_top = 13.0
+margin_top = 31.0
 margin_right = 548.0
-margin_bottom = 72.0
+margin_bottom = 90.0
 size_flags_vertical = 6
 text = "   "
 
 [node name="ZiegelTypInput" parent="VBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 552.0
-margin_top = 10.0
+margin_top = 28.0
 margin_right = 591.0
-margin_bottom = 75.0
+margin_bottom = 93.0
 size_flags_vertical = 6
 
 [node name="SchnuereLabel" type="Label" parent="VBoxContainer/GridContainer"]
-margin_top = 103.0
+margin_top = 156.0
 margin_right = 496.0
-margin_bottom = 162.0
+margin_bottom = 215.0
 size_flags_vertical = 6
 text = "Schnuere Bereiche"
 
 [node name="AbstandLabel2" type="Label" parent="VBoxContainer/GridContainer"]
 margin_left = 500.0
-margin_top = 103.0
+margin_top = 156.0
 margin_right = 548.0
-margin_bottom = 162.0
+margin_bottom = 215.0
 size_flags_vertical = 6
 text = "   "
 
 [node name="SchnuereBereichInput" parent="VBoxContainer/GridContainer" instance=ExtResource( 4 )]
 margin_left = 552.0
-margin_top = 100.0
+margin_top = 153.0
 margin_right = 591.0
-margin_bottom = 165.0
+margin_bottom = 218.0
 size_flags_vertical = 6
 
 [node name="LattenLabel" type="Label" parent="VBoxContainer/GridContainer"]
-margin_top = 193.0
+margin_top = 281.0
 margin_right = 496.0
-margin_bottom = 252.0
+margin_bottom = 340.0
 size_flags_vertical = 6
 text = "Latten Bereiche"
 
 [node name="AbstandLabel3" type="Label" parent="VBoxContainer/GridContainer"]
 margin_left = 500.0
-margin_top = 193.0
+margin_top = 281.0
 margin_right = 548.0
-margin_bottom = 252.0
+margin_bottom = 340.0
 size_flags_vertical = 6
 text = "   "
 
 [node name="LattenBereichInput" parent="VBoxContainer/GridContainer" instance=ExtResource( 4 )]
 margin_left = 552.0
-margin_top = 190.0
+margin_top = 278.0
 margin_right = 591.0
-margin_bottom = 255.0
+margin_bottom = 343.0
 size_flags_vertical = 6
 
 [node name="LattenLabel1" type="Label" parent="VBoxContainer/GridContainer"]
-margin_top = 283.0
+margin_top = 406.0
 margin_right = 496.0
-margin_bottom = 342.0
+margin_bottom = 465.0
 size_flags_vertical = 6
 text = "Schnittlinie Position"
 
 [node name="AbstandLabel4" type="Label" parent="VBoxContainer/GridContainer"]
 margin_left = 500.0
-margin_top = 283.0
+margin_top = 406.0
 margin_right = 548.0
-margin_bottom = 342.0
+margin_bottom = 465.0
 size_flags_vertical = 6
 text = "   "
 
 [node name="SchnittlinieInput" parent="VBoxContainer/GridContainer" instance=ExtResource( 5 )]
 margin_left = 552.0
-margin_top = 280.0
+margin_top = 403.0
 margin_right = 591.0
-margin_bottom = 345.0
+margin_bottom = 468.0
 size_flags_vertical = 6
 
 [node name="HSeparator1" type="HSeparator" parent="VBoxContainer"]
-margin_top = 433.0
-margin_right = 1280.0
-margin_bottom = 437.0
+margin_top = 573.0
+margin_right = 1920.0
+margin_bottom = 577.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
 editor/display_folded = true
-margin_top = 441.0
-margin_right = 1280.0
-margin_bottom = 800.0
+margin_top = 581.0
+margin_right = 1920.0
+margin_bottom = 1080.0
 size_flags_vertical = 3
 
 [node name="VisualisierenButton" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_right = 1280.0
+margin_right = 1920.0
 margin_bottom = 65.0
 size_flags_vertical = 2
 text = "Visualisieren"
 
 [node name="VerbindenButton" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_top = 121.0
-margin_right = 1280.0
-margin_bottom = 186.0
+margin_top = 167.0
+margin_right = 1920.0
+margin_bottom = 232.0
 size_flags_vertical = 2
 text = "Maschine verbinden"
 
 [node name="SendenButton" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_top = 242.0
-margin_right = 1280.0
-margin_bottom = 307.0
+margin_top = 334.0
+margin_right = 1920.0
+margin_bottom = 399.0
 size_flags_vertical = 2
 disabled = true
 text = "Senden"
@@ -172,6 +171,10 @@ alignment = 1
 margin_right = 369.0
 margin_bottom = 59.0
 text = "Übertragung..."
+[connection signal="changed" from="VBoxContainer/GridContainer/ZiegelTypInput" to="." method="_on_ZiegelTypInput_changed"]
+[connection signal="schnuere_oder_latten_bereiche_changed" from="VBoxContainer/GridContainer/SchnuereBereichInput" to="." method="_on_schnuere_oder_latten_bereiche_changed"]
+[connection signal="schnuere_oder_latten_bereiche_changed" from="VBoxContainer/GridContainer/LattenBereichInput" to="." method="_on_schnuere_oder_latten_bereiche_changed"]
+[connection signal="schnittlinie_changed" from="VBoxContainer/GridContainer/SchnittlinieInput" to="." method="_on_SchnittlinieInput_schnittlinie_changed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/VisualisierenButton" to="." method="_on_VisualisierenButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/VerbindenButton" to="." method="_on_VerbindenButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/SendenButton" to="." method="_on_SendenButton_pressed"]

@@ -10,3 +10,5 @@ script = ExtResource( 2 )
 
 [node name="Items" type="PopupMenu" parent="."]
 [connection signal="pressed" from="." to="." method="_on_Button_pressed"]
+[connection signal="id_pressed" from="Items" to="." method="_on_Items_id_pressed"]
+[connection signal="index_pressed" from="Items" to="." method="_on_Items_index_pressed"]

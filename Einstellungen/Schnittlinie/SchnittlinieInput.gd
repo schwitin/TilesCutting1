@@ -64,6 +64,7 @@ func update_winkel_label():
 
 
 func update_text():
+	# update_control()
 	var winkel = get_winkel()
 	set_text(winkel + "°")
 
@@ -95,8 +96,8 @@ func set_zeichenflaeche_position():
 	var userInput = get_node("PopupPanel/PanelContainer/Container")
 	var userInputBreite = userInput.get_size().x
 	var viewportSize = self.get_viewport_rect().size
-	var x = (viewportSize.x - userInputBreite) / bounding_box.x  * 0.95
-	var y = viewportSize.y / bounding_box.y  * 0.95
+	var x = (viewportSize.x - userInputBreite) / bounding_box.x  * 0.98
+	var y = viewportSize.y / bounding_box.y  * 0.98
 	var k = min(x, y)
 	var pos = zeichenflaeche.position
 	zeichenflaeche.position = Vector2(0,0)
@@ -182,7 +183,7 @@ func _on_PlusEinsButton_pressed():
 
 
 func _on_SchnittlinieInput_pressed():
-	
+	update_control()
 	get_node("PopupPanel").popup_centered()
 
 

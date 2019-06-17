@@ -1,4 +1,4 @@
-extends Node
+extends Control
 
 var aktuellerZiegel setget set_aktueller_ziegel
 
@@ -91,20 +91,20 @@ func _on_VorherigeNummer_pressed():
 
 
 func set_user_input_position():
-	var selfSize = OS.window_size
-	# var selfSize = get_viewport().size
+	#var selfSize = OS.window_size
+	var selfSize = self.get_viewport_rect().size
 	# var selfSize = get_tree().get_root().size
 	var userInputNode = get_node("UserInput")
 	var userInputSize = userInputNode.rect_size
-	#var pos = Vector2(selfSize.x - 316, 0)
-	var pos = Vector2(900,0)
+	var pos = Vector2(selfSize.x - 316, 0)
+	#var pos = Vector2(900,0)
 	userInputNode.rect_position = pos
 
 
 func set_button_position():
 	var buttonNode = get_node("EinzeldarstellungButton")
-	buttonNode.rect_size.x = 800
-	buttonNode.rect_size.y = 800
+	buttonNode.rect_size.x = 1500
+	buttonNode.rect_size.y = 1500
 
 #func _on_data_received(data_received):
 #	if "vorheriger" in data_received:

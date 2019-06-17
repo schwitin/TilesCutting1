@@ -59,5 +59,5 @@ func draw_latten():
 		draw_linie(linie)
 
 
-func draw_linie(line, farbe=Color("ffff00"), dicke=1.0):
+func draw_linie(line, farbe=Color("ffff00"), dicke=3.5):
 	draw_line(line.p1, line.p2, farbe, dicke)

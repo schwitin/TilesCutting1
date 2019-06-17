@@ -98,7 +98,7 @@ func zeichne(node, translate=Vector2(0,0)):
 		#zeichne_linie(einstellungen.schnittlinie, node, translate)
 
 
-func zeichne_linie(linie, node, translate=Vector2(0,0), color = Color("FFFFFF"), width=1.0):
+func zeichne_linie(linie, node, translate=Vector2(0,0), color = Color("FFFFFF"), width=3.0):
 	node.draw_line(linie.p1 + translate, linie.p2 + translate, color, width)
 
 

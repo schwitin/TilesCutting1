@@ -38,7 +38,7 @@ func _on_Button_pressed():
 	items.popup_centered()
 
 
-func _on_Items_item_pressed( ID ):
+func _on_Items_id_pressed(ID):
 	var selectedZiegelTyp = ziegelTypenDAO.ziegelTypen[ID]
 	if selectedZiegelTyp != ziegelTyp:
 		set_ziegel_typ(selectedZiegelTyp)

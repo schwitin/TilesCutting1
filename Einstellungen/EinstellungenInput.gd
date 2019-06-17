@@ -43,7 +43,7 @@ func _on_VisualisierenButton_pressed():
 	emit_signal("einstellungen_visualisieren")
 
 
-func _on_ZiegelInput_changed( ziegelTyp ):
+func _on_ZiegelTypInput_changed(ziegelTyp):
 	einstellungen.set_ziegel_typ(ziegelTyp)
 	var schnuereBereichInputNode = get_node("VBoxContainer/GridContainer/SchnuereBereichInput")
 	var lattenBereichInputNode = get_node("VBoxContainer/GridContainer/SchnuereBereichInput")
@@ -122,3 +122,4 @@ func _on_SendenButton_pressed():
 
 func _on_Timer_timeout():
 	get_node("WaitDialog").hide()
+
