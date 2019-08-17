@@ -5,7 +5,7 @@ extends HBoxContainer
 # Ist ein Button gedrückt, so wird die Beschriftung hervorgehoben.
 # Die initialisierung einzelner Buttons und deren Beschriftung geschiet in den Unterklassen.
 
-
+#warning-ignore:unused_class_variable
 var inputFieldScene = preload("res://Einstellungen/Bereiche/InputField.tscn")
 var selected_input_field
 

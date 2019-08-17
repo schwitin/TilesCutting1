@@ -33,9 +33,12 @@ func _ready():
 		_lattenBereicheInput.init("L", einstellungen)
 		_schnittlinieInput.init(einstellungen)
 	
+	#warning-ignore:return_value_discarded
 	global.connect("connected", self, "_on_connected")
+	#warning-ignore:return_value_discarded
 	global.connect("disconnected", self, "_on_disconnected")
 
+#warning-ignore:unused_argument
 func _process(delta):
 	if Input.is_action_just_released("go_back"):
 		go_back()

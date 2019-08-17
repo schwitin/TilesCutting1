@@ -38,6 +38,7 @@ func _ready():
 func _enter_tree():
 	scale_node()
 
+#warning-ignore:unused_argument
 func _process(delta):
 	if Input.is_action_just_released("go_back"):
 		emit_signal("uebersicht_verlassen")

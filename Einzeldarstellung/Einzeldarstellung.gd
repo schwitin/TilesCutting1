@@ -19,6 +19,7 @@ func _ready():
 	
 #	global.connect("data_received", self, "_on_data_received")
 
+#warning-ignore:unused_argument
 func _process(delta):
 	if Input.is_action_just_released("go_back"):
 		emit_signal("einzeldarstellung_verlassen")
