@@ -118,6 +118,7 @@ func _on_ObenUntenButton_pressed():
 	# isOben = !isOben
 	zeichenflaeche.set_oben_unten(!zeichenflaeche.isOben)
 	update_oben_unten_label()
+	update_versatz_und_winkel_labels()
 
 
 func _on_NachLinksButton_pressed():
