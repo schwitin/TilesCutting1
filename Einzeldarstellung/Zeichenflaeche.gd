@@ -33,5 +33,5 @@ func scale_node() :
 	#var pos = self.position
 	
 	position = Vector2(viewport_size.x / 3, viewport_size.y / 2)
-	rotation = -schnittlinie.get_winkel_zu_vertikale_rad() + PI
+	rotation = schnittlinie.get_winkel_zu_vertikale_rad() + PI
 	scale = Vector2(k,k)
