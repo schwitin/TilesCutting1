@@ -36,8 +36,6 @@ func update_control():
 	update_kehle_grat_label()
 	update_oben_unten_label()
 	update_text()
-	set_user_input_position()
-	set_zeichenflaeche_position()
 
 
 func update_versatz_und_winkel_labels():
@@ -64,7 +62,6 @@ func update_winkel_label():
 
 
 func update_text():
-	# update_control()
 	var winkel = get_winkel()
 	set_text(winkel + "°")
 
@@ -119,7 +116,7 @@ func _on_ObenUntenButton_pressed():
 	zeichenflaeche.set_oben_unten(!zeichenflaeche.isOben)
 	update_oben_unten_label()
 	update_versatz_und_winkel_labels()
-
+	
 
 func _on_NachLinksButton_pressed():
 	if zeichenflaeche.isOben:
@@ -186,7 +183,10 @@ func _on_PlusEinsButton_pressed():
 
 func _on_SchnittlinieInput_pressed():
 	update_control()
+	set_zeichenflaeche_position()
+	set_user_input_position()
 	get_node("PopupPanel").popup_centered()
+	
 
 
 func _on_GratKehleButton_pressed():

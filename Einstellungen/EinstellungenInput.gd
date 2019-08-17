@@ -20,7 +20,14 @@ func test():
 	var einstellungenClass = preload("res://Model/Einstellungen.gd")
 	init(einstellungenClass.new("dummy"))
 
-func _ready():
+func _exit_tree():
+	#warning-ignore:return_value_discarded
+	global.disconnect("connected", self, "_on_connected")
+	#warning-ignore:return_value_discarded
+	global.disconnect("disconnected", self, "_on_disconnected")
+
+
+func _enter_tree():
 	if einstellungen != null:
 		var _ueberschrift = get_node("VBoxContainer/Ueberschrift")
 		var _ziegelTypInput = get_node("VBoxContainer/GridContainer/ZiegelTypInput")
