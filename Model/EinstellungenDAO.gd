@@ -23,7 +23,7 @@ func neues_dach(name):
 func add_schnitt(dachName, schnittName):
 	var dach = read(dachName)
 	var einstellungenClass = load("res://Model/Einstellungen.gd")
-	dach.append(einstellungenClass.new(schnittName))
+	dach.append(einstellungenClass.new(dachName, schnittName))
 	save(dachName, dach)
 
 
