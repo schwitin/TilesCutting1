@@ -19,6 +19,10 @@ func _ready():
 	
 #	global.connect("data_received", self, "_on_data_received")
 
+func _process(delta):
+	if Input.is_action_just_released("go_back"):
+		emit_signal("einzeldarstellung_verlassen")
+
 func test():
 	var einstellungenClass = preload("res://Model/Einstellungen.gd")
 	var einstellungen = einstellungenClass.new("dummy", "dummy")

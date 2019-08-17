@@ -35,6 +35,10 @@ func _ready():
 	scale_node()
 	update()
 
+func _process(delta):
+	if Input.is_action_just_released("go_back"):
+		emit_signal("uebersicht_verlassen")
+
 # Zeichnet alle Ziegel von unten nach oben und von rechts nach links
 func _draw():
 	if alleZiegelReihen != null:

@@ -20,7 +20,7 @@ func test():
 	var einstellungenClass = preload("res://Model/Einstellungen.gd")
 	init(einstellungenClass.new("dummy"))
 
-func _enter_tree():
+func _ready():
 	if einstellungen != null:
 		var _ueberschrift = get_node("VBoxContainer/Ueberschrift")
 		var _ziegelTypInput = get_node("VBoxContainer/GridContainer/ZiegelTypInput")
@@ -35,6 +35,10 @@ func _enter_tree():
 	
 	global.connect("connected", self, "_on_connected")
 	global.connect("disconnected", self, "_on_disconnected")
+
+func _process(delta):
+	if Input.is_action_just_released("go_back"):
+		go_back()
 
 
 func _on_VisualisierenButton_pressed():
@@ -85,27 +89,31 @@ func _on_connected():
 
 func _notification(what):        
 	if what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST :
-		var schnuerePopup = get_node("VBoxContainer/GridContainer/SchnuereBereichInput/PopupPanel")
-		if schnuerePopup.is_visible():
-			schnuerePopup.hide()
-			return
-		
-		var lattenPopup = get_node("VBoxContainer/GridContainer/LattenBereichInput/PopupPanel")
-		if lattenPopup.is_visible():
-			lattenPopup.hide()
-			return
-		
-		var schnittliniePopup = get_node("VBoxContainer/GridContainer/SchnittlinieInput/PopupPanel")
-		if schnittliniePopup.is_visible():
-			schnittliniePopup.hide()
-			return
-		
-		var ziegelTypPopup = get_node("VBoxContainer/GridContainer/ZiegelTypInput/Items")
-		if ziegelTypPopup.is_visible():
-			ziegelTypPopup.hide()
-			return
-		
-		emit_signal("einstellungen_verlassen")
+		go_back()
+
+
+func go_back():
+	var schnuerePopup = get_node("VBoxContainer/GridContainer/SchnuereBereichInput/PopupPanel")
+	if schnuerePopup.is_visible():
+		schnuerePopup.hide()
+		return
+	
+	var lattenPopup = get_node("VBoxContainer/GridContainer/LattenBereichInput/PopupPanel")
+	if lattenPopup.is_visible():
+		lattenPopup.hide()
+		return
+	
+	var schnittliniePopup = get_node("VBoxContainer/GridContainer/SchnittlinieInput/PopupPanel")
+	if schnittliniePopup.is_visible():
+		schnittliniePopup.hide()
+		return
+	
+	var ziegelTypPopup = get_node("VBoxContainer/GridContainer/ZiegelTypInput/Items")
+	if ziegelTypPopup.is_visible():
+		ziegelTypPopup.hide()
+		return
+	
+	emit_signal("einstellungen_verlassen")
 
 
 func _on_SendenButton_pressed():

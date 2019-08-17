@@ -35,9 +35,9 @@ func set_bereich(_bereich):
 	latten_node = create_latten_node()
 	
 	add_child(decklaenge_node)
-	add_child(create_label_node(" x "))
+	add_child(create_label_node("    x    "))
 	add_child(latten_node)
-	add_child(create_label_node("="))
+	add_child(create_label_node(" = "))
 	add_child(gesamtgroesse_node)
 	update_gesamtgroesse()
 

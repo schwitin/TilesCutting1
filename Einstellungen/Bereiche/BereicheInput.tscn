@@ -11,58 +11,64 @@ text = "?"
 script = ExtResource( 2 )
 
 [node name="PopupPanel" type="PopupPanel" parent="."]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PopupPanel"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 336.0
-margin_bottom = 136.0
+margin_right = 372.0
+margin_bottom = 182.0
 
 [node name="Container" type="VBoxContainer" parent="PopupPanel/HBoxContainer"]
-margin_right = 120.0
-margin_bottom = 132.0
+margin_right = 156.0
+margin_bottom = 264.0
 size_flags_horizontal = 3
 
 [node name="Ueberschrift" type="Label" parent="PopupPanel/HBoxContainer/Container"]
-margin_right = 120.0
-margin_bottom = 59.0
+margin_right = 156.0
+margin_bottom = 82.0
 text = "?"
 
 [node name="BereicheContainer" type="VBoxContainer" parent="PopupPanel/HBoxContainer/Container"]
-margin_top = 63.0
-margin_right = 120.0
-margin_bottom = 63.0
+margin_top = 86.0
+margin_right = 156.0
+margin_bottom = 86.0
+
+[node name="Abstand" type="Label" parent="PopupPanel/HBoxContainer/Container"]
+margin_top = 90.0
+margin_right = 156.0
+margin_bottom = 172.0
 
 [node name="AddRemoveContainer" type="HBoxContainer" parent="PopupPanel/HBoxContainer/Container"]
 editor/display_folded = true
-margin_top = 67.0
-margin_right = 120.0
-margin_bottom = 132.0
+margin_top = 176.0
+margin_right = 156.0
+margin_bottom = 264.0
 
 [node name="AddButton" type="Button" parent="PopupPanel/HBoxContainer/Container/AddRemoveContainer"]
-margin_right = 54.0
-margin_bottom = 65.0
+margin_right = 71.0
+margin_bottom = 88.0
 text = "+"
 align = 0
 
 [node name="RemoveButton" type="Button" parent="PopupPanel/HBoxContainer/Container/AddRemoveContainer"]
-margin_left = 58.0
-margin_right = 120.0
-margin_bottom = 65.0
+margin_left = 75.0
+margin_right = 156.0
+margin_bottom = 88.0
 text = " - "
 align = 2
 
 [node name="VSeparator" type="VSeparator" parent="PopupPanel/HBoxContainer"]
-margin_left = 124.0
-margin_right = 128.0
-margin_bottom = 132.0
+margin_left = 160.0
+margin_right = 164.0
+margin_bottom = 264.0
 
 [node name="VSlider" type="VSlider" parent="PopupPanel/HBoxContainer"]
-margin_left = 132.0
-margin_right = 332.0
-margin_bottom = 132.0
+margin_left = 168.0
+margin_right = 368.0
+margin_bottom = 264.0
 rect_min_size = Vector2( 200, 0 )
 size_flags_horizontal = 1
 size_flags_vertical = 3

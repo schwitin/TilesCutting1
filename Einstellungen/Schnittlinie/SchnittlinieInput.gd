@@ -100,7 +100,7 @@ func set_zeichenflaeche_position():
 	var x = (viewportSize.x - userInputBreite) / bounding_box.x  * 0.99
 	var y = viewportSize.y / bounding_box.y  * 0.99
 	var k = min(x, y)
-	var pos = zeichenflaeche.position
+	#var pos = zeichenflaeche.position
 	zeichenflaeche.position = Vector2(0,0)
 	zeichenflaeche.scale = Vector2(k,k)
 	zeichenflaeche.position = Vector2(30,30)

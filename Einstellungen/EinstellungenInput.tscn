@@ -19,138 +19,138 @@ anchor_bottom = 1.0
 
 [node name="Ueberschrift" type="Label" parent="VBoxContainer"]
 margin_right = 1920.0
-margin_bottom = 59.0
+margin_bottom = 82.0
 text = "Beispiel__Grat_1"
 align = 1
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-margin_top = 63.0
+margin_top = 86.0
 margin_right = 1920.0
-margin_bottom = 67.0
+margin_bottom = 90.0
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
-margin_top = 71.0
+margin_top = 94.0
 margin_right = 1920.0
-margin_bottom = 569.0
+margin_bottom = 581.0
 size_flags_vertical = 3
 columns = 3
 
 [node name="ZiegelTypLabel" type="Label" parent="VBoxContainer/GridContainer"]
-margin_top = 31.0
-margin_right = 496.0
-margin_bottom = 90.0
+margin_top = 18.0
+margin_right = 682.0
+margin_bottom = 100.0
 size_flags_vertical = 6
 text = "Ziegel Typ"
 
 [node name="AbstandLabel1" type="Label" parent="VBoxContainer/GridContainer"]
-margin_left = 500.0
-margin_top = 31.0
-margin_right = 548.0
-margin_bottom = 90.0
+margin_left = 686.0
+margin_top = 18.0
+margin_right = 752.0
+margin_bottom = 100.0
 size_flags_vertical = 6
 text = "   "
 
 [node name="ZiegelTypInput" parent="VBoxContainer/GridContainer" instance=ExtResource( 3 )]
-margin_left = 552.0
-margin_top = 28.0
-margin_right = 591.0
-margin_bottom = 93.0
+margin_left = 756.0
+margin_top = 15.0
+margin_right = 805.0
+margin_bottom = 103.0
 size_flags_vertical = 6
 
 [node name="SchnuereLabel" type="Label" parent="VBoxContainer/GridContainer"]
-margin_top = 156.0
-margin_right = 496.0
-margin_bottom = 215.0
+margin_top = 140.0
+margin_right = 682.0
+margin_bottom = 222.0
 size_flags_vertical = 6
 text = "Schnuere Bereiche"
 
 [node name="AbstandLabel2" type="Label" parent="VBoxContainer/GridContainer"]
-margin_left = 500.0
-margin_top = 156.0
-margin_right = 548.0
-margin_bottom = 215.0
+margin_left = 686.0
+margin_top = 140.0
+margin_right = 752.0
+margin_bottom = 222.0
 size_flags_vertical = 6
 text = "   "
 
 [node name="SchnuereBereichInput" parent="VBoxContainer/GridContainer" instance=ExtResource( 4 )]
-margin_left = 552.0
-margin_top = 153.0
-margin_right = 591.0
-margin_bottom = 218.0
+margin_left = 756.0
+margin_top = 137.0
+margin_right = 805.0
+margin_bottom = 225.0
 size_flags_vertical = 6
 
 [node name="LattenLabel" type="Label" parent="VBoxContainer/GridContainer"]
-margin_top = 281.0
-margin_right = 496.0
-margin_bottom = 340.0
+margin_top = 262.0
+margin_right = 682.0
+margin_bottom = 344.0
 size_flags_vertical = 6
 text = "Latten Bereiche"
 
 [node name="AbstandLabel3" type="Label" parent="VBoxContainer/GridContainer"]
-margin_left = 500.0
-margin_top = 281.0
-margin_right = 548.0
-margin_bottom = 340.0
+margin_left = 686.0
+margin_top = 262.0
+margin_right = 752.0
+margin_bottom = 344.0
 size_flags_vertical = 6
 text = "   "
 
 [node name="LattenBereichInput" parent="VBoxContainer/GridContainer" instance=ExtResource( 4 )]
-margin_left = 552.0
-margin_top = 278.0
-margin_right = 591.0
-margin_bottom = 343.0
+margin_left = 756.0
+margin_top = 259.0
+margin_right = 805.0
+margin_bottom = 347.0
 size_flags_vertical = 6
 
 [node name="LattenLabel1" type="Label" parent="VBoxContainer/GridContainer"]
-margin_top = 406.0
-margin_right = 496.0
-margin_bottom = 465.0
+margin_top = 384.0
+margin_right = 682.0
+margin_bottom = 466.0
 size_flags_vertical = 6
 text = "Schnittlinie Position"
 
 [node name="AbstandLabel4" type="Label" parent="VBoxContainer/GridContainer"]
-margin_left = 500.0
-margin_top = 406.0
-margin_right = 548.0
-margin_bottom = 465.0
+margin_left = 686.0
+margin_top = 384.0
+margin_right = 752.0
+margin_bottom = 466.0
 size_flags_vertical = 6
 text = "   "
 
 [node name="SchnittlinieInput" parent="VBoxContainer/GridContainer" instance=ExtResource( 5 )]
-margin_left = 552.0
-margin_top = 403.0
-margin_right = 591.0
-margin_bottom = 468.0
+margin_left = 756.0
+margin_top = 381.0
+margin_right = 805.0
+margin_bottom = 469.0
 size_flags_vertical = 6
 
 [node name="HSeparator1" type="HSeparator" parent="VBoxContainer"]
-margin_top = 573.0
+margin_top = 585.0
 margin_right = 1920.0
-margin_bottom = 577.0
+margin_bottom = 589.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 581.0
+margin_top = 593.0
 margin_right = 1920.0
 margin_bottom = 1080.0
 size_flags_vertical = 3
 
 [node name="VisualisierenButton" type="Button" parent="VBoxContainer/VBoxContainer"]
 margin_right = 1920.0
-margin_bottom = 65.0
+margin_bottom = 88.0
 size_flags_vertical = 2
 text = "Visualisieren"
 
 [node name="VerbindenButton" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_top = 167.0
+margin_top = 163.0
 margin_right = 1920.0
-margin_bottom = 232.0
+margin_bottom = 251.0
 size_flags_vertical = 2
 text = "Maschine verbinden"
 
 [node name="SendenButton" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_top = 334.0
+margin_top = 326.0
 margin_right = 1920.0
-margin_bottom = 399.0
+margin_bottom = 414.0
 size_flags_vertical = 2
 disabled = true
 text = "Senden"

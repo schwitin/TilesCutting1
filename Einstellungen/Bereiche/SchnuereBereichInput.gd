@@ -33,11 +33,11 @@ func set_bereich(_bereich):
 	schnuere_node = create_schnuere_node()
 	
 	add_child(deckbreite_node)
-	add_child(create_label_node(" x "))
+	add_child(create_label_node("    x    "))
 	add_child(ziegel_node)
-	add_child(create_label_node(" x "))
+	add_child(create_label_node("      x      "))
 	add_child(schnuere_node)
-	add_child(create_label_node("="))
+	add_child(create_label_node("       =       "))
 	add_child(gesamtgroesse_node)
 	update_gesamtgroesse()
 
