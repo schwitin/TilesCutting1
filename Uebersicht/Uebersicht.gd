@@ -34,6 +34,9 @@ func update_ziegel():
 func _ready():
 	scale_node()
 	update()
+	
+func _enter_tree():
+	scale_node()
 
 func _process(delta):
 	if Input.is_action_just_released("go_back"):

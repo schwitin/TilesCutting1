@@ -83,23 +83,21 @@ func zeichne(node, translate=Vector2(0,0)):
 			colors.append(Color("353535"))
 			
 		node.draw_polygon(translated_points, colors)
-		node.draw_circle(get_zentrum() + translate, 5, Color("FFFF00"))
+		var circleRadius = 5 / get_scale_avg(node)
+		node.draw_circle(get_zentrum() + translate, circleRadius, Color("FFFF00"))
 		
 		var lastPoint = translated_points[translated_points.size() - 1]
 		for point in translated_points:
 			var linie = linieClass.new(lastPoint, point);
 			lastPoint = point
 			zeichne_linie(linie, node)
-		
-		#var linien = get_linien()
-		#for linie in linien:
-		#	zeichne_linie(linie, node, translate)
-		
-		#zeichne_linie(einstellungen.schnittlinie, node, translate)
+
 
 
 func zeichne_linie(linie, node, translate=Vector2(0,0), color = Color("FFFFFF"), width=3.0):
-	node.draw_line(linie.p1 + translate, linie.p2 + translate, color, width)
+	var scaleAvg = get_scale_avg(node)
+	var ajustedWidth = width / scaleAvg
+	node.draw_line(linie.p1 + translate, linie.p2 + translate, color, ajustedWidth)
 
 
 func get_bounding_box():
@@ -207,6 +205,10 @@ func get_startpunkt(schnittpunkte):
 		return schnittpunkt_mit_groesserem_x
 	else:
 		return schnittpunkt_mit_kleinerem_x
+
+
+func get_scale_avg(node):
+	return (node.scale.x + node.scale.y) / 2
 
 
 func println():

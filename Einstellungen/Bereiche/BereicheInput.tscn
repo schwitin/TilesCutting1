@@ -19,7 +19,7 @@ anchor_bottom = 1.0
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 372.0
-margin_bottom = 182.0
+margin_bottom = 268.0
 
 [node name="Container" type="VBoxContainer" parent="PopupPanel/HBoxContainer"]
 margin_right = 156.0
