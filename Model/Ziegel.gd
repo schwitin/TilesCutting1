@@ -69,6 +69,25 @@ func create_linie(p1, p2):
 	return linieClass.new(p1, p2)
 
 
+func update_ziegel_zeichnung(node):
+	if istGeschnitten:
+		var points = get_ziegel_polygon_points()
+		var translated_points = []
+		var laenge = einstellungen.ziegelTyp.laenge
+		var breite = einstellungen.ziegelTyp.breite
+		
+		var offset = Vector2(breite / 2, laenge / 2)
+		for point in points:
+			# point ist die globale Ziegelposition auf dem Dach (linke obere Ecke)
+			# Für die Zeichnung brauchen wir die Mitte des Ziegel in dem Ursprung
+			# des Koordinatensystems, damit wird die Zeichnung einfach rotieren, skalieren 
+			# und verschieben können.
+			translated_points.append( point - position - offset)
+		
+		node.set_polygon(translated_points)
+		node.texture_offset = offset
+
+
 func zeichne(node, translate=Vector2(0,0)):
 	var points = get_ziegel_polygon_points()
 	if istGeschnitten:

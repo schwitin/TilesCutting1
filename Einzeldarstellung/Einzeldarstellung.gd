@@ -45,6 +45,9 @@ func set_aktueller_ziegel(_aktuellerZiegel):
 	update_winkel()
 	set_user_input_position()
 	set_button_position()
+	set_ziegel_zeichnung_position(aktuellerZiegel)
+	var ziegelZeichnung = get_node("ZiegelZeichnung")
+	aktuellerZiegel.update_ziegel_zeichnung(ziegelZeichnung)
 
 
 func update_ziegel_nummer():
@@ -110,6 +113,29 @@ func set_button_position():
 	var buttonNode = get_node("EinzeldarstellungButton")
 	buttonNode.rect_size.x = 1500
 	buttonNode.rect_size.y = 1500
+
+
+# TODO konsolidieren
+func set_ziegel_zeichnung_position(ziegel) :
+	if ziegel == null:
+		return
+	var bounding_box = ziegel.get_bounding_box()
+	var schnittlinie = ziegel.einstellungen.schnittlinie
+	
+	var viewport_size = self.get_viewport_rect().size
+	var x = viewport_size.x / bounding_box.size.x  * 0.80
+	var y = viewport_size.y / bounding_box.size.y  * 0.80
+	var k = min(x, y)
+	
+	var position = Vector2(viewport_size.x / 3, viewport_size.y / 2)
+	var rotation = schnittlinie.get_winkel_zu_horizontale_rad() + PI 
+	var scale = Vector2(k,k)
+	
+	var ziegelZeichnung = get_node("ZiegelZeichnung")
+	ziegelZeichnung.set_position(position)
+	ziegelZeichnung.set_scale(scale)
+	ziegelZeichnung.rotation = rotation
+
 
 #func _on_data_received(data_received):
 #	if "vorheriger" in data_received:

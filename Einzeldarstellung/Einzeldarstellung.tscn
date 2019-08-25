@@ -1,13 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Resources/theme.tres" type="Theme" id=1]
 [ext_resource path="res://Einzeldarstellung/Einzeldarstellung.gd" type="Script" id=2]
 [ext_resource path="res://Einzeldarstellung/Zeichenflaeche.gd" type="Script" id=3]
 [ext_resource path="res://Resources/flat_transparent.tres" type="StyleBox" id=4]
+[ext_resource path="res://Resources/ziegel_imagetexture.tres" type="Texture" id=5]
 
 [node name="Einzeldarstellung" type="Container"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = -6.92532
+margin_bottom = -6.92529
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
@@ -20,7 +23,6 @@ margin_right = 316.0
 margin_bottom = 512.0
 
 [node name="DistanzZuMitte" type="HBoxContainer" parent="UserInput"]
-editor/display_folded = true
 margin_right = 424.0
 margin_bottom = 82.0
 
@@ -168,6 +170,12 @@ custom_styles/pressed = ExtResource( 4 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
+
+[node name="ZiegelZeichnung" type="Polygon2D" parent="."]
+position = Vector2( 645.141, 141.69 )
+scale = Vector2( 1.02129, 0.972 )
+texture = ExtResource( 5 )
+polygon = PoolVector2Array( 0.0228271, -0.390669, -0.812256, 481.027, 293.129, 482.749, 291.876, 152.893, 148.595, 1.24395 )
 [connection signal="pressed" from="UserInput/NaechsteVorherigeReihe/VorherigeReihe" to="." method="_on_VorherigeReihe_pressed"]
 [connection signal="pressed" from="UserInput/NaechsteVorherigeReihe/NaechsteReihe" to="." method="_on_NaechsteReihe_pressed"]
 [connection signal="pressed" from="UserInput/NaechsteVorherigeNummer/VorherigeNummer" to="." method="_on_VorherigeNummer_pressed"]

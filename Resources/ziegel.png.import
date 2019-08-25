@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/ziegel.png-7a2538d18e0e6677f8c51b552828a2e2.image"
+
+[deps]
+
+source_file="res://Resources/ziegel.png"
+dest_files=[ "res://.import/ziegel.png-7a2538d18e0e6677f8c51b552828a2e2.image" ]
+
+[params]
+

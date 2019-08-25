@@ -12,11 +12,11 @@ func set_ziegel(_ziegel):
 	update()
 	
 
-
-func _draw():
-	if null != ziegel:
-		var bounding_box = ziegel.get_bounding_box()
-		ziegel.zeichne(self,  -bounding_box.position - bounding_box.size / 2)
+# alte methode zum Zeichcnen des Zigels in der Einzeleinsicht
+#func _draw():
+	#if null != ziegel:
+		#var bounding_box = ziegel.get_bounding_box()
+		#ziegel.zeichne(self,  -bounding_box.position - bounding_box.size / 2)
 
 
 # TODO konsolidieren

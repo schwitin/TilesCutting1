@@ -158,6 +158,8 @@ func get_winkel_zu_vertikale() :
 func get_winkel_zu_horizontale() :
 	return 90.0 - get_winkel_zu_vertikale()
 	
+func get_winkel_zu_horizontale_rad() :
+	return PI/2 - get_winkel_zu_vertikale_rad()
 
 
 func clone():
