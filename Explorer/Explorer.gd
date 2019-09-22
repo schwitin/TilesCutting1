@@ -50,9 +50,9 @@ func _on_Daecher_item_selected( name ):
 	var itemList = []
 	for schnitt in dach:
 		itemList.append(schnitt.name)
-	get_schnitte_node().set_items(itemList)
 	selectedDachName = name
 	selectedDach = dach
+	get_schnitte_node().set_items(itemList)
 
 
 func _on_Daecher_item_new( name ):
