@@ -131,7 +131,7 @@ func _on_SendenButton_pressed():
 		get_node("WaitDialog").popup_centered()
 		get_node("VBoxContainer/Timer").start()
 		var data = einstellungen.to_maschine_string()
-		global.bluetooth.sendData("{S" + data + "}")
+		global.bluetooth.sendData("{#" + data + "}")
 	else:
 		get_node("VBoxContainer/VBoxContainer/SendenButton").set_disabled(true)
 		print("Module not initialized!")
