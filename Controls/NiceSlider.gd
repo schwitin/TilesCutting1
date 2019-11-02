@@ -8,7 +8,7 @@ var speedSetTime =  OS.get_ticks_msec()
 
 var MIN_SENSITIVITY = 1
 var MAX_SENSITIVITY = 100
-var sensitivity = MAX_SENSITIVITY
+var sensitivity = self.MAX_SENSITIVITY
 
 var inernalValue = 0
 var value = 0
@@ -140,7 +140,7 @@ func update_value(requestedIncrement):
 		self.inernalValue += 1 * direction
 		successfullIncrement += 1 * direction
 		
-		if self.inernalValue % self.sensitivity == 0 :
+		if self.inernalValue % self.sensitivity == 0 || self.is_on_limit() :
 			self.value += 1 * direction
 			emit_signal("value_changed", value)
 	
