@@ -18,7 +18,7 @@ signal schnuere_oder_latten_bereiche_changed
 var isDirty = false
 
 func _ready():
-	#test()
+	test()
 	pass
 
 
@@ -107,7 +107,7 @@ func _on_InputField_selected(input_field):
 	var slider = get_node("PopupPanel/HBoxContainer/VSlider")
 	slider.set_min(input_field.min_wert)
 	slider.set_max(input_field.max_wert)
-	slider.set_step(input_field.anpassung_schritt)
+	#slider.set_step(input_field.anpassung_schritt)
 	slider.set_value(input_field.wert)
 	selectedInputField = input_field
 
