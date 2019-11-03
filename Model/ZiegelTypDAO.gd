@@ -30,7 +30,9 @@ func load_ziegel_typen():
 				"VersatzY": "16",
 				"DecklaengeMin" : "410",
 				"DecklaengeMax" : "430",
-				"Deckbreite" : "241"
+				"Deckbreite" : "241",
+				"DeckbreiteMin" : "239",
+				"DeckbreiteMax" : "243"
 			}
 		]
 	}

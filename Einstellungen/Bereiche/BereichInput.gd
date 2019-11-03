@@ -41,7 +41,10 @@ func get_beispiel_ziegel_typ():
 		"VersatzY": "35",
 		"DecklaengeMin" : "370",
 		"DecklaengeMax" : "400",
-		"Deckbreite" : "267"
+		"Deckbreite" : "267",
+		"DeckbreiteMin" : "265",
+		"DeckbreiteMax" : "269"
+		
 	}
 	var ziegelTypClass = load("res://Model/ZiegelTyp.gd")
 	var ziegel_typ = ziegelTypClass.new(data)

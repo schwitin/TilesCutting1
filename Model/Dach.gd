@@ -222,7 +222,7 @@ func get_schnuere():
 	for bereich in bereicheSchuere :
 		#warning-ignore:unused_variable
 		for i in range(bereich.anzahl_schnuere):
-			x = x + bereich.get_abstand()
+			x = x + bereich.schnurabstand
 			var p1 = Vector2(x, 0)
 			var p2 = Vector2(x, bounding_box.y)
 			var linie = classLinie.new(p1, p2)
@@ -383,10 +383,11 @@ func get_ziegel():
 		for l in range(bereichLatten.anzahl_latten):
 			# Erster Element ist der linke Ziegel in der Reihe.
 			var ziegelReihe = get_ziegelreihe(lattenPositionY, lattenNr)
-			alleZiegelReihen.append(ziegelReihe)
-			# Wir verschieben lattenPositionY um eine Decklänge (=Lattenabstand) nach unten.
-			lattenPositionY += decklaenge
-			lattenNr += 1
+			if ziegelReihe.size() > 0:
+				alleZiegelReihen.append(ziegelReihe)
+				# Wir verschieben lattenPositionY um eine Decklänge (=Lattenabstand) nach unten.
+				lattenPositionY += decklaenge
+				lattenNr += 1
 	
 	return alleZiegelReihen
 
@@ -408,7 +409,7 @@ func get_ziegelreihe(lattenPositionY, latteNr):
 	
 	# Wir gehen über alle Bereiche und ermitteln die Deckbreite für jeden Bereich
 	for bereichSchnuere in einstellungen.bereicheSchuere:
-		var deckbreite = bereichSchnuere.deckbreite
+		var deckbreite = bereichSchnuere.get_deckbreite()
 		# Wir gehen über alle Schnüre im Bereich.
 		#warning-ignore:unused_variable
 		for schnurNr in range(bereichSchnuere.anzahl_schnuere):

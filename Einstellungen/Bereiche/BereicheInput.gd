@@ -18,7 +18,7 @@ signal schnuere_oder_latten_bereiche_changed
 var isDirty = false
 
 func _ready():
-	test()
+	#test()
 	pass
 
 
@@ -38,8 +38,8 @@ func init(_bereichTyp, _einstellungen):
 	
 	if bereichTyp == "S":
 		bereichClass = preload("res://Model/SchnuereBereich.gd")
-		bereichInputScene = preload("res://Einstellungen/Bereiche/SchnuereBereichInput.tscn")
-		ueberschriftNode.set_text("Deckbr.    Ziegel       Schnüre")
+		bereichInputScene = preload("res://Einstellungen/Bereiche/SchnuereBereichInput1.tscn")
+		ueberschriftNode.set_text("Schnurabst.    Schnüre       Ziegel")
 	else:
 		bereichClass = preload("res://Model/LattenBereich.gd")
 		bereichInputScene = preload("res://Einstellungen/Bereiche/LattenBereichInput.tscn")
@@ -120,6 +120,12 @@ func _on_slider_value_changed( value ):
 
 func _on_AddButton_pressed():
 	var bereich = bereichClass.new(einstellungen.ziegelTyp)
+	
+	if bereichTyp == "S":
+		bereich.anzahl_schnuere = 1
+	else:
+		bereich.anzahl_latten = 1
+	
 	add_bereich(bereich)
 	get_bereiche().append(bereich)
 	update_button_visibility()
@@ -139,7 +145,7 @@ func _on_RemoveButton_pressed():
 
 func _on_DachdimensionInput_pressed():
 	init_bereiche_view()
-	get_node("PopupPanel").popup_centered()
+	get_node("PopupPanel").popup_centered_ratio (0.9999)
 
 
 func _on_PopupPanel_popup_hide():

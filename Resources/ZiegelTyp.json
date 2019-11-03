@@ -9,7 +9,9 @@
 			"VersatzY": "16",
 			"DecklaengeMin" : "410",
 			"DecklaengeMax" : "430",
-			"Deckbreite" : "241"
+			"Deckbreite" : "241",
+                        "DeckbreiteMin" : "239",
+                        "DeckbreiteMax" : "243"
 		},		
 		{
 			"Name": "Rubin 9V",
@@ -19,7 +21,9 @@
 			"VersatzY": "35",
 			"DecklaengeMin" : "370",
 			"DecklaengeMax" : "400",
-			"Deckbreite" : "267"
+			"Deckbreite" : "267",
+                        "DeckbreiteMin" : "265",
+                        "DeckbreiteMax" : "269"
 		},
 		{
 			"Name": "Rubin 11V",
@@ -29,7 +33,9 @@
 			"VersatzY": "39",
 			"DecklaengeMin" : "338",
 			"DecklaengeMax" : "370",
-			"Deckbreite" : "234"
+			"Deckbreite" : "234",
+                        "DeckbreiteMin" : "232",
+                        "DeckbreiteMax" : "246"
 		}
 		
 		

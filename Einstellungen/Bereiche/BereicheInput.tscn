@@ -15,62 +15,83 @@ script = ExtResource( 2 )
 visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = 634.0
+margin_bottom = 567.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PopupPanel"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 372.0
-margin_bottom = 268.0
+margin_right = 679.0
+margin_bottom = 651.0
 
 [node name="Container" type="VBoxContainer" parent="PopupPanel/HBoxContainer"]
-margin_right = 156.0
-margin_bottom = 264.0
+margin_right = 371.0
+margin_bottom = 647.0
 size_flags_horizontal = 3
 
 [node name="Ueberschrift" type="Label" parent="PopupPanel/HBoxContainer/Container"]
-margin_right = 156.0
+margin_right = 371.0
 margin_bottom = 82.0
 text = "?"
 
 [node name="BereicheContainer" type="VBoxContainer" parent="PopupPanel/HBoxContainer/Container"]
 margin_top = 86.0
-margin_right = 156.0
-margin_bottom = 86.0
-
-[node name="Abstand" type="Label" parent="PopupPanel/HBoxContainer/Container"]
-margin_top = 90.0
-margin_right = 156.0
-margin_bottom = 172.0
+margin_right = 371.0
+margin_bottom = 383.0
+size_flags_vertical = 3
 
 [node name="AddRemoveContainer" type="HBoxContainer" parent="PopupPanel/HBoxContainer/Container"]
-editor/display_folded = true
-margin_top = 176.0
-margin_right = 156.0
-margin_bottom = 264.0
+margin_top = 387.0
+margin_right = 371.0
+margin_bottom = 475.0
+alignment = 1
 
 [node name="AddButton" type="Button" parent="PopupPanel/HBoxContainer/Container/AddRemoveContainer"]
-margin_right = 71.0
+margin_left = 80.0
+margin_right = 151.0
 margin_bottom = 88.0
 text = "+"
 align = 0
 
+[node name="VSeparator" type="VSeparator" parent="PopupPanel/HBoxContainer/Container/AddRemoveContainer"]
+margin_left = 155.0
+margin_right = 205.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 50, 0 )
+
 [node name="RemoveButton" type="Button" parent="PopupPanel/HBoxContainer/Container/AddRemoveContainer"]
-margin_left = 75.0
-margin_right = 156.0
+margin_left = 209.0
+margin_right = 290.0
 margin_bottom = 88.0
 text = " - "
 align = 2
 
-[node name="VSeparator" type="VSeparator" parent="PopupPanel/HBoxContainer"]
-margin_left = 160.0
-margin_right = 164.0
-margin_bottom = 264.0
+[node name="Abstand" type="Label" parent="PopupPanel/HBoxContainer/Container"]
+margin_top = 479.0
+margin_right = 371.0
+margin_bottom = 561.0
+
+[node name="InfoContainer" type="HBoxContainer" parent="PopupPanel/HBoxContainer/Container"]
+margin_top = 565.0
+margin_right = 371.0
+margin_bottom = 647.0
+alignment = 1
+
+[node name="InfoLabel" type="Label" parent="PopupPanel/HBoxContainer/Container/InfoContainer"]
+margin_left = 183.0
+margin_right = 183.0
+margin_bottom = 82.0
+
+[node name="InfoValue" type="Label" parent="PopupPanel/HBoxContainer/Container/InfoContainer"]
+margin_left = 187.0
+margin_right = 187.0
+margin_bottom = 82.0
 
 [node name="VSlider" type="Control" parent="PopupPanel/HBoxContainer"]
-margin_left = 168.0
-margin_right = 368.0
-margin_bottom = 264.0
-rect_min_size = Vector2( 200, 0 )
+margin_left = 375.0
+margin_right = 675.0
+margin_bottom = 647.0
+rect_min_size = Vector2( 300, 0 )
 script = ExtResource( 3 )
 [connection signal="pressed" from="." to="." method="_on_DachdimensionInput_pressed"]
 [connection signal="popup_hide" from="PopupPanel" to="." method="_on_PopupPanel_popup_hide"]

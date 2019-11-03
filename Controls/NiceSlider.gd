@@ -17,7 +17,6 @@ var maxValue = 100
 
 var speed = 0
 var MAX_SPEED = 1000
-var MIN_SPEED = 200
 var SPEED_DECREMENT = 2
 
 
@@ -140,7 +139,7 @@ func update_value(requestedIncrement):
 		self.inernalValue += 1 * direction
 		successfullIncrement += 1 * direction
 		
-		if self.inernalValue % self.sensitivity == 0 || self.is_on_limit() :
+		if int(self.inernalValue) % self.sensitivity == 0 || self.is_on_limit() :
 			self.value += 1 * direction
 			emit_signal("value_changed", value)
 	
@@ -211,8 +210,9 @@ func set_value(value):
 		self.inernalValue = self.value
 		return
 	
-	self.value = value
-	self.inernalValue = value
+	self.value = int(value)
+	self.inernalValue = int(value)
+	self.inernalValue = int(self.inernalValue)
 
 
 func set_sensitivity(sensitivity):
