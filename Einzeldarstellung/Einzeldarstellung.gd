@@ -10,8 +10,7 @@ signal vorherige_reihe(aktuellerZiegel)
 signal naechste_nummer(aktuellerZiegel)
 signal vorherige_nummer(aktuellerZiegel)
 
-
-func _ready():
+func _enter_tree():
 	# Unkommentieren, wenn dieses Szene einzeln zum Testen gestertet wird
 	#test()
 	if aktuellerZiegel == null:
@@ -36,6 +35,9 @@ func test():
 
 func set_aktueller_ziegel(_aktuellerZiegel):
 	aktuellerZiegel = _aktuellerZiegel
+	if aktuellerZiegel == null:
+		return
+
 	update_ziegel_nummer()
 	update_ziegel_reihe()
 	update_distanz_zum_zentrum()
@@ -100,7 +102,7 @@ func set_user_input_position():
 	var selfSize = self.get_viewport_rect().size
 	var userInputNode = get_node("UserInput")
 	var userInputSize = userInputNode.rect_size
-	var pos = Vector2(selfSize.x - userInputSize.x, 0)
+	var pos = Vector2(selfSize.x - userInputSize.x, 50)
 	userInputNode.rect_position = pos
 
 

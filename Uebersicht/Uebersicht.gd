@@ -41,7 +41,7 @@ func _enter_tree():
 #warning-ignore:unused_argument
 func _process(delta):
 	if Input.is_action_just_released("go_back"):
-		emit_signal("uebersicht_verlassen")
+		go_back()
 
 # Zeichnet alle Ziegel von unten nach oben und von rechts nach links
 func _draw():
@@ -52,9 +52,6 @@ func _draw():
 				var ziegel = reihe[reihe.size() - j - 1]
 				ziegel.zeichne(self)
 
-
-#func on_schnittlinie_changed():
-	#set_naechster_ziegel(null)
 
 
 func scale_node() :
@@ -138,5 +135,17 @@ func _on_Button_pressed():
 
 
 func _notification(what):        
-	if what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST :
-		emit_signal("uebersicht_verlassen")
+	if what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:
+		go_back()
+
+func go_back():
+	if alleZiegelReihen != null:
+			# Ziegel als nicht ausgewählt markieren
+			for i in range(alleZiegelReihen.size()):
+				var reihe = alleZiegelReihen[alleZiegelReihen.size() - i - 1]
+				for j in range(reihe.size()):
+					var ziegel = reihe[reihe.size() - j - 1]
+					ziegel.set_ausgewaelt(false)
+		
+	emit_signal("aktueller_ziegel", null)
+	emit_signal("uebersicht_verlassen")
