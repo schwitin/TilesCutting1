@@ -88,8 +88,8 @@ margin_right = 187.0
 margin_bottom = 82.0
 
 [node name="VSlider" type="Control" parent="PopupPanel/HBoxContainer"]
-margin_left = 375.0
-margin_right = 675.0
+margin_left = 376.0
+margin_right = 676.0
 margin_bottom = 647.0
 rect_min_size = Vector2( 300, 0 )
 script = ExtResource( 3 )
