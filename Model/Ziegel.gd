@@ -69,7 +69,8 @@ func get_distanz_von_schnittlinie_zum_zentrum():
 
 func get_winkel_zu_vertikale():
 	var winkel = einstellungen.schnittlinie.get_winkel_zu_vertikale()
-	var winkelV = abs(min(180 - abs(winkel), abs(winkel)))
+	# var winkelV = abs(min(180 - abs(winkel), abs(winkel)))
+	var winkelV = abs(winkel)
 	return winkelV
 
 

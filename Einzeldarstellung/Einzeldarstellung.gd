@@ -125,7 +125,7 @@ func set_ziegel_zeichnung_position(ziegel) :
 	var k = min(x, y)
 	
 	var position = Vector2(viewport_size.x / 3, viewport_size.y / 2)
-	var rotation = schnittlinie.get_winkel_zu_horizontale_rad() + PI 
+	var rotation = schnittlinie.get_winkel_zu_horizontale_rad() 
 	var scale = Vector2(k,k)
 	
 	var ziegelZeichnung = get_node("ZiegelZeichnung")
