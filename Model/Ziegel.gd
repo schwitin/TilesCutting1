@@ -2,7 +2,7 @@ extends Reference
 
 var reihe
 var nummer
-var position
+var position		# linke obere Ecke
 var einstellungen
 
 var istAusgewaelt  = false setget set_ausgewaelt
@@ -17,9 +17,13 @@ func _init(_einstellungen, _position):
 	position = _position
 	get_ziegel_polygon_points() # inizialisierung istGeschnitten
 
-
-func get_linien():
-	var linien = []
+# Gibt ecken eines ganzen Ziegels als ein Array zurück
+# Erster Element ist die linke obere Ecke
+# Zweiter Element ist die rechte obere Ecke
+# Dritter Element ist die rechte untere Ecke
+# Vierter Element ist die linke untere Ecke
+func get_eckpunkte():
+	var ecken = []
 	var laenge = einstellungen.ziegelTyp.laenge
 	var breite = einstellungen.ziegelTyp.breite
 
@@ -27,26 +31,29 @@ func get_linien():
 	var p2 = Vector2(position.x + breite, position.y)
 	var p3 = Vector2(position.x + breite, position.y + laenge)
 	var p4 = Vector2(position.x, position.y + laenge)
+	ecken.append(p1)
+	ecken.append(p2)
+	ecken.append(p3)
+	ecken.append(p4)
 	
-	linien.append(create_linie(p1, p2))
-	linien.append(create_linie(p2, p3))
-	linien.append(create_linie(p3, p4))
-	linien.append(create_linie(p4, p1))
+	return ecken
+
+
+func get_linien():
+	var linien = []
+	var ecken = get_eckpunkte()
+	linien.append(create_linie(ecken[0], ecken[1]))
+	linien.append(create_linie(ecken[1], ecken[2]))
+	linien.append(create_linie(ecken[2], ecken[3]))
+	linien.append(create_linie(ecken[3], ecken[0]))
 	
 	return linien
 
 
 func get_zentrum():
-	var laenge = einstellungen.ziegelTyp.laenge
-	var breite = einstellungen.ziegelTyp.breite
-
-	var p1 = position
-	var p2 = Vector2(position.x + breite, position.y)
-	var p3 = Vector2(position.x + breite, position.y + laenge)
-	var p4 = Vector2(position.x, position.y + laenge)
-	
-	var diagonale1 = create_linie(p1, p3)
-	var diagonale2 = create_linie(p2, p4)
+	var ecken = get_eckpunkte()
+	var diagonale1 = create_linie(ecken[0], ecken[2])
+	var diagonale2 = create_linie(ecken[1], ecken[3])
 	var zentrum = diagonale1.get_schnittpunkt(diagonale2)
 	return zentrum
 
@@ -58,6 +65,7 @@ func get_distanz_von_schnittlinie_zum_zentrum():
 	var vorzeichen = (normale.p2.x - normale.p1.x + 1 ) / abs(normale.p2.x - normale.p1.x + 1)
 	var distanz = normale.p1.distance_to(normale.p2) * vorzeichen
 	return distanz
+
 
 func get_winkel_zu_vertikale():
 	var winkel = einstellungen.schnittlinie.get_winkel_zu_vertikale()
@@ -132,7 +140,9 @@ func get_ziegel_polygon_points():
 	var polygon_punkte
 	var schnittlinie = einstellungen.schnittlinie.get_laengere_linie(2)
 	
-	var ecken = get_eckpunkte()		# Erster und letzter Element ist die gleiche Ecke
+	var ecken = get_eckpunkte()
+	# Erster und letzter Element ist die gleiche Ecke
+	ecken.append(position)
 	var ecken_und_schnittpunkte = []
 	
 	# Beim richtigen Schnitt quer durch den Ziegel erhalten wir exakt 2 Schnittpunkte  
@@ -193,16 +203,6 @@ func get_ziegel_polygon_points():
 		polygon_punkte = ecken
 	
 	return polygon_punkte
-
-
-func get_eckpunkte():
-	var ecken = []
-	ecken.append(position)
-	ecken.append(Vector2(position.x + einstellungen.ziegelTyp.breite, position.y))
-	ecken.append(Vector2(position.x + einstellungen.ziegelTyp.breite, position.y + einstellungen.ziegelTyp.laenge))
-	ecken.append(Vector2(position.x, position.y + einstellungen.ziegelTyp.laenge))
-	ecken.append(position)
-	return ecken
 
 
 # Wählt den Startpunkt eines Ziegelpoygons aus den zwei existierenden Schnittpunkten aus
