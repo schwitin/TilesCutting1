@@ -16,8 +16,7 @@ func _ready():
 	#test()
 	if aktuellerZiegel == null:
 		emit_signal("naechste_reihe", null)
-	
-#	global.connect("data_received", self, "_on_data_received")
+
 
 #warning-ignore:unused_argument
 func _process(delta):
@@ -37,8 +36,6 @@ func test():
 
 func set_aktueller_ziegel(_aktuellerZiegel):
 	aktuellerZiegel = _aktuellerZiegel
-	var zeichenflaeche = get_node("Zeichenflaeche")
-	zeichenflaeche.set_ziegel(aktuellerZiegel)
 	update_ziegel_nummer()
 	update_ziegel_reihe()
 	update_distanz_zum_zentrum()
@@ -58,6 +55,7 @@ func update_ziegel_nummer():
 func update_ziegel_reihe():
 	var node = get_node("UserInput/NaechsteVorherigeReihe/Wert")
 	node.text = String(aktuellerZiegel.reihe)
+
 
 func update_distanz_zum_zentrum():
 	var distanz = aktuellerZiegel.get_distanz_von_schnittlinie_zum_zentrum()
@@ -99,13 +97,10 @@ func _on_VorherigeNummer_pressed():
 
 
 func set_user_input_position():
-	#var selfSize = OS.window_size
 	var selfSize = self.get_viewport_rect().size
-	# var selfSize = get_tree().get_root().size
 	var userInputNode = get_node("UserInput")
 	var userInputSize = userInputNode.rect_size
 	var pos = Vector2(selfSize.x - userInputSize.x, 0)
-	#var pos = Vector2(900,0)
 	userInputNode.rect_position = pos
 
 
@@ -135,11 +130,3 @@ func set_ziegel_zeichnung_position(ziegel) :
 	ziegelZeichnung.set_position(position)
 	ziegelZeichnung.set_scale(scale)
 	ziegelZeichnung.rotation = rotation
-
-
-#func _on_data_received(data_received):
-#	if "vorheriger" in data_received:
-#		emit_signal("naechster_ziegel", aktuellerZiegel)
-#	else:
-#		emit_signal("vorheriger_ziegel", aktuellerZiegel)
-
