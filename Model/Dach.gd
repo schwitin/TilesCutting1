@@ -4,13 +4,10 @@ var einstellungen = null
 var isGrat = true setget set_grat, is_grat
 var schnittlinie
 
-#var classZiegelTyp = preload("res://Model/ZiegelTyp.gd")
 var classLinie = preload("res://Model/Linie.gd")
 
 signal changed()
 
- 
-#var aktueller_ziegel_index = 0
 
 func _init(_einstellungen):
 	einstellungen = _einstellungen
@@ -22,9 +19,11 @@ func _init(_einstellungen):
 func set_grat(_is_grat):
 	isGrat = _is_grat
 	emit_signal("changed")
-	
+
+
 func is_grat():
 	return isGrat
+
 
 func get_sprungpunkte_oben():
 	var latten = get_latten()
@@ -70,6 +69,7 @@ func get_abstand_von_schnittlinie_zum_naechsten_schnur_oben():
 	var linie = get_linie_von_schnittlinie_zum_naechsten_schnur_oben()
 	var distance = linie.p1.distance_to(linie.p2)
 	return distance
+
 
 func get_abstand_von_schnittlinie_zum_naechsten_schnur_unten():
 	var linie = get_linie_von_schnittlinie_zum_naechsten_schnur_unten()
@@ -352,9 +352,15 @@ func get_latten_grat():
 			linien.append(linie)
 		
 	return linien
+
+
+func get_winkel_schnittlinie_unterste_latte():
+	var winkel = schnittlinie.get_winkel_zu_horizontale()
+	var steigung = schnittlinie.get_steigung()
+	if isGrat && steigung < 0 || !isGrat && steigung > 0:
+		winkel = 180 - winkel
 	
-func get_abstand_linie_oben():
-	pass
+	return winkel
 
 
 ###################################################################################
@@ -390,6 +396,7 @@ func get_ziegel():
 				lattenNr += 1
 	
 	return alleZiegelReihen
+
 
 ###################################################
 # Erstellt die Ziegelreihe für die übergebene Latte

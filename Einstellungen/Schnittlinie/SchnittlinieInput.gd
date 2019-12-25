@@ -66,9 +66,7 @@ func update_text():
 	set_text(winkel + "°")
 
 func get_winkel():
-	var winkel = einstellungen.schnittlinie.get_winkel_zu_horizontale()
-	# var winkelV = abs(min(180 - abs(winkel), abs(winkel)))
-	# var winkelVStr = "%0.1f" % winkelV
+	var winkel = dach.get_winkel_schnittlinie_unterste_latte()
 	var winkelVStr = "%0.1f" % winkel
 	return winkelVStr
 	
@@ -193,6 +191,7 @@ func _on_SchnittlinieInput_pressed():
 func _on_GratKehleButton_pressed():
 	dach.set_grat(!dach.is_grat())
 	update_kehle_grat_label()
+	update_winkel_label()
 
 
 func _on_PopupPanel_popup_hide():
