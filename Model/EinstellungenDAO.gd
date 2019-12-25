@@ -78,7 +78,7 @@ func save(name, dach):
 	}
 	
 	var json = JSON.print(dict, "  ")
-	print(json)
+	# print(json)
 	
 	var file = File.new()
 	var path = EINSTELLUNGEN_DIR + name + ".cfg"
