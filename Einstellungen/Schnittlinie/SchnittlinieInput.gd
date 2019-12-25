@@ -66,9 +66,10 @@ func update_text():
 	set_text(winkel + "°")
 
 func get_winkel():
-	var winkel = einstellungen.schnittlinie.get_winkel_zu_vertikale()
-	var winkelV = abs(min(180 - abs(winkel), abs(winkel)))
-	var winkelVStr = "%0.1f" % winkelV
+	var winkel = einstellungen.schnittlinie.get_winkel_zu_horizontale()
+	# var winkelV = abs(min(180 - abs(winkel), abs(winkel)))
+	# var winkelVStr = "%0.1f" % winkelV
+	var winkelVStr = "%0.1f" % winkel
 	return winkelVStr
 	
 func update_kehle_grat_label():

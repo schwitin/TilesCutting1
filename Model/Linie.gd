@@ -145,21 +145,15 @@ func get_normale(punkt):
 	return linieClass.new(punkt, Vector2(x,y))
 
 
-func get_winkel_zu_vertikale_rad() :
-	var rad = p1.angle_to_point(p2)
-	return rad
-
-func get_winkel_zu_vertikale() :
-	var rad = p1.angle_to_point(p2)
+func get_winkel_zu_horizontale() :
+	var rad = get_winkel_zu_horizontale_rad()
 	var degree = rad * 180 / PI
 	return degree
 
 
-func get_winkel_zu_horizontale() :
-	return 90.0 - get_winkel_zu_vertikale()
-	
-func get_winkel_zu_horizontale_rad() :
-	return PI/2 - get_winkel_zu_vertikale_rad()
+func get_winkel_zu_horizontale_rad():
+	var rad = p2.angle_to_point(p1)
+	return rad
 
 
 func clone():

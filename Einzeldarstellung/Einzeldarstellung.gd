@@ -22,6 +22,7 @@ func _process(delta):
 	if Input.is_action_just_released("go_back"):
 		emit_signal("einzeldarstellung_verlassen")
 
+
 func test():
 	var einstellungenClass = preload("res://Model/Einstellungen.gd")
 	var einstellungen = einstellungenClass.new("dummy", "dummy")
@@ -66,7 +67,7 @@ func update_distanz_zum_zentrum():
 
 
 func update_winkel():
-	var winkelV = aktuellerZiegel.get_winkel_zu_vertikale()
+	var winkelV = aktuellerZiegel.get_winkel_fuer_die_maschine()
 	var winkelVStr = "%0.1f" % winkelV
 	var winkelNode = get_node("UserInput/Winkel/Wert")
 	winkelNode.text = String(winkelVStr)
@@ -117,7 +118,6 @@ func set_ziegel_zeichnung_position(ziegel) :
 	if ziegel == null:
 		return
 	var bounding_box = ziegel.get_bounding_box()
-	var schnittlinie = ziegel.einstellungen.schnittlinie
 	
 	var viewport_size = self.get_viewport_rect().size
 	var x = viewport_size.x / bounding_box.size.x  * 0.80
@@ -125,7 +125,8 @@ func set_ziegel_zeichnung_position(ziegel) :
 	var k = min(x, y)
 	
 	var position = Vector2(viewport_size.x / 3, viewport_size.y / 2)
-	var rotation = schnittlinie.get_winkel_zu_horizontale_rad() 
+	var rotation = ziegel.get_rotation_fuer_die_einzeldarstellung()
+	# print(rotation * 180 / PI)
 	var scale = Vector2(k,k)
 	
 	var ziegelZeichnung = get_node("ZiegelZeichnung")

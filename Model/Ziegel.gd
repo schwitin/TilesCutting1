@@ -62,17 +62,33 @@ func get_distanz_von_schnittlinie_zum_zentrum():
 	var schnittlinie = einstellungen.schnittlinie
 	var zentrum = get_zentrum()
 	var normale = schnittlinie.get_normale(zentrum)
-	var vorzeichen = -(normale.p2.x - normale.p1.x + 1 ) / abs(normale.p2.x - normale.p1.x + 1)
+	var winkelFuerDieMaschine = get_winkel_fuer_die_maschine()
+	var vorzeichen = (normale.p2.x - normale.p1.x + 1 ) / abs(normale.p2.x - normale.p1.x + 1)
+	
+	# Wenn wir den Ziegel für die Maschiene um mehr als 180° wegen Wölbung drehen müssen
+	# dann ist der Vorzeichen anders.
+	if (winkelFuerDieMaschine < 270):
+		vorzeichen = vorzeichen * -1
 	var distanz = normale.p1.distance_to(normale.p2) * vorzeichen
 	return distanz
 
 
-func get_winkel_zu_vertikale():
-	var winkel = einstellungen.schnittlinie.get_winkel_zu_vertikale()
-	# var winkelV = abs(min(180 - abs(winkel), abs(winkel)))
-	var winkelV = abs(winkel)
-	return winkelV
+func get_rotation_fuer_die_einzeldarstellung():
+	# rotation = -(winkelZuHorizontaleRad - PI/2), wenn winkelZuHorizontaleRad > 90
+	# rotation = -(winkelZuHorizontaleRad + PI/2), wenn winkelZuHorizontaleRad < 90
+	# Wir rotieren immer gegen den Uhrzeigersinn, da die Wölbung immer rechts ist
+	# und der Schnitt immer von der Wölbung anfängt
+	var winkelZuHorizontaleRad = einstellungen.schnittlinie.get_winkel_zu_horizontale_rad()
+	var vorzeichen = abs(winkelZuHorizontaleRad - PI/2 + 0.001) / (winkelZuHorizontaleRad - PI/2 + 0.001)
+	var rotation = -(winkelZuHorizontaleRad - PI/2 * vorzeichen)
+	return rotation
 
+
+func get_winkel_fuer_die_maschine():
+	var rotationRad = get_rotation_fuer_die_einzeldarstellung()
+	var rotation = rotationRad * 180 / PI
+	var winkel = 360 - abs(rotation)
+	return winkel
 
 func create_linie(p1, p2):
 	return linieClass.new(p1, p2)
@@ -241,7 +257,7 @@ func to_maschine_string(separator = ""):
 	var reiheStr = "%02d" % reihe
 	var nummerStr = "%02d" % nummer
 	var distanzStr = "%03+d" % get_distanz_von_schnittlinie_zum_zentrum()
-	var windelV = get_winkel_zu_vertikale()
+	var windelV = get_winkel_fuer_die_maschine()
 	var winkelStr = "%04d" % (windelV * 10)
 	var vorschubFlexStr = "VVV"
 	return reiheStr +  separator + nummerStr +  separator + distanzStr +  separator + winkelStr +  separator + vorschubFlexStr
