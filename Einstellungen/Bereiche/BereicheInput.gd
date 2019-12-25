@@ -38,7 +38,7 @@ func init(_bereichTyp, _einstellungen):
 	
 	if bereichTyp == "S":
 		bereichClass = preload("res://Model/SchnuereBereich.gd")
-		bereichInputScene = preload("res://Einstellungen/Bereiche/SchnuereBereichInput1.tscn")
+		bereichInputScene = preload("res://Einstellungen/Bereiche/SchnuereBereichInput.tscn")
 		ueberschriftNode.set_text("Schnurabst.    Schnüre       Ziegel")
 	else:
 		bereichClass = preload("res://Model/LattenBereich.gd")
