@@ -10,6 +10,7 @@ text = "?"
 script = ExtResource( 2 )
 
 [node name="PopupPanel" type="PopupPanel" parent="."]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 0
@@ -25,129 +26,129 @@ margin_bottom = -4.0
 alignment = 2
 
 [node name="Container" type="VBoxContainer" parent="PopupPanel/PanelContainer"]
-margin_right = 294.0
-margin_bottom = 550.0
+margin_right = 396.0
+margin_bottom = 734.0
 size_flags_horizontal = 0
 
 [node name="WinkelContainer" type="VBoxContainer" parent="PopupPanel/PanelContainer/Container"]
 editor/display_folded = true
-margin_right = 294.0
-margin_bottom = 122.0
+margin_right = 396.0
+margin_bottom = 168.0
 
 [node name="Versatz" type="HBoxContainer" parent="PopupPanel/PanelContainer/Container/WinkelContainer"]
-margin_right = 294.0
-margin_bottom = 59.0
+margin_right = 396.0
+margin_bottom = 82.0
 alignment = 1
 
 [node name="VersatzValue" type="Label" parent="PopupPanel/PanelContainer/Container/WinkelContainer/Versatz"]
-margin_left = 99.0
-margin_right = 195.0
-margin_bottom = 59.0
+margin_left = 130.0
+margin_right = 265.0
+margin_bottom = 82.0
 text = "000"
 align = 2
 
 [node name="VWinkel" type="HBoxContainer" parent="PopupPanel/PanelContainer/Container/WinkelContainer"]
-margin_top = 63.0
-margin_right = 294.0
-margin_bottom = 122.0
+margin_top = 86.0
+margin_right = 396.0
+margin_bottom = 168.0
 alignment = 1
 
 [node name="WinkelValue" type="Label" parent="PopupPanel/PanelContainer/Container/WinkelContainer/VWinkel"]
-margin_left = 76.0
-margin_right = 188.0
-margin_bottom = 59.0
+margin_left = 100.0
+margin_right = 257.0
+margin_bottom = 82.0
 text = "00.0"
 
 [node name="WinkelEinheit" type="Label" parent="PopupPanel/PanelContainer/Container/WinkelContainer/VWinkel"]
-margin_left = 192.0
-margin_right = 217.0
-margin_bottom = 59.0
+margin_left = 261.0
+margin_right = 296.0
+margin_bottom = 82.0
 text = "°"
 
 [node name="SchnittpunktContainer" type="PanelContainer" parent="PopupPanel/PanelContainer/Container"]
-margin_top = 126.0
-margin_right = 294.0
-margin_bottom = 550.0
+margin_top = 172.0
+margin_right = 396.0
+margin_bottom = 734.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel/PanelContainer/Container/SchnittpunktContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 287.0
-margin_bottom = 417.0
+margin_right = 389.0
+margin_bottom = 555.0
 
 [node name="GratKehleButton" type="Button" parent="PopupPanel/PanelContainer/Container/SchnittpunktContainer/VBoxContainer"]
-margin_right = 280.0
-margin_bottom = 65.0
+margin_right = 382.0
+margin_bottom = 88.0
 text = "Unten"
 
 [node name="ObenUntenButton" type="Button" parent="PopupPanel/PanelContainer/Container/SchnittpunktContainer/VBoxContainer"]
-margin_top = 69.0
-margin_right = 280.0
-margin_bottom = 134.0
+margin_top = 92.0
+margin_right = 382.0
+margin_bottom = 180.0
 text = "Unten"
 
 [node name="NavigationContainer" type="GridContainer" parent="PopupPanel/PanelContainer/Container/SchnittpunktContainer/VBoxContainer"]
 editor/display_folded = true
-margin_top = 138.0
-margin_right = 280.0
-margin_bottom = 410.0
+margin_top = 184.0
+margin_right = 382.0
+margin_bottom = 548.0
 columns = 2
 
 [node name="NachLinksButton" type="Button" parent="PopupPanel/PanelContainer/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
-margin_right = 126.0
-margin_bottom = 65.0
+margin_right = 172.0
+margin_bottom = 88.0
 text = "|<--"
 align = 0
 
 [node name="NachRechtsButton" type="Button" parent="PopupPanel/PanelContainer/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
-margin_left = 130.0
-margin_right = 280.0
-margin_bottom = 65.0
+margin_left = 176.0
+margin_right = 382.0
+margin_bottom = 88.0
 text = "-->|"
 align = 2
 
 [node name="MinusHundertButton" type="Button" parent="PopupPanel/PanelContainer/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
-margin_top = 69.0
-margin_right = 126.0
-margin_bottom = 134.0
+margin_top = 92.0
+margin_right = 172.0
+margin_bottom = 180.0
 text = "-100"
 align = 0
 
 [node name="PlusHundertButton" type="Button" parent="PopupPanel/PanelContainer/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
-margin_left = 130.0
-margin_top = 69.0
-margin_right = 280.0
-margin_bottom = 134.0
+margin_left = 176.0
+margin_top = 92.0
+margin_right = 382.0
+margin_bottom = 180.0
 text = "+100"
 align = 2
 
 [node name="MinusZehnButton" type="Button" parent="PopupPanel/PanelContainer/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
-margin_top = 138.0
-margin_right = 126.0
-margin_bottom = 203.0
+margin_top = 184.0
+margin_right = 172.0
+margin_bottom = 272.0
 text = "-10"
 align = 0
 
 [node name="PlusZehnButton" type="Button" parent="PopupPanel/PanelContainer/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
-margin_left = 130.0
-margin_top = 138.0
-margin_right = 280.0
-margin_bottom = 203.0
+margin_left = 176.0
+margin_top = 184.0
+margin_right = 382.0
+margin_bottom = 272.0
 text = "+10"
 align = 2
 
 [node name="MinusEinsButton" type="Button" parent="PopupPanel/PanelContainer/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
-margin_top = 207.0
-margin_right = 126.0
-margin_bottom = 272.0
+margin_top = 276.0
+margin_right = 172.0
+margin_bottom = 364.0
 text = "-1"
 align = 0
 
 [node name="PlusEinsButton" type="Button" parent="PopupPanel/PanelContainer/Container/SchnittpunktContainer/VBoxContainer/NavigationContainer"]
-margin_left = 130.0
-margin_top = 207.0
-margin_right = 280.0
-margin_bottom = 272.0
+margin_left = 176.0
+margin_top = 276.0
+margin_right = 382.0
+margin_bottom = 364.0
 text = "+1"
 align = 2
 

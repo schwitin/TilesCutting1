@@ -58,12 +58,37 @@ func get_zentrum():
 	return zentrum
 
 
+func ist_punkt_im_ziegel(punkt):
+	var linien = get_linien()
+	
+	for linie in linien:
+		var distanz = linie.get_distanz(punkt)
+		var istAusserhalb = distanz > 0
+	
+		if istAusserhalb:
+			return false
+	# Distanz zu jeder Linie des Ziegels ist negativ oder 0
+	# D.h. der Punkt liegt innerhalb des Ziegels oder auf der Kante
+	return true
+
+
+# Gibt true zurück, wenn der übergebene Ziegel verdeckt ist, false anderenfalls.
+func verdeckt(ziegel):
+	for ecke in ziegel.get_ziegel_polygon_points():
+		var istAusserhalb = !ist_punkt_im_ziegel(ecke)
+		
+		if istAusserhalb:
+			return false
+	# Alle Ecken des übergebenen Ziegels sind verdeckt
+	return true
+
+
 func get_distanz_von_schnittlinie_zum_zentrum():
 	var schnittlinie = einstellungen.schnittlinie
 	var zentrum = get_zentrum()
 	var normale = schnittlinie.get_normale(zentrum)
 	var winkelFuerDieMaschine = get_winkel_fuer_die_maschine()
-	var vorzeichen = (normale.p2.x - normale.p1.x + 1 ) / abs(normale.p2.x - normale.p1.x + 1)
+	var vorzeichen = -(normale.p2.x - normale.p1.x + 1 ) / abs(normale.p2.x - normale.p1.x + 1)
 	
 	# Wenn wir den Ziegel für die Maschiene um mehr als 180° wegen Wölbung drehen müssen
 	# dann ist der Vorzeichen anders.

@@ -156,6 +156,19 @@ func get_winkel_zu_horizontale_rad():
 	return rad
 
 
+# Gibt Distanz zu dem übergebenen Punkt zurück.
+# Bei Distanz > 0 liegt der Punkt rechts von p1 --> p2
+# Bei Distenz < 0 liegt der Punkt links von p1 --> p2
+# https://docs.godotengine.org/de/latest/tutorials/math/vectors_advanced.html
+func get_distanz(punkt):
+	var richtungsVektor = (p2 - p1).normalized()
+	# rotate 90 degrees
+	var normale = Vector2(richtungsVektor.y, -richtungsVektor.x)
+	var distanzZuDemUrsprung = normale.dot(p1)
+	var distanz = normale.dot(punkt) - distanzZuDemUrsprung
+	return distanz
+
+
 func clone():
 	var clone = linieClass.new(p1, p2)
 	return clone

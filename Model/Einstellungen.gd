@@ -157,7 +157,7 @@ func to_maschine_string(separator = ""):
 	#var maschineStr = "|" + name + "|"
 	var classDach = preload("res://Model/Dach.gd")
 	var dach = classDach.new(self)
-	var alleZiegel = dach.get_ziegel()
+	var alleZiegel = dach.get_ziegel_ohne_verdeckte()
 	alleZiegel.invert()
 	for reihe in alleZiegel:
 		for ziegel in reihe:

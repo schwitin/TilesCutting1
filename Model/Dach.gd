@@ -28,21 +28,47 @@ func is_grat():
 func get_sprungpunkte_oben():
 	var latten = get_latten()
 	var sprung_latte = latten[0]
-	return get_sprungpunkte(sprung_latte)
+	return get_sprungpunkte_auf_der_latte(sprung_latte)
 
 
 func get_sprungpunkte_unten():
 	var latten = get_latten()
 	var sprung_latte = latten[latten.size()-1]
-	return get_sprungpunkte(sprung_latte)
+	return get_sprungpunkte_auf_der_latte(sprung_latte)
 
 
-func get_sprungpunkte(sprung_latte):
+# WIP
+func get_sprungpunkte_links():
+	var schnuere = get_schnuere()
+	var sprung_schnur = schnuere[0]
+	return get_sprungpunkte_auf_dem_schnur(sprung_schnur)
+
+
+# WIP
+func get_sprungpunkte_rechts():
+	var schnuere = get_schnuere()
+	var sprung_schnur = schnuere[schnuere.size()-1]
+	return get_sprungpunkte_auf_dem_schnur(sprung_schnur)
+
+
+func get_sprungpunkte_auf_der_latte(sprung_latte):
 	var sprungpunkte = []
 	var y = sprung_latte.p1.y
 	var schnuere = get_schnuere()
 	for schnur in schnuere:
 		var x = schnur.p1.x
+		var p = Vector2(x, y)
+		sprungpunkte.append(p)
+		
+	return sprungpunkte
+
+# WIP
+func get_sprungpunkte_auf_dem_schnur(sprung_schnur):
+	var sprungpunkte = []
+	var x = sprung_schnur.p1.x
+	var latten = get_latten()
+	for latte in latten:
+		var y = latte.p1.y
 		var p = Vector2(x, y)
 		sprungpunkte.append(p)
 		
@@ -118,6 +144,26 @@ func bewege_schnittlinie_oben(mm):
 		emit_signal("changed")
 
 
+# WIP
+func bewege_schnittlinie_links(mm):
+	var bounding_box = get_bounding_box()
+	var schnittlinie = get_schnittlinie()
+	var y = schnittlinie.p1.y + mm
+	if y >= 0 && y <= bounding_box.y:
+		schnittlinie.p1.y = y
+		emit_signal("changed")
+
+
+# WIP
+func bewege_schnittlinie_rechts(mm):
+	var bounding_box = get_bounding_box()
+	var schnittlinie = get_schnittlinie()
+	var y = schnittlinie.p2.y + mm
+	if y >= 0 && y <= bounding_box.y:
+		schnittlinie.p2.y = y
+		emit_signal("changed")
+
+
 func bewege_schnittlinie_unten(mm):
 	var bounding_box = get_bounding_box()
 	var schnittlinie = get_schnittlinie()
@@ -163,6 +209,46 @@ func bewege_schnittlinie_unten_nach_rechts() :
 		emit_signal("changed")
 
 
+# WIP
+func bewege_schnittlinie_links_nach_unten() :
+	var schnittlinie = get_schnittlinie()
+	var sprungpunkte = get_sprungpunkte_links()
+	var sprungpunkt = get_sprungpunkt_unten(sprungpunkte, schnittlinie.p1.y)
+	if sprungpunkt != null:
+		schnittlinie.p1 = sprungpunkt
+		emit_signal("changed")
+
+
+# WIP
+func bewege_schnittlinie_links_nach_oben() :
+	var schnittlinie = get_schnittlinie()
+	var sprungpunkte = get_sprungpunkte_links()
+	var sprungpunkt = get_sprungpunkt_oben(sprungpunkte, schnittlinie.p1.y)
+	if sprungpunkt != null:
+		schnittlinie.p1 = sprungpunkt
+		emit_signal("changed")
+
+
+# WIP
+func bewege_schnittlinie_rechts_nach_unten() :
+	var schnittlinie = get_schnittlinie()
+	var sprungpunkte = get_sprungpunkte_rechts()
+	var sprungpunkt = get_sprungpunkt_unten(sprungpunkte, schnittlinie.p2.y)
+	if sprungpunkt != null:
+		schnittlinie.p2 = sprungpunkt
+		emit_signal("changed")
+
+
+# WIP
+func bewege_schnittlinie_rechts_nach_oben() :
+	var schnittlinie = get_schnittlinie()
+	var sprungpunkte = get_sprungpunkte_rechts()
+	var sprungpunkt = get_sprungpunkt_oben(sprungpunkte, schnittlinie.p2.y)
+	if sprungpunkt != null:
+		schnittlinie.p2 = sprungpunkt
+		emit_signal("changed")
+
+
 func get_sprungpunkt_links(sprungpunkte, x):
 	var naechster_sprungpunkt_links = null
 	for p in sprungpunkte:
@@ -185,6 +271,32 @@ func get_sprungpunkt_rechts(sprungpunkte, x):
 			break
 		
 	return naechster_sprungpunkt_rechts
+
+
+# WIP
+func get_sprungpunkt_oben(sprungpunkte, y):
+	var naechster_sprungpunkt_oben = null
+	for p in sprungpunkte:
+		if p.y < y :
+			naechster_sprungpunkt_oben = p
+		else :
+			break
+		
+	return naechster_sprungpunkt_oben
+
+
+# WIP
+func get_sprungpunkt_unten(sprungpunkte, y):
+	var naechster_sprungpunkt_unten = null
+	var size = sprungpunkte.size()
+	for i in range(size):
+		var p = sprungpunkte[size-i-1]
+		if p.y > y :
+			naechster_sprungpunkt_unten = p
+		else :
+			break
+		
+	return naechster_sprungpunkt_unten
 
 
 func get_schnittlinie():
@@ -367,6 +479,32 @@ func get_winkel_schnittlinie_unterste_latte():
 # Ermittelt alle Ziegel für das Dach, das durch Latten-, Schnürebereiche und die 
 # Schnttlinie definiert ist. Es wird ein zweidimensionaler Array zurückgegeben.
 # Die erste Dimension sind die Ziegelreihen (Arrays), die zweite Dimension
+# sind die Ziegel dieser Reihe, wobei die Reihe nur geschnittene Ziegel enthält, 
+# die von anderen geschnittenen Ziegeln nicht verdeckt sind.
+###################################################################################
+func get_ziegel_ohne_verdeckte():
+	var alleZiegelReihen = get_ziegel()
+	var alleZiegelReihenOhneVerdeckte = []
+	
+	for i in range(alleZiegelReihen.size()):
+		var reihe = alleZiegelReihen[i]
+		var reiheOhneVerdeckte = []
+		
+		for j in range(reihe.size()):
+			var ziegel = reihe[j]
+			if ist_ziegel_verdeckt(ziegel, alleZiegelReihen): continue
+			reiheOhneVerdeckte.append(ziegel)
+		
+		if reiheOhneVerdeckte.size() > 0:
+			alleZiegelReihenOhneVerdeckte.append(reiheOhneVerdeckte)
+	
+	return alleZiegelReihenOhneVerdeckte
+
+
+###################################################################################
+# Ermittelt alle Ziegel für das Dach, das durch Latten-, Schnürebereiche und die 
+# Schnttlinie definiert ist. Es wird ein zweidimensionaler Array zurückgegeben.
+# Die erste Dimension sind die Ziegelreihen (Arrays), die zweite Dimension
 # sind die Ziegel dieser Reihe, wobei die Reihe nur geschnittene Ziegel enthält.
 ###################################################################################
 func get_ziegel():
@@ -448,6 +586,14 @@ func createZiegel(position, positionLogisch):
 	ziegel.nummer = positionLogisch.x
 	return ziegel
 
+
+func ist_ziegel_verdeckt(ziegel, alleZiegelReihen):
+	for i in range(alleZiegelReihen.size()):
+		var reihe = alleZiegelReihen[i - 1]
+		for j in range(reihe.size()):
+			var z = reihe[j - 1]
+			if z != ziegel && z.verdeckt(ziegel):
+				return true;
 
 func init_schnittlinie():
 	#print("init_schnittlinie")

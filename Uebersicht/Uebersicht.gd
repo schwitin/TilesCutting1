@@ -27,7 +27,7 @@ func test():
 
 func update_ziegel():
 	var dach = classDach.new(einstellungen)
-	alleZiegelReihen = dach.get_ziegel()
+	alleZiegelReihen = dach.get_ziegel_ohne_verdeckte()
 	update()
 
 
